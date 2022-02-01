@@ -1,16 +1,9 @@
-# untitled2
+Gametrax is an API based game tracker app.
 
-A new Flutter project.
+This code is submitted as part of completion fr the degree of 
+'Bachelor of Computer Application' at Jagran Lakecity University, Bhopal, M.P. 2022
 
-## Getting Started
+Reusing the code for this application is not allowed. Reposting or copying this code is not allowed.
+Any use of the code without the permission of the author (i.e Amisha Das) may be subject to a lawsuit under the ** 
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Contact: amishav.das@gmail.com
