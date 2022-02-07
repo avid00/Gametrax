@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'game_info.dart';
 
 void main() => runApp(_searchgamesState());
 
@@ -80,7 +81,6 @@ class _searchpageState extends State<searchpage> {
     return AppBar(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
-
       ),
       backgroundColor: Color(0xFF212121),
       title: _appbartitle,
@@ -101,53 +101,56 @@ class _searchpageState extends State<searchpage> {
         return ListView.builder(
           itemCount: namelist == null ? 0 : 10,
           itemBuilder: (BuildContext context, int index) {
-            return Card(
-              clipBehavior: Clip.antiAlias,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5.5),
-                ),
-                color: Color(0xFF212121),
-                child: SizedBox(
-                  height: 100,
-                  child: Row(
-                    children: [
-                      Expanded(
-                          child: Stack(
-                        children: [
-                          Positioned.fill(
-                            child: Image.network(
-                            imagelist[index],
-                              fit: BoxFit.cover,
-                          ),
-                          ),
-                          Container(
-                            decoration: const BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Colors.transparent,
-                                  Color(0xFF212121),
-                                  ],
-                                  begin: Alignment.centerLeft,
-                                    end: Alignment.centerRight,
-                                  )),
-                          ),
+            return GestureDetector(
+              onTap: ()=> pushtogameinfo(),
+              child: Card(
+                clipBehavior: Clip.antiAlias,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.5),
+                  ),
+                  color: Color(0xFF212121),
+                  child: SizedBox(
+                    height: 100,
+                    child: Row(
+                      children: [
+                        Expanded(
+                            child: Stack(
+                          children: [
+                            Positioned.fill(
+                              child: Image.network(
+                              imagelist[index],
+                                fit: BoxFit.cover,
+                            ),
+                            ),
+                            Container(
+                              decoration: const BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Colors.transparent,
+                                    Color(0xFF212121),
+                                    ],
+                                    begin: Alignment.centerLeft,
+                                      end: Alignment.centerRight,
+                                    )),
+                            ),
 
-                        ],
-                      )),
-                      Expanded(
-                        child: Text(
-                          namelist[index],
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                            color: Colors.white,
+                          ],
+                        )),
+                        Expanded(
+                          child: Text(
+                            namelist[index],
+                            textAlign: TextAlign.right,
+                            style: TextStyle(
+                              color: Colors.white,
 
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
+                  )
                   ),
-                )
-                );
+            );
           },
         );
       },
@@ -172,6 +175,12 @@ class _searchpageState extends State<searchpage> {
     });
   }
 
+  pushtogameinfo(){
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => gameInfo(namelist[index])));
+
+  }
+
   gamesearch() async {
     try {
       if (namelist.isNotEmpty && imagelist.isNotEmpty) {
@@ -182,7 +191,6 @@ class _searchpageState extends State<searchpage> {
       var endpointUrl = 'https://api.rawg.io/api/games';
       Map<String, dynamic> queryParams = {
         'key': 'e8bfd125c87243ad941d54f7933bf318',
-
         ///TODO: USE MY OWN KEY LOL
         'search': '$gamename',
         'ordering': '-rating',
@@ -215,3 +223,8 @@ class _searchpageState extends State<searchpage> {
     }
   }
 }
+
+
+//----------------------------------
+//https://rapidapi.com/SapphireWare/api/video-game-price/
+//
