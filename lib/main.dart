@@ -1,8 +1,8 @@
-import 'dart:math';
-
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:untitled2/register/sign_up.dart';
 import 'game_info.dart';
 import 'search.dart';
 
@@ -15,6 +15,7 @@ class _searchgamesState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'GAMES',
       theme: ThemeData(
         textTheme: TextTheme(
@@ -69,14 +70,29 @@ class _homePageState extends State<homePage> {
                   ),
                 ),
               ),
-              ElevatedButton.icon(
-                icon: Icon(
-                  Icons.insert_chart,
-                  color: Colors.white,
-                ),
-                onPressed: () async => getNews(),
-                label: Text("News"),
-              ),
+              Row(
+                children: [
+                  ElevatedButton.icon(
+                    icon: Icon(
+                      Icons.insert_chart,
+                      color: Colors.white,
+                    ),
+                    onPressed: () async => getNews(),
+                    label: Text("News"),
+                  ),
+                  ElevatedButton.icon(
+                    icon: Icon(
+                      Icons.insert_chart,
+                      color: Colors.white,
+                    ),
+                    onPressed: () => Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => loginpage()),
+                    ),
+                    label: Text("login"),
+                  ),
+                ],
+              )
               // Container(
               //   decoration: const BoxDecoration(
               //       gradient: LinearGradient(
@@ -101,7 +117,7 @@ class _homePageState extends State<homePage> {
         ),
         backgroundColor: Color(0xFF212121),
         title: TextField(
-          onTap: () => Navigator.pushReplacement(
+          onTap: () async => Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => searchpage()),
           ),
@@ -109,7 +125,8 @@ class _homePageState extends State<homePage> {
               hintText: "Search for a Game",
               hintStyle: TextStyle(
                 color: Colors.white24,
-              )),
+              ),
+          ),
         ),
         leading: IconButton(
           icon: Icon(Icons.search_sharp, color: Colors.white70),
@@ -131,14 +148,13 @@ class _homePageState extends State<homePage> {
   getNews() async {
     String _key = "6XwYELZ9DeIYextaDlz9H6mIaNVTfZtX9JpENTOPI-g";
     var urlGoogleNews = "https://google-news.p.rapidapi.com/v2/search?q=Video Games, gaming&country=UK";
-    dio.options.headers["x-api-key"] = "6XwYELZ9DeIYextaDlz9H6mIaNVTfZtX9JpENTOPI-g";
+    dio.options.headers["key"] = "6XwYELZ9DeIYextaDlz9H6mIaNVTfZtX9JpENTOPI-g";
     Map<String, dynamic> queryParams = {
       'x-api-key': '6XwYELZ9DeIYextaDlz9H6mIaNVTfZtX9JpENTOPI-g',
     };
 
   try {
-    final response = await dio.get(urlGoogleNews, queryParameters: queryParams,
-        );
+    final response = await dio.get(urlGoogleNews);
     setState(() {
       final data = response.data as Map;
       for (int i=0;i<=6;i++){
@@ -155,4 +171,5 @@ class _homePageState extends State<homePage> {
 
 //----------------------------------
 //https://rapidapi.com/SapphireWare/api/video-game-price/
-//
+// newsapi.ord key: 014429d2731c4bb6b1d2830bae54e1d0
+//gamespot: c9353d017f27e4448a12f53c22c94b3a09ee01f7

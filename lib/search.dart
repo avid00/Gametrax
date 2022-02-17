@@ -83,7 +83,7 @@ class _searchpageState extends State<searchpage> {
           itemCount: namelist == null ? 0 : 10,
           itemBuilder: (BuildContext context, int index) {
             return GestureDetector(
-              onTap: () => pushtogameinfo(),
+              onTap: () async => pushtogameinfo(),
               child: Card(
                   clipBehavior: Clip.antiAlias,
                   shape: RoundedRectangleBorder(
@@ -135,7 +135,7 @@ class _searchpageState extends State<searchpage> {
     );
   }
 
-  _searchPressed() {
+  _searchPressed() async {
     setState(() {
       _appbartitle = TextField(
           style: TextStyle(
@@ -153,7 +153,7 @@ class _searchpageState extends State<searchpage> {
     });
   }
 
-  pushtogameinfo() {
+  pushtogameinfo() async {
     print("SELECTED: ${namelist[index]}");
     Navigator.push(
         context,
