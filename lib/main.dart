@@ -1,9 +1,10 @@
-import 'package:firebase_core/firebase_core.dart';
+// ignore_for_file: prefer_const_constructors
+//import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
+//import 'package:dio/dio.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:untitled2/register/sign_up.dart';
-import 'game_info.dart';
+//import 'game_info.dart';
 import 'search.dart';
 
 void main() => runApp(_searchgamesState());
@@ -137,21 +138,21 @@ class _HomePageState extends State<HomePage> {
         ));
   }
 
-  getBackgroundImage(){
-    String _key = "B-1LeqNhvdDdmWEM94JIRz9I1t__OctghnK67rY2_6Q";
-    var urlUnsplash = "https://api.unsplash.com/photos/random/?topics=Video Games&query=Wallpaper&client_id=$_key&count=20";
-
-    final response_unsplash = dio.get(urlUnsplash);
-
-  }
+  // getBackgroundImage(){
+  //   String _key = "B-1LeqNhvdDdmWEM94JIRz9I1t__OctghnK67rY2_6Q";
+  //   var urlUnsplash = "https://api.unsplash.com/photos/random/?topics=Video Games&query=Wallpaper&client_id=$_key&count=20";
+  //
+  //   final response_unsplash = dio.get(urlUnsplash);
+  //
+  // }
 
   getNews() async {
-    String _key = "6XwYELZ9DeIYextaDlz9H6mIaNVTfZtX9JpENTOPI-g";
+    //String _key = "6XwYELZ9DeIYextaDlz9H6mIaNVTfZtX9JpENTOPI-g";
     var urlGoogleNews = "https://google-news.p.rapidapi.com/v2/search?q=Video Games, gaming&country=UK";
     dio.options.headers["key"] = "6XwYELZ9DeIYextaDlz9H6mIaNVTfZtX9JpENTOPI-g";
-    Map<String, dynamic> queryParams = {
-      'x-api-key': '6XwYELZ9DeIYextaDlz9H6mIaNVTfZtX9JpENTOPI-g',
-    };
+    // Map<String, dynamic> queryParams = {
+    //   'x-api-key': '6XwYELZ9DeIYextaDlz9H6mIaNVTfZtX9JpENTOPI-g',
+    // };
 
   try {
     final response = await dio.get(urlGoogleNews);

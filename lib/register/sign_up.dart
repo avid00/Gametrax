@@ -1,3 +1,4 @@
+// ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -32,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(168, 320, 150, 0),
+                padding: const EdgeInsets.fromLTRB(168, 280, 150, 0),
                 child: Text(
                   'Sign In',
                   style: GoogleFonts.rubik(
@@ -43,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(90, 390, 90, 0),
+                padding: const EdgeInsets.fromLTRB(90, 320, 90, 0),
                 child: TextField(
                   controller: username,
                   style: GoogleFonts.rubik(color: Colors.white, fontSize: 12),
@@ -61,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(90, 440, 90, 0),
+                padding: const EdgeInsets.fromLTRB(90, 390, 90, 0),
                 child: TextField(
                   controller: password,
                   style: GoogleFonts.rubik(color: Colors.white, fontSize: 12),
@@ -74,6 +75,56 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(150, 460, 50, 0),
+                child: ElevatedButton(onPressed: null, child:
+                    Text(
+                      '    Enter    ',
+                      style: GoogleFonts.rubik(
+                        color: Colors.white,
+                        fontSize: 15,
+                      ),
+                    ),
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(7.0),
+                            side: BorderSide(color: Colors.white),
+                        ),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(135, 510, 125, 0),
+                child: ElevatedButton(
+                  onPressed: null,
+                  child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Sign in with ',
+                      style: GoogleFonts.rubik(
+                        color: Colors.white,
+                        fontSize: 15,
+                      ),
+                    ),
+                    Image.asset(
+                      'assets/images/google.png',
+                      scale: 4,
+                    ),
+                  ],
+                ),
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(7.0),
+                        side: BorderSide(color: Colors.white),
+                      ),
                     ),
                   ),
                 ),
