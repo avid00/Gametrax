@@ -23,19 +23,19 @@ class _searchgamesState extends StatelessWidget {
         ),
         // primarySwatch: Colors.black,
       ),
-      home: homePage(),
+      home: HomePage(),
     );
   }
 }
 
-class homePage extends StatefulWidget {
-  const homePage({Key key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key key}) : super(key: key);
 
   @override
-  _homePageState createState() => _homePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _homePageState extends State<homePage> {
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,7 +87,7 @@ class _homePageState extends State<homePage> {
                     ),
                     onPressed: () => Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => loginpage()),
+                      MaterialPageRoute(builder: (context) => LoginPage()),
                     ),
                     label: Text("login"),
                   ),

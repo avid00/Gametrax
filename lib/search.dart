@@ -146,7 +146,7 @@ class _searchpageState extends State<searchpage> {
             hintText: 'Search for your favourite Games',
           ),
           textInputAction: TextInputAction.search,
-          onSubmitted: (value) {
+          onSubmitted: (value) async {
             gamesearch();
             setState(() {});
           });
