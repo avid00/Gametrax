@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'game_info.dart';
 
 Map data = {};
@@ -135,7 +134,7 @@ class _searchpageState extends State<searchpage> {
     );
   }
 
-  _searchPressed() async {
+  _searchPressed() { //dont async
     setState(() {
       _appbartitle = TextField(
           style: TextStyle(

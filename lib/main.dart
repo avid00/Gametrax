@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 //import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:untitled2/register/sign_in.dart';
 import 'package:untitled2/register/sign_up.dart';
 import 'search.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
@@ -89,7 +91,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     onPressed: () => Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => SignUpPage()),
+                      MaterialPageRoute(builder: (context) => LoginPage()),
                     ),
                     label: Text("login"),
                   ),
@@ -110,6 +112,7 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       bottomNavigationBar: BottomNavyBar(
+        backgroundColor: Colors.black45,
         selectedIndex: _currentIndex,
         showElevation: true,
         itemCornerRadius: 24,
@@ -117,29 +120,55 @@ class _HomePageState extends State<HomePage> {
         onItemSelected: (index) => setState(() => _currentIndex = index),
         items: <BottomNavyBarItem>[
           BottomNavyBarItem(
-            icon: Icon(Icons.apps),
-            title: Text('Home'),
-            activeColor: Colors.red,
-            textAlign: TextAlign.center,
-          ),
-          BottomNavyBarItem(
-            icon: Icon(Icons.people),
-            title: Text('Users'),
-            activeColor: Colors.purpleAccent,
-            textAlign: TextAlign.center,
-          ),
-          BottomNavyBarItem(
-            icon: Icon(Icons.message),
-            title: Text(
-              'Messages test for mes teset test test ',
+            icon: GestureDetector(
+              child: Icon(Icons.home),
+              onTap: () async => Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => HomePage()),
+              ) ,
             ),
-            activeColor: Colors.pink,
+            title: Text('Home'),
+            activeColor: Colors.white70,
             textAlign: TextAlign.center,
           ),
           BottomNavyBarItem(
-            icon: Icon(Icons.settings),
-            title: Text('Settings'),
-            activeColor: Colors.blue,
+            icon: GestureDetector(
+              child: Icon(Icons.search_sharp),
+            onTap: () async => Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => searchpage()),
+            ) ,
+            ),
+            title: Text('Games'),
+            activeColor: Colors.white70,
+            textAlign: TextAlign.center,
+          ),
+          BottomNavyBarItem(
+            icon: GestureDetector(
+              child: Icon(Icons.view_list_sharp),
+              onTap: () async => null
+              //     Navigator.pushReplacement(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => searchpage()),
+              // ) ,
+            ),
+            title: Text(
+              'Lists',
+            ),
+            activeColor: Colors.white70,
+            textAlign: TextAlign.center,
+          ),
+          BottomNavyBarItem(
+            icon: GestureDetector(
+              child: Icon(Icons.person_sharp),
+              onTap: () async => null
+              //     Navigator.pushReplacement(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => searchpage()),
+              // ) ,
+            ),
+            title: Text('Me'), //TODO: add user's name/nicname
+            activeColor: Colors.white70,
             textAlign: TextAlign.center,
           ),
         ],

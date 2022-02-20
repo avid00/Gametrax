@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:untitled2/main.dart';
 import 'package:untitled2/register/sign_up.dart';
 
 class LoginPage extends StatefulWidget {
@@ -82,20 +83,25 @@ class _LoginPageState extends State<LoginPage> {
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(150, 460, 50, 0),
-                child: ElevatedButton(onPressed: null, child:
-                    Text(
-                      '    Enter    ',
-                      style: GoogleFonts.rubik(
-                        color: Colors.white,
-                        fontSize: 15,
-                      ),
+                child: ElevatedButton(
+                  onPressed: () => Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomePage()),
+                  ),
+                  child: Text(
+                    '   Enter   ',
+                    style: GoogleFonts.rubik(
+                      color: Colors.white,
+                      fontSize: 15,
                     ),
+                  ),
                   style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.transparent),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(7.0),
-                            side: BorderSide(color: Colors.white),
-                        ),
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(7.0),
+                        side: BorderSide(color: Colors.white),
+                      ),
                     ),
                   ),
                 ),
@@ -105,21 +111,21 @@ class _LoginPageState extends State<LoginPage> {
                 child: ElevatedButton(
                   onPressed: null,
                   child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Sign in with ',
-                      style: GoogleFonts.rubik(
-                        color: Colors.white,
-                        fontSize: 15,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Sign in with ',
+                        style: GoogleFonts.rubik(
+                          color: Colors.white,
+                          fontSize: 15,
+                        ),
                       ),
-                    ),
-                    Image.asset(
-                      'assets/images/google.png',
-                      scale: 4,
-                    ),
-                  ],
-                ),
+                      Image.asset(
+                        'assets/images/google.png',
+                        scale: 4,
+                      ),
+                    ],
+                  ),
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
@@ -153,15 +159,15 @@ class _LoginPageState extends State<LoginPage> {
                       width: 40,
                     ),
                     IconButton(
-                        onPressed: () => Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(builder: (context) => SignUpPage()),
-                        ),
-                        icon: Icon(
-                          Icons.email_outlined,
-                          size: 33,
-                          color: Colors.white,
-                        ),
+                      onPressed: () => Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => SignUpPage()),
+                      ),
+                      icon: Icon(
+                        Icons.email_outlined,
+                        size: 33,
+                        color: Colors.white,
+                      ),
                     ),
                   ],
                 ),
@@ -169,7 +175,7 @@ class _LoginPageState extends State<LoginPage> {
             ],
           )
         ],
-      ),
+      )
     );
   }
 }
