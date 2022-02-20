@@ -1,11 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 //import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-//import 'package:dio/dio.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:untitled2/register/sign_up.dart';
-//import 'game_info.dart';
 import 'search.dart';
+import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 
 void main() => runApp(_searchgamesState());
 
@@ -37,6 +36,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int _currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -105,6 +106,41 @@ class _HomePageState extends State<HomePage> {
               //       )),
               // ),
             ],
+          ),
+        ],
+      ),
+      bottomNavigationBar: BottomNavyBar(
+        selectedIndex: _currentIndex,
+        showElevation: true,
+        itemCornerRadius: 24,
+        curve: Curves.easeIn,
+        onItemSelected: (index) => setState(() => _currentIndex = index),
+        items: <BottomNavyBarItem>[
+          BottomNavyBarItem(
+            icon: Icon(Icons.apps),
+            title: Text('Home'),
+            activeColor: Colors.red,
+            textAlign: TextAlign.center,
+          ),
+          BottomNavyBarItem(
+            icon: Icon(Icons.people),
+            title: Text('Users'),
+            activeColor: Colors.purpleAccent,
+            textAlign: TextAlign.center,
+          ),
+          BottomNavyBarItem(
+            icon: Icon(Icons.message),
+            title: Text(
+              'Messages test for mes teset test test ',
+            ),
+            activeColor: Colors.pink,
+            textAlign: TextAlign.center,
+          ),
+          BottomNavyBarItem(
+            icon: Icon(Icons.settings),
+            title: Text('Settings'),
+            activeColor: Colors.blue,
+            textAlign: TextAlign.center,
           ),
         ],
       ),
