@@ -88,7 +88,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     onPressed: () => Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => LoginPage()),
+                      MaterialPageRoute(builder: (context) => SignUpPage()),
                     ),
                     label: Text("login"),
                   ),
