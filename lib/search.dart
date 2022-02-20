@@ -8,9 +8,9 @@ TextEditingController _gamenamecontroller = TextEditingController();
 final dio = Dio(); // for http requests
 String gamenamesearch;
 int resplength;
-List respgamename = List();
-List namelist = List();
-List imagelist = List();
+List respgamename = [];
+List namelist = [];
+List imagelist = [];
 String _gamenamedata;
 String _gamedatedata;
 String _gameimagedata;
@@ -26,6 +26,7 @@ class searchpage extends StatefulWidget {
 }
 
 class _searchpageState extends State<searchpage> {
+  int _currentIndex;
   @override
   void initState() {
     // TODO: implement initState
@@ -49,9 +50,9 @@ class _searchpageState extends State<searchpage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: _buildBar(context),
       body: Container(
-        color: Colors.black,
         child: _buildList(),
       ),
     );
@@ -82,7 +83,12 @@ class _searchpageState extends State<searchpage> {
           itemCount: namelist == null ? 0 : 10,
           itemBuilder: (BuildContext context, int index) {
             return GestureDetector(
-              onTap: () async => pushtogameinfo(),
+              onTap: () async => {
+              Navigator.push(
+              context,
+              MaterialPageRoute(
+              builder: (context) => gameInfo(imagelist[index], namelist[index]),),)
+              },
               child: Card(
                   clipBehavior: Clip.antiAlias,
                   shape: RoundedRectangleBorder(
@@ -154,10 +160,13 @@ class _searchpageState extends State<searchpage> {
 
   pushtogameinfo() async {
     print("SELECTED: ${namelist[index]}");
+    setState(() {
+      _currentIndex = index;
+    });
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => gameInfo(imagelist[index], namelist[index])));
+            builder: (context) => gameInfo(imagelist[_currentIndex], namelist[_currentIndex]),),);
   }
 
   gamesearch() async {
