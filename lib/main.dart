@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:untitled2/lists.dart';
+import 'package:untitled2/onboarding_screens.dart';
+import 'package:untitled2/profile_page.dart';
 import 'package:untitled2/register/sign_in.dart';
 import 'search.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
@@ -96,6 +98,17 @@ class _HomePageState extends State<HomePage> {
                     ),
                     label: Text("login"),
                   ),
+                  ElevatedButton.icon(
+                    icon: Icon(
+                      Icons.insert_chart,
+                      color: Colors.white,
+                    ),
+                    onPressed: () => Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => Onboarding_1()),
+                    ),
+                    label: Text("onboarding"),
+                  ),
                 ],
               )
               // Container(
@@ -162,11 +175,11 @@ class _HomePageState extends State<HomePage> {
           BottomNavyBarItem(
             icon: GestureDetector(
               child: Icon(Icons.person_sharp),
-              onTap: () async => null
-              //     Navigator.pushReplacement(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => searchpage()),
-              // ) ,
+              onTap: () async =>
+                  Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => ProfilePage()),
+              ) ,
             ),
             title: Text('Me'), //TODO: add user's name/nicname
             activeColor: Colors.white70,
@@ -220,14 +233,14 @@ class _HomePageState extends State<HomePage> {
 
   try {
     final response = await dio.get(url_news);
+    print('Response ============>$response');
     setState(() {
       final data = response.data as Map;
-      for (int i=0;i<=6;i++){
-        newsdata = data["articles"]["title"].toString();
-        news_url = data["articles"]["url"].toString();
-        news_image = data["articles"]["urlToImage"].toString();
-
-        print(newsdata);
+      for (int i=0;i<=10;i++){
+        newsdata = data["articles"][i]["title"].toString();
+        news_url = data["articles"][i]["url"].toString();
+        news_image = data["articles"][i]["urlToImage"].toString();
+       // print(newsdata);
       }
     });
 

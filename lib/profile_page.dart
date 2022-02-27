@@ -1,17 +1,16 @@
 // ignore_for_file: prefer_const_constructors
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:untitled2/main.dart';
 
-class ListsPage extends StatefulWidget {
-  const ListsPage({Key key}) : super(key: key);
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({Key key}) : super(key: key);
 
   @override
-  _ListsPageState createState() => _ListsPageState();
+  _ProfilePageState createState() => _ProfilePageState();
 }
 
-class _ListsPageState extends State<ListsPage> {
+class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +22,7 @@ class _ListsPageState extends State<ListsPage> {
               height: 400,
             ),
             Text(
-              "Lists Page",
+              "Profile Page",
               style: TextStyle(
                 color: Colors.white,
               ),
@@ -41,3 +40,4 @@ class _ListsPageState extends State<ListsPage> {
     );
   }
 }
+

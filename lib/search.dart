@@ -188,8 +188,8 @@ class _searchpageState extends State<searchpage> {
       };
       final response =
       await dio.get(endpointUrl + '?', queryParameters: queryParams);
-      print('Response ============>$response');
-      print("GAMENAME: $gamename");
+      // print('Response ============>$response');
+      // print("GAMENAME: $gamename");
 
       setState(() {
         final data = response.data as Map;
@@ -198,15 +198,15 @@ class _searchpageState extends State<searchpage> {
           _gamedatedata = data["results"][i]["released"].toString();
           _gameimagedata = data["results"][i]["background_image"]
               .toString(); //use image.network
-          print("$namelist");
+         // print("$namelist");
           namelist.add(_gamenamedata);
           imagelist.add((_gameimagedata));
-          print(_gameimagedata);
+         // print(_gameimagedata);
           // print(gamenamedata);
         }
         namelength = namelist.length;
-        print(namelength);
-        print("gamenameeeeeeeeee$namelist");
+       // print(namelength);
+       // print("gamenameeeeeeeeee$namelist");
       });
     } catch (e) {
       print('error $e');
