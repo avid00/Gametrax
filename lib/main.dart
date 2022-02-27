@@ -1,10 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 //import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:untitled2/lists.dart';
 import 'package:untitled2/register/sign_in.dart';
-import 'package:untitled2/register/sign_up.dart';
 import 'search.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 
@@ -13,6 +12,8 @@ void main() => runApp(_searchgamesState());
 //variables
 TextEditingController _name = TextEditingController();
 String newsdata;
+String news_url;
+String news_image;
 class _searchgamesState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -146,11 +147,11 @@ class _HomePageState extends State<HomePage> {
           BottomNavyBarItem(
             icon: GestureDetector(
               child: Icon(Icons.view_list_sharp),
-              onTap: () async => null
-              //     Navigator.pushReplacement(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => searchpage()),
-              // ) ,
+              onTap: () async =>
+                  Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => ListsPage()),
+              ) ,
             ),
             title: Text(
               'Lists',
@@ -212,19 +213,20 @@ class _HomePageState extends State<HomePage> {
   // }
 
   getNews() async {
-    //String _key = "6XwYELZ9DeIYextaDlz9H6mIaNVTfZtX9JpENTOPI-g";
-    var urlGoogleNews = "https://google-news.p.rapidapi.com/v2/search?q=Video Games, gaming&country=UK";
-    dio.options.headers["key"] = "6XwYELZ9DeIYextaDlz9H6mIaNVTfZtX9JpENTOPI-g";
+    var url_news = "https://newsapi.org/v2/everything?q=gaming&apiKey=0ef79622f62947498f5dcf9d653f9b7c";
     // Map<String, dynamic> queryParams = {
     //   'x-api-key': '6XwYELZ9DeIYextaDlz9H6mIaNVTfZtX9JpENTOPI-g',
     // };
 
   try {
-    final response = await dio.get(urlGoogleNews);
+    final response = await dio.get(url_news);
     setState(() {
       final data = response.data as Map;
       for (int i=0;i<=6;i++){
         newsdata = data["articles"]["title"].toString();
+        news_url = data["articles"]["url"].toString();
+        news_image = data["articles"]["urlToImage"].toString();
+
         print(newsdata);
       }
     });
