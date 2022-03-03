@@ -13,7 +13,8 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   TextEditingController username = TextEditingController();
   TextEditingController password = TextEditingController();
-  TextEditingController nickname = TextEditingController();
+  TextEditingController email = TextEditingController();
+  final _formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -46,84 +47,114 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(90, 320, 90, 0),
-                //TODO: add lmit of 20
-                child: TextField(
-                  controller: nickname,
-                  style: GoogleFonts.rubik(color: Colors.white, fontSize: 15),
-                  decoration: InputDecoration(
-                    hintText: 'enter a nickname we can call you by',
-                    hintStyle:
-                    GoogleFonts.rubik(color: Colors.white60, fontSize: 12),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(90, 370, 90, 0),
-                //TODO: Add limit of 20
-                child: TextField(
-                  controller: username,
-                  style: GoogleFonts.rubik(color: Colors.white, fontSize: 15),
-                  decoration: InputDecoration(
-                    hintText: 'your username goes here',
-                    hintStyle:
-                    GoogleFonts.rubik(color: Colors.white60, fontSize: 12),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(90, 420, 90, 0),
-                //TODO: add password censor and eye
-                child: TextField(
-                  controller: password,
-                  style: GoogleFonts.rubik(color: Colors.white, fontSize: 15),
-                  decoration: InputDecoration(
-                    hintText: 'and your password here shhh...',
-                    hintStyle:
-                    GoogleFonts.rubik(color: Colors.white60, fontSize: 12),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(150, 520, 50, 0),
-                child: ElevatedButton(onPressed: null, child:
-                Text(
-                  '   Confirm   ',
-                  style: GoogleFonts.rubik(
-                    color: Colors.white,
-                    fontSize: 15,
-                  ),
-                ),
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(7.0),
-                        side: BorderSide(color: Colors.white),
+                padding: const EdgeInsets.fromLTRB(70, 330, 70, 100),
+                child: Form(
+                  key: _formkey,
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        validator: (val) =>
+                            val.isEmpty ? 'enter an email please' : null,
+                        controller: email,
+                        style: GoogleFonts.rubik(
+                            color: Colors.white, fontSize: 15),
+                        decoration: InputDecoration(
+                          hintText: 'we will keep your email safe',
+                          hintStyle: GoogleFonts.rubik(
+                              color: Colors.white60, fontSize: 12),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                        ),
+                        onChanged: (val) {
+                          setState(() => {
+                                email.text = val,
+                              });
+                        },
                       ),
-                    ),
+                      TextFormField(
+                        validator: (val) => val.isEmpty
+                            ? 'we need to know what to call you'
+                            : null,
+                        controller: username,
+                        style: GoogleFonts.rubik(
+                            color: Colors.white, fontSize: 15),
+                        decoration: InputDecoration(
+                          hintText: 'your username goes here',
+                          hintStyle: GoogleFonts.rubik(
+                              color: Colors.white60, fontSize: 12),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                        ),
+                        onChanged: (val) {
+                          setState(() => {
+                                username.text = val,
+                              });
+                        },
+                      ),
+                      TextFormField(
+                        validator: (val) => val.length < 9
+                            ? 'you will need a secure password you know'
+                            : null,
+                        controller: password,
+                        style: GoogleFonts.rubik(
+                            color: Colors.white, fontSize: 15),
+                        decoration: InputDecoration(
+                          hintText: 'and your password here shhh...',
+                          hintStyle: GoogleFonts.rubik(
+                              color: Colors.white60, fontSize: 12),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                        ),
+                        onChanged: (val) {
+                          setState(() => {
+                                password.text = val,
+                              });
+                        },
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      ElevatedButton(
+                        onPressed: () async {
+                          if (_formkey.currentState.validate()) {
+                            print(email.text);
+                          }
+                        },
+                        child: Text(
+                          '   Confirm   ',
+                          style: GoogleFonts.rubik(
+                            color: Colors.white,
+                            fontSize: 15,
+                          ),
+                        ),
+                        style: ButtonStyle(
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(7.0),
+                              side: BorderSide(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(128, 600, 0, 0),
+                padding: const EdgeInsets.fromLTRB(128, 650, 0, 0),
                 child: Column(
                   children: [
                     Text(
@@ -136,10 +167,10 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     TextButton(
                       //TODO: add login link and make text coloured
-                     onPressed: () => Navigator.pushReplacement(
-                       context,
-                       MaterialPageRoute(builder: (context) => LoginPage()),
-                     ),
+                      onPressed: () => Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                      ),
                       child: Text(
                         'Sign in here',
                         style: GoogleFonts.rubik(
@@ -151,7 +182,6 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                   ],
                 ),
-
               ),
             ],
           )

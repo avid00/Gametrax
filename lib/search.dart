@@ -88,7 +88,7 @@ class _searchpageState extends State<searchpage> {
               Navigator.push(
               context,
               MaterialPageRoute(
-              builder: (context) => gameInfo(imagelist[index], namelist[index]),),)
+              builder: (context) => GameInfo(imagelist[index], namelist[index]),),)
               },
               child: Card(
                   clipBehavior: Clip.antiAlias,
@@ -167,7 +167,7 @@ class _searchpageState extends State<searchpage> {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => gameInfo(imagelist[_currentIndex], namelist[_currentIndex]),),);
+            builder: (context) => GameInfo(imagelist[_currentIndex], namelist[_currentIndex]),),);
   }
 
   gamesearch() async {

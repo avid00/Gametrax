@@ -1,18 +1,18 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-class gameInfo extends StatefulWidget {
-  final String selected_game;
-  final String selected_gameimage;
-  const gameInfo(this.selected_gameimage, this.selected_game, {Key key})
+///TODO: add power by RAWG at the bottom
+class GameInfo extends StatefulWidget {
+  final String selectedGame;
+  final String selectedGameImage;
+  const GameInfo(this.selectedGameImage, this.selectedGame, {Key key})
       : super(key: key);
 
   @override
-  _gameInfoState createState() => _gameInfoState();
+  _GameInfoState createState() => _GameInfoState();
 }
 
-class _gameInfoState extends State<gameInfo> {
+class _GameInfoState extends State<GameInfo> {
   @override
   void initState() {
     // TODO: implement initState
@@ -38,7 +38,7 @@ class _gameInfoState extends State<gameInfo> {
                 children: [
                   Stack(
                     children: [
-                      Image.network(widget.selected_gameimage),
+                      Image.network(widget.selectedGameImage),
                     ],
                   ),
                   SizedBox(
@@ -47,13 +47,67 @@ class _gameInfoState extends State<gameInfo> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(10, 0, 70, 0),
                     child: Text(
-                      widget.selected_game,
+                      widget.selectedGame,
                       style: GoogleFonts.rubik(
                         color: Colors.white70,
                         fontSize: 30,
                       ),
                     ),
-                  )
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 175, 0),
+                    child: Text(
+                      "Date Release: 2015-02-22",
+                      style: GoogleFonts.rubik(
+                        color: Colors.white70,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 225, 0),
+                    child: Text(
+                      "Genre: RPG, Action",
+                      style: GoogleFonts.rubik(
+                        color: Colors.white70,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 225, 0),
+                    child: ElevatedButton.icon(onPressed: null, icon: Icon(
+                      Icons.add_circle_outline,
+                    ), label: Text("add to library",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                    ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 200, 0),
+                    child: ElevatedButton.icon(onPressed: null, icon: Icon(
+                      Icons.screen_search_desktop,
+                    ), label: Text("search on google",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -67,7 +121,7 @@ class _gameInfoState extends State<gameInfo> {
     return AppBar(
       backgroundColor: Colors.black26,
       title: Text(
-        "About ${widget.selected_game}",
+        "About ${widget.selectedGame}",
         style: TextStyle(
           fontSize: 15,
         ),

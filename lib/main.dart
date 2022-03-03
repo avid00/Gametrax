@@ -233,7 +233,7 @@ class _HomePageState extends State<HomePage> {
 
   try {
     final response = await dio.get(url_news);
-    print('Response ============>$response');
+   // print('Response ============>$response');
     setState(() {
       final data = response.data as Map;
       for (int i=0;i<=10;i++){
