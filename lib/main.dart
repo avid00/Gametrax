@@ -7,6 +7,7 @@ import 'package:untitled2/onboarding_screens.dart';
 import 'package:untitled2/profile_page.dart';
 import 'package:untitled2/register/sign_in.dart';
 import 'search.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 
 void main() => runApp(_searchgamesState());
@@ -16,6 +17,10 @@ TextEditingController _name = TextEditingController();
 String newsdata;
 String news_url;
 String news_image;
+List newstitlelist =[];
+List newsurllist =[];
+List newsimagelist =[];
+int index = 0;
 class _searchgamesState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -42,7 +47,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
-
+@override
+  void initState() {
+    super.initState();
+    getNews();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,17 +119,76 @@ class _HomePageState extends State<HomePage> {
                     label: Text("onboarding"),
                   ),
                 ],
-              )
-              // Container(
-              //   decoration: const BoxDecoration(
-              //       gradient: LinearGradient(
-              //         colors: [
-              //           Colors.transparent,
-              //           Color(0xFFEF0000),
-              //         ],
-              //         begin: Alignment.bottomCenter,
-              //       )),
-              // ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(10, 300, 10, 200),
+                child: Container(
+                  height: 80,
+                  width: 250,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(11)),
+                    color: Colors.white,
+                  ),
+                  child: Stack(
+                    children: [
+                      Image.network("https://st2.depositphotos.com/1026550/7298/i/600/depositphotos_72983963-stock-photo-playinh-video-game.jpg",
+                        fit: BoxFit.cover,
+                        height: double.infinity,
+                        width: double.infinity,
+                        alignment: Alignment.center,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              newstitlelist[1],
+                              style: GoogleFonts.rubik(
+                                fontSize: 12,
+                                color: Colors.white,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 6,
+                            ),
+                            Text(
+                              "da-te-here",
+                              style: GoogleFonts.rubik(
+                                fontSize: 11,
+                                fontStyle: FontStyle.italic,
+                                color: Colors.white,
+                              ),
+                            ),
+
+                          ],
+                        ),
+                      ),
+                      Positioned(
+                        right: 10,
+                        bottom: 10,
+                        child: IconButton(
+                          padding: EdgeInsets.zero,
+                          constraints: BoxConstraints(),
+                          onPressed: () async {
+                            final url = newsurllist[1];
+                          if(await canLaunch(url)){
+                            await launch(url,
+                               // forceWebView: true
+                            );
+                          }
+                        }, //TODO: add url_launcher
+                          icon: Icon(
+                            Icons.open_in_new,
+                            color: Colors.white,
+                            size: 18,
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ),
+              ),
             ],
           ),
         ],
@@ -232,6 +300,9 @@ class _HomePageState extends State<HomePage> {
     // };
 
   try {
+    if (newstitlelist.isNotEmpty){
+      newstitlelist.clear();
+    }
     final response = await dio.get(url_news);
    // print('Response ============>$response');
     setState(() {
@@ -241,7 +312,11 @@ class _HomePageState extends State<HomePage> {
         news_url = data["articles"][i]["url"].toString();
         news_image = data["articles"][i]["urlToImage"].toString();
        // print(newsdata);
+        newstitlelist.add(newsdata);
+        newsurllist.add(news_url);
+        newsimagelist.add(news_image);
       }
+
     });
 
   }catch(e){
