@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
-import 'package:untitled2/main.dart';
+import 'homePage.dart';
 
 class Onboarding_1 extends StatefulWidget {
   const Onboarding_1({Key key}) : super(key: key);

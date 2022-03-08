@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:untitled2/main.dart';
+import 'package:untitled2/homePage.dart';
 import 'package:untitled2/register/sign_up.dart';
 
 class LoginPage extends StatefulWidget {

@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors
-import 'dart:ui';
+import 'homePage.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled2/main.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key key}) : super(key: key);
