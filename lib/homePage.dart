@@ -38,6 +38,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
@@ -62,10 +67,10 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 Center(
-                  heightFactor: 4,
-                  child: TextField(
+                  heightFactor: 7,
+                  child: Text(
+                    "david",
                     textAlign: TextAlign.center,
-                    controller: _name,
                     style: GoogleFonts.rubikMonoOne(
                       fontSize: 25,
                       color: Colors.white,
@@ -74,14 +79,6 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Row(
                   children: [
-                    ElevatedButton.icon(
-                      icon: Icon(
-                        Icons.insert_chart,
-                        color: Colors.white,
-                      ),
-                      onPressed: () async => await getNews(),
-                      label: Text("News"),
-                    ),
                     ElevatedButton.icon(
                       icon: Icon(
                         Icons.insert_chart,
@@ -114,14 +111,6 @@ class _HomePageState extends State<HomePage> {
                       height: 80,
                       width: 250,
                       decoration: BoxDecoration(
-                          // gradient: LinearGradient(
-                          //   begin: Alignment.centerLeft,
-                          //   end: Alignment.centerRight,
-                          //   colors: [
-                          //     Colors.purple.shade900,
-                          //     Colors.purple.shade100,
-                          //   ],
-                          // ),
                           borderRadius: BorderRadius.all(Radius.circular(11)),
                           color: Colors.black,
                           image: DecorationImage(
@@ -400,10 +389,10 @@ class _HomePageState extends State<HomePage> {
 
 ///news tile 5 ----------------------------------------------------------------------------------------------------------------------------
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(60, 700, 10, 0),
+                  padding: const EdgeInsets.fromLTRB(10, 700, 10, 0),
                   child: Container(
                       height: 80,
-                      width: 280,
+                      width: 400,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(11)),
                           color: Colors.black,

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'game_info.dart';
 
 Map data = {};
@@ -12,6 +13,7 @@ int resplength;
 List respgamename = [];
 List namelist = [];
 List imagelist = [];
+List dateList = [];
 String _gamenamedata;
 String _gamedatedata;
 String _gameimagedata;
@@ -27,15 +29,19 @@ class searchpage extends StatefulWidget {
 }
 
 class _searchpageState extends State<searchpage> {
-  int _currentIndex;
+  //int _currentIndex;
   @override
   void initState() {
-    // TODO: implement initState
+    super.initState();
     _buildList();
     _searchPressed();
-    super.initState();
+
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+  }
   _searchpageState() {
     _gamenamecontroller.addListener(() {
       if (_gamenamecontroller.text.isEmpty) {
@@ -88,7 +94,7 @@ class _searchpageState extends State<searchpage> {
               Navigator.push(
               context,
               MaterialPageRoute(
-              builder: (context) => GameInfo(imagelist[index], namelist[index]),),)
+              builder: (context) => GameInfo(imagelist[index], namelist[index], dateList[index]),),)
               },
               child: Card(
                   clipBehavior: Clip.antiAlias,
@@ -150,6 +156,9 @@ class _searchpageState extends State<searchpage> {
           controller: _gamenamecontroller,
           decoration: InputDecoration(
             hintText: 'Search for your favourite Games',
+            hintStyle: GoogleFonts.rubik(
+              color: Colors.white24,
+            )
           ),
           textInputAction: TextInputAction.search,
           onSubmitted: (value) async {
@@ -159,16 +168,16 @@ class _searchpageState extends State<searchpage> {
     });
   }
 
-  pushtogameinfo() async {
-    print("SELECTED: ${namelist[index]}");
-    setState(() {
-      _currentIndex = index;
-    });
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => GameInfo(imagelist[_currentIndex], namelist[_currentIndex]),),);
-  }
+  // pushtogameinfo() async {
+  //   print("SELECTED: ${namelist[index]}");
+  //   setState(() {
+  //     _currentIndex = index;
+  //   });
+  //   Navigator.push(
+  //       context,
+  //       MaterialPageRoute(
+  //           builder: (context) => GameInfo(imagelist[_currentIndex], namelist[_currentIndex],),),);
+  // }
 
   gamesearch() async {
     try {
@@ -188,25 +197,21 @@ class _searchpageState extends State<searchpage> {
       };
       final response =
       await dio.get(endpointUrl + '?', queryParameters: queryParams);
-      // print('Response ============>$response');
-      // print("GAMENAME: $gamename");
 
       setState(() {
         final data = response.data as Map;
         for (int i = 1; i < 10; i++) {
+          //data variables parsing from json
           _gamenamedata = data["results"][i]["name"].toString();
           _gamedatedata = data["results"][i]["released"].toString();
-          _gameimagedata = data["results"][i]["background_image"]
-              .toString(); //use image.network
-         // print("$namelist");
+          _gameimagedata = data["results"][i]["background_image"].toString(); //use image.network
+
+          //adding data to lists
+          dateList.add(_gamedatedata);
           namelist.add(_gamenamedata);
-          imagelist.add((_gameimagedata));
-         // print(_gameimagedata);
-          // print(gamenamedata);
+          imagelist.add(_gameimagedata);
         }
         namelength = namelist.length;
-       // print(namelength);
-       // print("gamenameeeeeeeeee$namelist");
       });
     } catch (e) {
       print('error $e');
