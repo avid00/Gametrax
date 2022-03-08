@@ -8,10 +8,12 @@ class GameInfo extends StatefulWidget {
   final String selectedGame;
   final String selectedGameImage;
   final String gameDate;
+  final String gameGenre;
   const GameInfo(
       this.selectedGameImage,
       this.selectedGame,
       this.gameDate,
+      this.gameGenre,
       {Key key})
       : super(key: key);
 
@@ -51,7 +53,7 @@ class _GameInfoState extends State<GameInfo> {
                       height: 20,
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 0, 70, 0),
+                      padding: const EdgeInsets.fromLTRB(5, 0, 70, 0),
                       child: Text(
                         widget.selectedGame,
                         style: GoogleFonts.rubik(
@@ -64,7 +66,7 @@ class _GameInfoState extends State<GameInfo> {
                       height: 20,
                     ),
                     Text(
-                      "Date Released: ${widget.gameDate}",
+                      "Date Released: ${widget.gameDate}", ///TODO: parse date
                       style: GoogleFonts.rubik(
                         color: Colors.white70,
                         fontSize: 15,
@@ -76,7 +78,7 @@ class _GameInfoState extends State<GameInfo> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 225, 0),
                       child: Text(
-                        "Genre: RPG, Action",
+                        widget.gameGenre,
                         style: GoogleFonts.rubik(
                           color: Colors.white70,
                           fontSize: 15,

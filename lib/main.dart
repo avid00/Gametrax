@@ -5,22 +5,42 @@ import 'homePage.dart';
 
 void main() => runApp(Gametrax());
 
-class Gametrax extends StatelessWidget {
+class Gametrax extends StatefulWidget {
+  const Gametrax({Key key}) : super(key: key);
+
+  @override
+  State<Gametrax> createState() => _GametraxState();
+}
+
+class _GametraxState extends State<Gametrax> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'GAMES',
-      // theme: ThemeData(
-      //   // textTheme: TextTheme(
-      //   //   bodyText1: GoogleFonts.rubik(),
-      //   // ),
-      //   // primarySwatch: Colors.black,
-      // ),
-      home: HomePage(),
+        home: HomePage(),
+
     );
   }
 }
+
+//
+// class Gametrax extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       title: 'GAMES',
+//
+//       // theme: ThemeData(
+//       //   // textTheme: TextTheme(
+//       //   //   bodyText1: GoogleFonts.rubik(),
+//       //   // ),
+//       //   // primarySwatch: Colors.black,
+//       // ),
+//       home: HomePage(),
+//     );
+//   }
+// }
 
 
 //----------------------------------

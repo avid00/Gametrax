@@ -488,7 +488,7 @@ class _HomePageState extends State<HomePage> {
               child: Icon(Icons.search_sharp),
               onTap: () async => Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => searchpage()),
+                MaterialPageRoute(builder: (context) => SearchPage()),
               ),
             ),
             title: Text('Games'),
@@ -535,7 +535,7 @@ class _HomePageState extends State<HomePage> {
         title: TextField(
           onTap: () async => Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => searchpage()),
+            MaterialPageRoute(builder: (context) => SearchPage()),
           ),
           decoration: InputDecoration(
             hintText: "Search for a Game",
@@ -548,7 +548,7 @@ class _HomePageState extends State<HomePage> {
           icon: Icon(Icons.search_sharp, color: Colors.white70),
           onPressed: () => Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => searchpage()),
+            MaterialPageRoute(builder: (context) => SearchPage()),
           ),
         ));
   }
