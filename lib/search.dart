@@ -303,12 +303,19 @@ class _SearchPageState extends State<SearchPage> {
       setState(() {
         searching = true;
         final data = response.data as Map;
+        // final genre = _gamegenredata as Map;
+        // List _genreList = [];
+        // String _genre;
+
+        print("DATAAAAAAAAAAAAAAAA: $data");
         for (int i = 0; i < 20; i++) {
           //data variables parsing from json
           _gamenamedata = data["results"][i]["name"].toString();
           _gamedatedata = data["results"][i]["released"].toString();
           _gameimagedata = data["results"][i]["background_image"].toString(); //use image.network
+          // _gamegenredata = data ["results"][i]["genres"].toString();
           _gamegenredata = data ["results"][i]["genres"].toString();
+
           ///TODO: add platforms as well
           //adding data to lists
           dateList.add(_gamedatedata);

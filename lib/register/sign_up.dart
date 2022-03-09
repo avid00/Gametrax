@@ -1,7 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:untitled2/homePage.dart';
 import 'package:untitled2/register/sign_in.dart';
+import 'package:untitled2/services/auth.dart';
+import 'package:provider/provider.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key key}) : super(key: key);
@@ -17,6 +20,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final _formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
     return Material(
       type: MaterialType.transparency,
       child: Column(
@@ -129,7 +133,14 @@ class _SignUpPageState extends State<SignUpPage> {
                       ElevatedButton(
                         onPressed: () async {
                           if (_formkey.currentState.validate()) {
-                            print(email.text);
+                           await authService.createUserWithEmailAndPassword(
+                                email.text,
+                                password.text
+                           );
+                           Navigator.pop(
+                             context,
+                             MaterialPageRoute(builder: (context) => HomePage()),
+                           );
                           }
                         },
                         child: Text(
@@ -166,7 +177,6 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                     ),
                     TextButton(
-                      //TODO: add login link and make text coloured
                       onPressed: () => Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(builder: (context) => LoginPage()),

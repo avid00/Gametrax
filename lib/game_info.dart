@@ -76,7 +76,7 @@ class _GameInfoState extends State<GameInfo> {
                       height: 20,
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 225, 0),
+                      padding: const EdgeInsets.fromLTRB(0, 0, 190, 0),
                       child: Text(
                         widget.gameGenre,
                         style: GoogleFonts.rubik(

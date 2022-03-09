@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:untitled2/homePage.dart';
 import 'package:untitled2/register/sign_up.dart';
+import 'package:untitled2/services/auth.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key key}) : super(key: key);
@@ -12,10 +14,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController username = TextEditingController();
+  TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
     return Material(
       type: MaterialType.transparency,
       child: Column(
@@ -48,10 +52,10 @@ class _LoginPageState extends State<LoginPage> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(90, 320, 90, 0),
                 child: TextField(
-                  controller: username,
+                  controller: email,
                   style: GoogleFonts.rubik(color: Colors.white, fontSize: 12),
                   decoration: InputDecoration(
-                    hintText: 'your username goes here',
+                    hintText: 'your email goes here',
                     hintStyle:
                         GoogleFonts.rubik(color: Colors.white60, fontSize: 12),
                     enabledBorder: UnderlineInputBorder(
@@ -84,10 +88,12 @@ class _LoginPageState extends State<LoginPage> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(150, 460, 50, 0),
                 child: ElevatedButton(
-                  onPressed: () => Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => HomePage()),
-                  ),
+                  onPressed: () async{
+                  await authService.signInWithEmailAndPassword(
+                        email.text,
+                        password.text,
+                  );
+                  },
                   child: Text(
                     '   Enter   ',
                     style: GoogleFonts.rubik(
