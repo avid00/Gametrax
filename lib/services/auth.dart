@@ -1,9 +1,9 @@
 // ignore_for_file: prefer_const_constructors
-import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
-import 'package:untitled2/register/sign_in.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class AuthService {
   final auth.FirebaseAuth _firebaseAuth = auth.FirebaseAuth.instance;
@@ -30,11 +30,13 @@ return _userFromFirebase(credential.user);
 
    Future<User> createUserWithEmailAndPassword(
        String email,
-       String password,) async {
+       String password,
+       ) async {
      final credential = await _firebaseAuth.createUserWithEmailAndPassword(
        email: email,
        password: password,
      );
+
      return _userFromFirebase(credential.user);
    }
 

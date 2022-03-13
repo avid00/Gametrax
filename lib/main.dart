@@ -3,11 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:untitled2/onboarding_screens.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:untitled2/register/sign_in.dart';
 import 'package:untitled2/services/auth.dart';
 import 'package:untitled2/services/wrapper.dart';
-import 'homePage.dart';
 import 'package:provider/provider.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 

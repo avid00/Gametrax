@@ -5,21 +5,17 @@ import 'package:untitled2/lists.dart';
 import 'package:untitled2/onboarding_screens.dart';
 import 'package:untitled2/profile_page.dart';
 import 'package:untitled2/register/sign_in.dart';
+import 'package:untitled2/services/auth.dart';
 import 'search.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'services/variables.dart';
+
+///TODO: add changing background image
 
 //variables
-TextEditingController _name = TextEditingController();
-String newsData;
-String newsURL;
-String newsImage;
-String newsDate;
-List newstitlelist = [];
-List newsurllist = [];
-List newsimagelist = [];
-List newsdatelist = [];
+// TextEditingController _name = TextEditingController();
 int index = 0;
 
 class HomePage extends StatefulWidget {
@@ -37,10 +33,10 @@ class _HomePageState extends State<HomePage> {
     getNews();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -99,17 +95,26 @@ class _HomePageState extends State<HomePage> {
                         context,
                         MaterialPageRoute(builder: (context) => Onboarding_1()),
                       ),
+                      label: Text("logout"),
+                    ),
+                    ElevatedButton.icon(
+                      icon: Icon(
+                        Icons.insert_chart,
+                        color: Colors.white,
+                      ),
+                      onPressed: () async {
+                        await AuthService().signOut();
+                      },
                       label: Text("onboarding"),
                     ),
                   ],
                 ),
-
 ///news tile 1 -----------------------------------------------------------------------------------------------------------------------------
                 Padding(
                   padding: const EdgeInsets.fromLTRB(10, 300, 10, 0),
                   child: Container(
                       height: 80,
-                      width: 250,
+                      width: 300,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(11)),
                           color: Colors.black,
@@ -119,7 +124,8 @@ class _HomePageState extends State<HomePage> {
                             colorFilter: ColorFilter.mode(
                                 Colors.black.withOpacity(0.7),
                                 BlendMode.dstATop)
-                          )),
+                          ),
+                      ),
                       child: Stack(
                         children: [
                           Padding(
@@ -174,7 +180,7 @@ class _HomePageState extends State<HomePage> {
                         ],
                       )),
                 ),
- ///news tile 2 ------------------------------------------------------------------------------------------------------------------------
+///news tile 2 ------------------------------------------------------------------------------------------------------------------------
                 Padding(
                   padding: const EdgeInsets.fromLTRB(80, 400, 10, 0),
                   child: Container(
@@ -244,13 +250,12 @@ class _HomePageState extends State<HomePage> {
                         ],
                       )),
                 ),
-
 ///news tile 3-----------------------------------------------------------------------------------------------------------------------------
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 500, 10, 0),
+                  padding: const EdgeInsets.fromLTRB(10, 500, 90, 0),
                   child: Container(
                       height: 80,
-                      width: 400,
+                      width: 300,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(11)),
                           color: Colors.black,
@@ -315,13 +320,12 @@ class _HomePageState extends State<HomePage> {
                         ],
                       )),
                 ),
-
 ///news tile 4 -----------------------------------------------------------------------------------------------------------------------------
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 600, 10, 0),
+                  padding: const EdgeInsets.fromLTRB(80, 600, 10, 0),
                   child: Container(
                       height: 80,
-                      width: 280,
+                      width: 300,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(11)),
                           color: Colors.black,
@@ -386,7 +390,6 @@ class _HomePageState extends State<HomePage> {
                         ],
                       )),
                 ),
-
 ///news tile 5 ----------------------------------------------------------------------------------------------------------------------------
                 Padding(
                   padding: const EdgeInsets.fromLTRB(10, 700, 10, 0),
@@ -488,7 +491,7 @@ class _HomePageState extends State<HomePage> {
               child: Icon(Icons.search_sharp),
               onTap: () async => Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => SearchPage()),
+                MaterialPageRoute(builder: (context) => TrendingGames()),
               ),
             ),
             title: Text('Games'),

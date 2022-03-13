@@ -1,4 +1,6 @@
 // ignore_for_file: prefer_const_constructors
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:untitled2/homePage.dart';
@@ -17,10 +19,27 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController username = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController email = TextEditingController();
+  UserCredential userCredential;
   final _formkey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
+    signUserUp() async {
+      await authService.createUserWithEmailAndPassword(
+          email.text, password.text);
+      final instance = FirebaseAuth.instance;
+      userCredential = await instance.createUserWithEmailAndPassword(
+          email: email.text, password: password.text);
+      String uid = userCredential.user.uid;
+      await FirebaseFirestore.instance.collection('users').doc(uid).set({
+        'email': email.text,
+        'uid': uid,
+        'dateOfCreation': DateTime.now(),
+        'nickname': username.text,
+      });
+    }
+
     return Material(
       type: MaterialType.transparency,
       child: Column(
@@ -133,14 +152,12 @@ class _SignUpPageState extends State<SignUpPage> {
                       ElevatedButton(
                         onPressed: () async {
                           if (_formkey.currentState.validate()) {
-                           await authService.createUserWithEmailAndPassword(
-                                email.text,
-                                password.text
-                           );
-                           Navigator.pop(
-                             context,
-                             MaterialPageRoute(builder: (context) => HomePage()),
-                           );
+                            signUserUp();
+                            Navigator.pop(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage()),
+                            );
                           }
                         },
                         child: Text(

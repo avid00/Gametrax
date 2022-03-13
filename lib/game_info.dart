@@ -10,10 +10,7 @@ class GameInfo extends StatefulWidget {
   final String gameDate;
   final String gameGenre;
   const GameInfo(
-      this.selectedGameImage,
-      this.selectedGame,
-      this.gameDate,
-      this.gameGenre,
+      this.selectedGameImage, this.selectedGame, this.gameDate, this.gameGenre,
       {Key key})
       : super(key: key);
 
@@ -26,6 +23,7 @@ class _GameInfoState extends State<GameInfo> {
   void initState() {
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,8 +44,9 @@ class _GameInfoState extends State<GameInfo> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Image.network(widget.selectedGameImage,
-                    fit: BoxFit.cover,
+                    Image.network(
+                      widget.selectedGameImage,
+                      fit: BoxFit.cover,
                     ),
                     SizedBox(
                       height: 20,
@@ -65,20 +64,25 @@ class _GameInfoState extends State<GameInfo> {
                     SizedBox(
                       height: 20,
                     ),
-                    Text(
-                      "Date Released: ${widget.gameDate}", ///TODO: parse date
-                      style: GoogleFonts.rubik(
-                        color: Colors.white70,
-                        fontSize: 15,
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 130, 0),
+                      child: Text(
+                        "Date Released: ${widget.gameDate}",
+
+                        ///TODO: parse date
+                        style: GoogleFonts.rubik(
+                          color: Colors.white70,
+                          fontSize: 15,
+                        ),
                       ),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 15,
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 190, 0),
+                      padding: const EdgeInsets.fromLTRB(0, 0, 205, 0),
                       child: Text(
-                        widget.gameGenre,
+                        "Genre: ${widget.gameGenre}",
                         style: GoogleFonts.rubik(
                           color: Colors.white70,
                           fontSize: 15,
@@ -90,13 +94,17 @@ class _GameInfoState extends State<GameInfo> {
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 225, 0),
-                      child: ElevatedButton.icon(onPressed: null, icon: Icon(
-                        Icons.add_circle_outline,
-                      ), label: Text("add to library",
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                      ),
+                      child: ElevatedButton.icon(
+                        onPressed: null,
+                        icon: Icon(
+                          Icons.add_circle_outline,
+                        ),
+                        label: Text(
+                          "add to library",
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                     ),
                     SizedBox(
@@ -106,7 +114,8 @@ class _GameInfoState extends State<GameInfo> {
                       padding: const EdgeInsets.fromLTRB(0, 0, 200, 0),
                       child: ElevatedButton.icon(
                         onPressed: () async {
-                          final url = "https://www.google.com/search?q=${widget.selectedGame}";
+                          final url =
+                              "https://www.google.com/search?q=${widget.selectedGame}";
                           if (await canLaunch(url)) {
                             await launch(
                               url,
@@ -114,12 +123,14 @@ class _GameInfoState extends State<GameInfo> {
                           }
                         },
                         icon: Icon(
-                        Icons.screen_search_desktop,
-                      ), label: Text("search on google",
-                        style: TextStyle(
-                          color: Colors.white,
+                          Icons.screen_search_desktop,
                         ),
-                      ),
+                        label: Text(
+                          "Search on Google",
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                     ),
                   ],
