@@ -29,6 +29,7 @@ class _TrendingGamesState extends State<TrendingGames> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: gotoAppBar(),
+
       ///TODO: add reused widgets to a separate file
       body: SingleChildScrollView(
         child: Column(
@@ -49,63 +50,124 @@ class _TrendingGamesState extends State<TrendingGames> {
                 color: Color(0xFF393939),
               ),
             ),
+
 ///Game rank 1 and 2-------------------------------------------------------------------------------------------------------------------------
             Row(
               children: [
+///Game 1--------------------------------------------------------------------------------
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
                   child: Container(
-                   // color: Colors.white,
-                    height: 200,
+                    height: 230,
                     width: 160,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(11)),
-                      color: Colors.white,
+                      gradient: LinearGradient(
+                        colors: const [
+                          Color(0xFF6A6A6A),
+                          Color(0xFF3F3F3F),
+                          Color(0xFF131313),
+                        ],
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        stops: const [0.2, 0.6, 1.0],
+                        tileMode: TileMode.clamp,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(9)),
                     ),
-                    child:
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(8, 8, 8, 100),
-                      child: Container(
-                          height: 80,
-                          width: 80,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(11)),
-                              color: Colors.black,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+//Image----------------------------------------------------------------------------------------------------------------------------------
+                          Container(
+                            height: 120,
+                            decoration: BoxDecoration(
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black,
+                                  blurRadius: 5.0,
+                                ),
+                              ],
+                              ///TODO: add border
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(9)),
                               image: DecorationImage(
-                                  image: NetworkImage(
-                                      popularimagelist[0],
-                                  ),
-                                  fit: BoxFit.cover,
-                                  // colorFilter: ColorFilter.mode(
-                                  //     Colors.black.withOpacity(0.7),
-                                  //     BlendMode.dstATop)
+                                image: NetworkImage(
+                                  popularimagelist[0],
+                                ),
+                                fit: BoxFit.cover,
                               ),
+                            ),
                           ),
-                          // child: Stack(
-                          //   children: [
-                          //     Padding(
-                          //       padding: const EdgeInsets.all(8.0),
-                          //       child: Column(
-                          //         crossAxisAlignment: CrossAxisAlignment.start,
-                          //         children: [
-                          //           Text(
-                          //             popularnamelist[0],
-                          //             style: GoogleFonts.rubik(
-                          //               fontSize: 12,
-                          //               fontWeight: FontWeight.bold,
-                          //               color: Colors.white,
-                          //             ),
-                          //           ),
-                          //         ],
-                          //       ),
-                          //     ),
-                          //   ],
-                          // ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(8, 0, 100, 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+//Info column----------------------------------------------------------------------------------------------------------------
+                                Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      popularnamelist[0],
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: GoogleFonts.rubik(
+                                        fontSize: 13,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      "Rank: #1",
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: GoogleFonts.rubik(
+                                        fontSize: 11,
+                                        color: Colors.white70,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      "Metacritic: 92%",
+                                      ///TODO: add metacritic variable
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: GoogleFonts.rubik(
+                                        fontSize: 11,
+                                        color: Colors.white70,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+
+//Icons column-------------------------------------------------------------------------------------------------------------------------
+                                Column(
+                                  children: [
+                                    IconButton(
+                                        onPressed: null,
+                                        icon: Icon(
+                                          Icons.favorite_border,
+                                          size: 15,
+                                        )),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
-
                 ),
+
+                ///Game 2---------------------------------------------------------------------------------
                 Padding(
                   padding: const EdgeInsets.fromLTRB(30, 20, 0, 0),
                   child: Container(
@@ -123,35 +185,37 @@ class _TrendingGamesState extends State<TrendingGames> {
   }
 
   fetchTrendingGames() async {
-///fetching popular games for default page body---------------------------------------------------------------------------------------------
+    ///fetching popular games for default page body---------------------------------------------------------------------------------------------
     var popularGamesURL = 'https://rawg.io/api/games/lists/main';
     Map<String, dynamic> queryParams = {
-      'key': 'e8bfd125c87243ad941d54f7933bf318', ///TODO: USE MY OWN KEY LOL
+      'key': 'e8bfd125c87243ad941d54f7933bf318',
+
+      ///TODO: USE MY OWN KEY LOL
       'page': '1',
       'page_size': '10',
       'ordering': '-relevance',
       'discover': 'true',
     };
-      try {
-        // if (newstitlelist.isNotEmpty) {
-        //   newstitlelist.clear();
-        // }
-        final response =
-        await dio.get(popularGamesURL + '?', queryParameters: queryParams);
-        setState(() {
-          final data = response.data as Map;
-          for (int i = 0; i <= 10; i++) {
-            //parsing data
-            popularGameName = data["results"][i]["name"].toString();
-            popularGameImage = data["results"][i]["background_image"].toString();
-            //add to list
-            popularnamelist.add(popularGameName);
-            popularimagelist.add(popularGameImage);
-          }
-        });
-      } catch (e) {
-        print(e);
-      }
+    try {
+      // if (newstitlelist.isNotEmpty) {
+      //   newstitlelist.clear();
+      // }
+      final response =
+          await dio.get(popularGamesURL + '?', queryParameters: queryParams);
+      setState(() {
+        final data = response.data as Map;
+        for (int i = 0; i <= 10; i++) {
+          //parsing data
+          popularGameName = data["results"][i]["name"].toString();
+          popularGameImage = data["results"][i]["background_image"].toString();
+          //add to list
+          popularnamelist.add(popularGameName);
+          popularimagelist.add(popularGameImage);
+        }
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 
   gotoAppBar() {

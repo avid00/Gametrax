@@ -13,7 +13,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'services/variables.dart';
 
 ///TODO: add changing background image
-
+///TODO: cache the news articles and refresh only every 24 hours
 //variables
 // TextEditingController _name = TextEditingController();
 int index = 0;
