@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
-import 'homePage.dart';
+import 'package:untitled2/register/sign_up.dart';
 
 class Onboarding_1 extends StatefulWidget {
   const Onboarding_1({Key key}) : super(key: key);
@@ -92,7 +92,7 @@ class Onboarding_3 extends StatelessWidget {
             ElevatedButton(
               onPressed: () => Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => HomePage()),
+                MaterialPageRoute(builder: (context) => SignUpPage()),
               ),
               child: Text("go to homepage"),
             ),

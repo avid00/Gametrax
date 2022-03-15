@@ -593,3 +593,9 @@ class _HomePageState extends State<HomePage> {
     }
   }
 }
+
+///TODO: error:
+// I/flutter ( 2729): setState() called after dispose(): _HomePageState#36c16(lifecycle state: defunct, not mounted)
+// I/flutter ( 2729): This error happens if you call setState() on a State object for a widget that no longer appears in the widget tree (e.g., whose parent widget no longer includes the widget in its build). This error can occur when code calls setState() from a timer or an animation callback.
+// I/flutter ( 2729): The preferred solution is to cancel the timer or stop listening to the animation in the dispose() callback. Another solution is to check the "mounted" property of this object before calling setState() to ensure the object is still in the tree.
+// I/flutter ( 2729): This error might indicate a memory leak if setState() is being called because another object is retaining a reference to this State object after it has been removed from the tree. To avoid memory leaks, consider breaking the reference to this object during dispose().

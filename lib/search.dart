@@ -50,7 +50,6 @@ class _TrendingGamesState extends State<TrendingGames> {
                 color: Color(0xFF393939),
               ),
             ),
-
 ///Game rank 1 and 2-------------------------------------------------------------------------------------------------------------------------
             Row(
               children: [
@@ -100,64 +99,103 @@ class _TrendingGamesState extends State<TrendingGames> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.fromLTRB(8, 0, 100, 0),
+                            padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
 //Info column----------------------------------------------------------------------------------------------------------------
-                                Column(
-                                  children: [
+                                Expanded(
+                                  flex: 3,
+                                  child: Column(
+                                    children: [
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          popularnamelist[0],
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: GoogleFonts.rubik(
+                                            fontSize: 13,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          "Rank: #1",
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: GoogleFonts.rubik(
+                                            fontSize: 11,
+                                            color: Colors.white70,
+                                          ),
+                                        ),
+                                      ),
+                                      // SizedBox(
+                                      //   height: 10,
+                                      // ),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          "Metacritic: 92%",
+                                          ///TODO: add metacritic variable
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: GoogleFonts.rubik(
+                                            fontSize: 11,
+                                            color: Colors.white70,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+//Icons column-------------------------------------------------------------------------------------------------------------------------
+                                Expanded(
+                                  child: Column(
+                                  children: const [
                                     SizedBox(
-                                      height: 10,
+                                      height: 9,
                                     ),
-                                    Text(
-                                      popularnamelist[0],
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: GoogleFonts.rubik(
-                                        fontSize: 13,
-                                        color: Colors.white,
+                                    Align(
+                                      alignment: Alignment.centerRight,
+                                      child: IconButton(
+                                        padding: EdgeInsets.zero,
+                                        constraints: BoxConstraints(),
+                                        onPressed: null,
+                                        icon: Icon(
+                                          Icons.favorite_border,
+                                          size: 30,
+                                          color: Colors.white,
+                                        ),
                                       ),
                                     ),
                                     SizedBox(
                                       height: 10,
                                     ),
-                                    Text(
-                                      "Rank: #1",
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: GoogleFonts.rubik(
-                                        fontSize: 11,
-                                        color: Colors.white70,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text(
-                                      "Metacritic: 92%",
-                                      ///TODO: add metacritic variable
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: GoogleFonts.rubik(
-                                        fontSize: 11,
-                                        color: Colors.white70,
+                                    Align(
+                                      alignment: Alignment.centerRight,
+                                      child: IconButton(
+                                        padding: EdgeInsets.zero,
+                                        constraints: BoxConstraints(),
+                                        onPressed: null,
+                                        icon: Icon(
+                                          Icons.bookmark_border_sharp,
+                                          size: 30,
+                                          color: Colors.white,
+                                        ),
                                       ),
                                     ),
                                   ],
                                 ),
-
-//Icons column-------------------------------------------------------------------------------------------------------------------------
-                                Column(
-                                  children: [
-                                    IconButton(
-                                        onPressed: null,
-                                        icon: Icon(
-                                          Icons.favorite_border,
-                                          size: 15,
-                                        )),
-                                  ],
-                                )
+                                ),
                               ],
                             ),
                           ),
@@ -166,14 +204,1383 @@ class _TrendingGamesState extends State<TrendingGames> {
                     ),
                   ),
                 ),
-
-                ///Game 2---------------------------------------------------------------------------------
+///Game 2--------------------------------------------------------------------------------
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(30, 20, 0, 0),
+                  padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
                   child: Container(
-                    color: Colors.white,
-                    height: 150,
+                    height: 230,
                     width: 160,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: const [
+                          Color(0xFF6A6A6A),
+                          Color(0xFF3F3F3F),
+                          Color(0xFF131313),
+                        ],
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        stops: const [0.2, 0.6, 1.0],
+                        tileMode: TileMode.clamp,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(9)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+//Image----------------------------------------------------------------------------------------------------------------------------------
+                          Container(
+                            height: 120,
+                            decoration: BoxDecoration(
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black,
+                                  blurRadius: 5.0,
+                                ),
+                              ],
+                              ///TODO: add border
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(9)),
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  popularimagelist[1],
+                                ),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+//Info column----------------------------------------------------------------------------------------------------------------
+                                Expanded(
+                                  flex: 3,
+                                  child: Column(
+                                    children: [
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          popularnamelist[1],
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: GoogleFonts.rubik(
+                                            fontSize: 13,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          "Rank: #2",
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: GoogleFonts.rubik(
+                                            fontSize: 11,
+                                            color: Colors.white70,
+                                          ),
+                                        ),
+                                      ),
+                                      // SizedBox(
+                                      //   height: 10,
+                                      // ),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          "Metacritic: 92%",
+                                          ///TODO: add metacritic variable
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: GoogleFonts.rubik(
+                                            fontSize: 11,
+                                            color: Colors.white70,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+//Icons column-------------------------------------------------------------------------------------------------------------------------
+                                Expanded(
+                                  child: Column(
+                                    children: const [
+                                      SizedBox(
+                                        height: 9,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: IconButton(
+                                          padding: EdgeInsets.zero,
+                                          constraints: BoxConstraints(),
+                                          onPressed: null,
+                                          icon: Icon(
+                                            Icons.favorite_border,
+                                            size: 30,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: IconButton(
+                                          padding: EdgeInsets.zero,
+                                          constraints: BoxConstraints(),
+                                          onPressed: null,
+                                          icon: Icon(
+                                            Icons.bookmark_border_sharp,
+                                            size: 30,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+///Game rank 3 and 4-------------------------------------------------------------------------------------------------------------------------
+            Row(
+              children: [
+///Game 3--------------------------------------------------------------------------------
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+                  child: Container(
+                    height: 230,
+                    width: 160,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: const [
+                          Color(0xFF6A6A6A),
+                          Color(0xFF3F3F3F),
+                          Color(0xFF131313),
+                        ],
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        stops: const [0.2, 0.6, 1.0],
+                        tileMode: TileMode.clamp,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(9)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+//Image----------------------------------------------------------------------------------------------------------------------------------
+                          Container(
+                            height: 120,
+                            decoration: BoxDecoration(
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black,
+                                  blurRadius: 5.0,
+                                ),
+                              ],
+                              ///TODO: add border
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(9)),
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  popularimagelist[2],
+                                ),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+//Info column----------------------------------------------------------------------------------------------------------------
+                                Expanded(
+                                  flex: 3,
+                                  child: Column(
+                                    children: [
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          popularnamelist[2],
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: GoogleFonts.rubik(
+                                            fontSize: 13,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          "Rank: #3",
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: GoogleFonts.rubik(
+                                            fontSize: 11,
+                                            color: Colors.white70,
+                                          ),
+                                        ),
+                                      ),
+                                      // SizedBox(
+                                      //   height: 10,
+                                      // ),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          "Metacritic: 92%",
+                                          ///TODO: add metacritic variable
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: GoogleFonts.rubik(
+                                            fontSize: 11,
+                                            color: Colors.white70,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+//Icons column-------------------------------------------------------------------------------------------------------------------------
+                                Expanded(
+                                  child: Column(
+                                    children: const [
+                                      SizedBox(
+                                        height: 9,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: IconButton(
+                                          padding: EdgeInsets.zero,
+                                          constraints: BoxConstraints(),
+                                          onPressed: null,
+                                          icon: Icon(
+                                            Icons.favorite_border,
+                                            size: 30,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: IconButton(
+                                          padding: EdgeInsets.zero,
+                                          constraints: BoxConstraints(),
+                                          onPressed: null,
+                                          icon: Icon(
+                                            Icons.bookmark_border_sharp,
+                                            size: 30,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+///Game 4--------------------------------------------------------------------------------
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+                  child: Container(
+                    height: 230,
+                    width: 160,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: const [
+                          Color(0xFF6A6A6A),
+                          Color(0xFF3F3F3F),
+                          Color(0xFF131313),
+                        ],
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        stops: const [0.2, 0.6, 1.0],
+                        tileMode: TileMode.clamp,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(9)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+//Image----------------------------------------------------------------------------------------------------------------------------------
+                          Container(
+                            height: 120,
+                            decoration: BoxDecoration(
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black,
+                                  blurRadius: 5.0,
+                                ),
+                              ],
+                              ///TODO: add border
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(9)),
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  popularimagelist[3],
+                                ),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+//Info column----------------------------------------------------------------------------------------------------------------
+                                Expanded(
+                                  flex: 3,
+                                  child: Column(
+                                    children: [
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          popularnamelist[3],
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: GoogleFonts.rubik(
+                                            fontSize: 13,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          "Rank: #4",
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: GoogleFonts.rubik(
+                                            fontSize: 11,
+                                            color: Colors.white70,
+                                          ),
+                                        ),
+                                      ),
+                                      // SizedBox(
+                                      //   height: 10,
+                                      // ),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          "Metacritic: 92%",
+                                          ///TODO: add metacritic variable
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: GoogleFonts.rubik(
+                                            fontSize: 11,
+                                            color: Colors.white70,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+//Icons column-------------------------------------------------------------------------------------------------------------------------
+                                Expanded(
+                                  child: Column(
+                                    children: const [
+                                      SizedBox(
+                                        height: 9,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: IconButton(
+                                          padding: EdgeInsets.zero,
+                                          constraints: BoxConstraints(),
+                                          onPressed: null,
+                                          icon: Icon(
+                                            Icons.favorite_border,
+                                            size: 30,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: IconButton(
+                                          padding: EdgeInsets.zero,
+                                          constraints: BoxConstraints(),
+                                          onPressed: null,
+                                          icon: Icon(
+                                            Icons.bookmark_border_sharp,
+                                            size: 30,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+///Game rank 5 and 6-------------------------------------------------------------------------------------------------------------------------
+            Row(
+              children: [
+///Game 5--------------------------------------------------------------------------------
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+                  child: Container(
+                    height: 230,
+                    width: 160,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: const [
+                          Color(0xFF6A6A6A),
+                          Color(0xFF3F3F3F),
+                          Color(0xFF131313),
+                        ],
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        stops: const [0.2, 0.6, 1.0],
+                        tileMode: TileMode.clamp,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(9)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+//Image----------------------------------------------------------------------------------------------------------------------------------
+                          Container(
+                            height: 120,
+                            decoration: BoxDecoration(
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black,
+                                  blurRadius: 5.0,
+                                ),
+                              ],
+                              ///TODO: add border
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(9)),
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  popularimagelist[4],
+                                ),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+//Info column----------------------------------------------------------------------------------------------------------------
+                                Expanded(
+                                  flex: 3,
+                                  child: Column(
+                                    children: [
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          popularnamelist[4],
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: GoogleFonts.rubik(
+                                            fontSize: 13,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          "Rank: #5",
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: GoogleFonts.rubik(
+                                            fontSize: 11,
+                                            color: Colors.white70,
+                                          ),
+                                        ),
+                                      ),
+                                      // SizedBox(
+                                      //   height: 10,
+                                      // ),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          "Metacritic: 92%",
+                                          ///TODO: add metacritic variable
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: GoogleFonts.rubik(
+                                            fontSize: 11,
+                                            color: Colors.white70,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+//Icons column-------------------------------------------------------------------------------------------------------------------------
+                                Expanded(
+                                  child: Column(
+                                    children: const [
+                                      SizedBox(
+                                        height: 9,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: IconButton(
+                                          padding: EdgeInsets.zero,
+                                          constraints: BoxConstraints(),
+                                          onPressed: null,
+                                          icon: Icon(
+                                            Icons.favorite_border,
+                                            size: 30,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: IconButton(
+                                          padding: EdgeInsets.zero,
+                                          constraints: BoxConstraints(),
+                                          onPressed: null,
+                                          icon: Icon(
+                                            Icons.bookmark_border_sharp,
+                                            size: 30,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+///Game 6--------------------------------------------------------------------------------
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+                  child: Container(
+                    height: 230,
+                    width: 160,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: const [
+                          Color(0xFF6A6A6A),
+                          Color(0xFF3F3F3F),
+                          Color(0xFF131313),
+                        ],
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        stops: const [0.2, 0.6, 1.0],
+                        tileMode: TileMode.clamp,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(9)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+//Image----------------------------------------------------------------------------------------------------------------------------------
+                          Container(
+                            height: 120,
+                            decoration: BoxDecoration(
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black,
+                                  blurRadius: 5.0,
+                                ),
+                              ],
+                              ///TODO: add border
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(9)),
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  popularimagelist[5],
+                                ),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+//Info column----------------------------------------------------------------------------------------------------------------
+                                Expanded(
+                                  flex: 3,
+                                  child: Column(
+                                    children: [
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          popularnamelist[5],
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: GoogleFonts.rubik(
+                                            fontSize: 13,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          "Rank: #6",
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: GoogleFonts.rubik(
+                                            fontSize: 11,
+                                            color: Colors.white70,
+                                          ),
+                                        ),
+                                      ),
+                                      // SizedBox(
+                                      //   height: 10,
+                                      // ),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          "Metacritic: 92%",
+                                          ///TODO: add metacritic variable
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: GoogleFonts.rubik(
+                                            fontSize: 11,
+                                            color: Colors.white70,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+//Icons column-------------------------------------------------------------------------------------------------------------------------
+                                Expanded(
+                                  child: Column(
+                                    children: const [
+                                      SizedBox(
+                                        height: 9,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: IconButton(
+                                          padding: EdgeInsets.zero,
+                                          constraints: BoxConstraints(),
+                                          onPressed: null,
+                                          icon: Icon(
+                                            Icons.favorite_border,
+                                            size: 30,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: IconButton(
+                                          padding: EdgeInsets.zero,
+                                          constraints: BoxConstraints(),
+                                          onPressed: null,
+                                          icon: Icon(
+                                            Icons.bookmark_border_sharp,
+                                            size: 30,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+///Game rank 7 and 8-------------------------------------------------------------------------------------------------------------------------
+            Row(
+              children: [
+///Game 7--------------------------------------------------------------------------------
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+                  child: Container(
+                    height: 230,
+                    width: 160,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: const [
+                          Color(0xFF6A6A6A),
+                          Color(0xFF3F3F3F),
+                          Color(0xFF131313),
+                        ],
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        stops: const [0.2, 0.6, 1.0],
+                        tileMode: TileMode.clamp,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(9)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+//Image----------------------------------------------------------------------------------------------------------------------------------
+                          Container(
+                            height: 120,
+                            decoration: BoxDecoration(
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black,
+                                  blurRadius: 5.0,
+                                ),
+                              ],
+                              ///TODO: add border
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(9)),
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  popularimagelist[6],
+                                ),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+//Info column----------------------------------------------------------------------------------------------------------------
+                                Expanded(
+                                  flex: 3,
+                                  child: Column(
+                                    children: [
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          popularnamelist[6],
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: GoogleFonts.rubik(
+                                            fontSize: 13,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          "Rank: #7",
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: GoogleFonts.rubik(
+                                            fontSize: 11,
+                                            color: Colors.white70,
+                                          ),
+                                        ),
+                                      ),
+                                      // SizedBox(
+                                      //   height: 10,
+                                      // ),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          "Metacritic: 92%",
+                                          ///TODO: add metacritic variable
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: GoogleFonts.rubik(
+                                            fontSize: 11,
+                                            color: Colors.white70,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+//Icons column-------------------------------------------------------------------------------------------------------------------------
+                                Expanded(
+                                  child: Column(
+                                    children: const [
+                                      SizedBox(
+                                        height: 9,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: IconButton(
+                                          padding: EdgeInsets.zero,
+                                          constraints: BoxConstraints(),
+                                          onPressed: null,
+                                          icon: Icon(
+                                            Icons.favorite_border,
+                                            size: 30,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: IconButton(
+                                          padding: EdgeInsets.zero,
+                                          constraints: BoxConstraints(),
+                                          onPressed: null,
+                                          icon: Icon(
+                                            Icons.bookmark_border_sharp,
+                                            size: 30,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+///Game 8--------------------------------------------------------------------------------
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+                  child: Container(
+                    height: 230,
+                    width: 160,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: const [
+                          Color(0xFF6A6A6A),
+                          Color(0xFF3F3F3F),
+                          Color(0xFF131313),
+                        ],
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        stops: const [0.2, 0.6, 1.0],
+                        tileMode: TileMode.clamp,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(9)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+//Image----------------------------------------------------------------------------------------------------------------------------------
+                          Container(
+                            height: 120,
+                            decoration: BoxDecoration(
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black,
+                                  blurRadius: 5.0,
+                                ),
+                              ],
+                              ///TODO: add border
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(9)),
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  popularimagelist[7],
+                                ),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+//Info column----------------------------------------------------------------------------------------------------------------
+                                Expanded(
+                                  flex: 3,
+                                  child: Column(
+                                    children: [
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          popularnamelist[7],
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: GoogleFonts.rubik(
+                                            fontSize: 13,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          "Rank: #8",
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: GoogleFonts.rubik(
+                                            fontSize: 11,
+                                            color: Colors.white70,
+                                          ),
+                                        ),
+                                      ),
+                                      // SizedBox(
+                                      //   height: 10,
+                                      // ),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          "Metacritic: 92%",
+                                          ///TODO: add metacritic variable
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: GoogleFonts.rubik(
+                                            fontSize: 11,
+                                            color: Colors.white70,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+//Icons column-------------------------------------------------------------------------------------------------------------------------
+                                Expanded(
+                                  child: Column(
+                                    children: const [
+                                      SizedBox(
+                                        height: 9,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: IconButton(
+                                          padding: EdgeInsets.zero,
+                                          constraints: BoxConstraints(),
+                                          onPressed: null,
+                                          icon: Icon(
+                                            Icons.favorite_border,
+                                            size: 30,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: IconButton(
+                                          padding: EdgeInsets.zero,
+                                          constraints: BoxConstraints(),
+                                          onPressed: null,
+                                          icon: Icon(
+                                            Icons.bookmark_border_sharp,
+                                            size: 30,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+///Game rank 9 and 10-------------------------------------------------------------------------------------------------------------------------
+            Row(
+              children: [
+///Game 9--------------------------------------------------------------------------------
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+                  child: Container(
+                    height: 230,
+                    width: 160,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: const [
+                          Color(0xFF6A6A6A),
+                          Color(0xFF3F3F3F),
+                          Color(0xFF131313),
+                        ],
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        stops: const [0.2, 0.6, 1.0],
+                        tileMode: TileMode.clamp,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(9)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+//Image----------------------------------------------------------------------------------------------------------------------------------
+                          Container(
+                            height: 120,
+                            decoration: BoxDecoration(
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black,
+                                  blurRadius: 5.0,
+                                ),
+                              ],
+                              ///TODO: add border
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(9)),
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  popularimagelist[8],
+                                ),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+//Info column----------------------------------------------------------------------------------------------------------------
+                                Expanded(
+                                  flex: 3,
+                                  child: Column(
+                                    children: [
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          popularnamelist[8],
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: GoogleFonts.rubik(
+                                            fontSize: 13,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          "Rank: #9",
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: GoogleFonts.rubik(
+                                            fontSize: 11,
+                                            color: Colors.white70,
+                                          ),
+                                        ),
+                                      ),
+                                      // SizedBox(
+                                      //   height: 10,
+                                      // ),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          "Metacritic: 92%",
+                                          ///TODO: add metacritic variable
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: GoogleFonts.rubik(
+                                            fontSize: 11,
+                                            color: Colors.white70,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+//Icons column-------------------------------------------------------------------------------------------------------------------------
+                                Expanded(
+                                  child: Column(
+                                    children: const [
+                                      SizedBox(
+                                        height: 9,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: IconButton(
+                                          padding: EdgeInsets.zero,
+                                          constraints: BoxConstraints(),
+                                          onPressed: null,
+                                          icon: Icon(
+                                            Icons.favorite_border,
+                                            size: 30,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: IconButton(
+                                          padding: EdgeInsets.zero,
+                                          constraints: BoxConstraints(),
+                                          onPressed: null,
+                                          icon: Icon(
+                                            Icons.bookmark_border_sharp,
+                                            size: 30,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+///Game 10--------------------------------------------------------------------------------
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+                  child: Container(
+                    height: 230,
+                    width: 160,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: const [
+                          Color(0xFF6A6A6A),
+                          Color(0xFF3F3F3F),
+                          Color(0xFF131313),
+                        ],
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        stops: const [0.2, 0.6, 1.0],
+                        tileMode: TileMode.clamp,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(9)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+//Image----------------------------------------------------------------------------------------------------------------------------------
+                          Container(
+                            height: 120,
+                            decoration: BoxDecoration(
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black,
+                                  blurRadius: 5.0,
+                                ),
+                              ],
+                              ///TODO: add border
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(9)),
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  popularimagelist[9],
+                                ),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+//Info column----------------------------------------------------------------------------------------------------------------
+                                Expanded(
+                                  flex: 3,
+                                  child: Column(
+                                    children: [
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          popularnamelist[9],
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: GoogleFonts.rubik(
+                                            fontSize: 13,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          "Rank: #10",
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: GoogleFonts.rubik(
+                                            fontSize: 11,
+                                            color: Colors.white70,
+                                          ),
+                                        ),
+                                      ),
+                                      // SizedBox(
+                                      //   height: 10,
+                                      // ),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          "Metacritic: 92%",
+                                          ///TODO: add metacritic variable
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: GoogleFonts.rubik(
+                                            fontSize: 11,
+                                            color: Colors.white70,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+//Icons column-------------------------------------------------------------------------------------------------------------------------
+                                Expanded(
+                                  child: Column(
+                                    children: const [
+                                      SizedBox(
+                                        height: 9,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: IconButton(
+                                          padding: EdgeInsets.zero,
+                                          constraints: BoxConstraints(),
+                                          onPressed: null,
+                                          icon: Icon(
+                                            Icons.favorite_border,
+                                            size: 30,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: IconButton(
+                                          padding: EdgeInsets.zero,
+                                          constraints: BoxConstraints(),
+                                          onPressed: null,
+                                          icon: Icon(
+                                            Icons.bookmark_border_sharp,
+                                            size: 30,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ],

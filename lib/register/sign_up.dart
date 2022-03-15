@@ -30,28 +30,21 @@ class _SignUpPageState extends State<SignUpPage> {
       final instance = FirebaseAuth.instance;
       userCredential = await instance.createUserWithEmailAndPassword(
           email: email.text, password: password.text);
-      String uid = userCredential.user.uid;
+      var user = FirebaseAuth.instance.currentUser;
 
       await authService.createUserWithEmailAndPassword(
-          email.text, password.text).then((userCredential) => {
-            FirebaseFirestore.instance.collection('users').doc(uid).set({
-      'email': email.text,
-      'uid': uid,
-      'dateOfCreation': DateTime.now(),
-      'nickname': username.text,
-      }),
-      });
-      // try {
-      //   await FirebaseFirestore.instance.collection('users').doc(uid).set({
-      //     'email': email.text,
-      //     'uid': uid,
-      //     'dateOfCreation': DateTime.now(),
-      //     'nickname': username.text,
-      //   });
-      // } catch(e)
-      // {
-      //   print("Error: $e");
-      // }
+          email.text, password.text);
+
+      try{
+        await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+          'email': email.text,
+          'uid': user.uid,
+          'dateOfCreation': DateTime.now(),
+          'nickname': username.text,
+        });
+      } catch(e){
+        print("Error: $e");
+      }
     }
 
     return Material(
@@ -91,8 +84,14 @@ class _SignUpPageState extends State<SignUpPage> {
                     children: [
                       TextFormField(
                         validator: (val) =>
-                            val.isEmpty ? 'enter an email please' : null,
-                        controller: email,  ///TODO: fix keyboard glitching, putting the cursor at the start
+                            val.isEmpty ? 'ⓘ enter an email please' : null,
+                        controller: TextEditingController.fromValue(
+                          TextEditingValue(
+                            text:email.text,
+                            selection: TextSelection.collapsed(
+                                offset: email.text.length-0),
+                          ),
+                        ),
                         style: GoogleFonts.rubik(
                             color: Colors.white, fontSize: 15),
                         decoration: InputDecoration(
@@ -114,13 +113,20 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       TextFormField(
                         validator: (val) => val.isEmpty
-                            ? 'we need to know what to call you'
+                            ? 'ⓘ we need to know what to call you'
                             : null,
-                        controller: username,
+                       controller: TextEditingController.fromValue(
+                           TextEditingValue(
+                               text: username.text,
+                               selection: TextSelection.collapsed(
+                                   offset: username.text.length-0),
+                           ),
+                       ),
+                       // controller: username,
                         style: GoogleFonts.rubik(
                             color: Colors.white, fontSize: 15),
                         decoration: InputDecoration(
-                          hintText: 'what should we call you?',
+                          hintText: 'your good name?',
                           hintStyle: GoogleFonts.rubik(
                               color: Colors.white60, fontSize: 12),
                           enabledBorder: UnderlineInputBorder(
@@ -138,13 +144,19 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       TextFormField(
                         validator: (val) => val.length < 9
-                            ? 'you will need a secure password you know (min 9 chars.)'
+                            ? 'ⓘ you will need a secure password you know (min 9 chars.)'
                             : null,
-                        controller: password,
+                        controller: TextEditingController.fromValue(
+                          TextEditingValue(
+                            text: password.text,
+                            selection: TextSelection.collapsed(
+                                offset: password.text.length-0),
+                          ),
+                        ),
                         style: GoogleFonts.rubik(
                             color: Colors.white, fontSize: 15),
                         decoration: InputDecoration(
-                          hintText: "and again please (we know... it's annoying)",
+                          hintText: "and your password here shhh...",
                           hintStyle: GoogleFonts.rubik(
                               color: Colors.white60, fontSize: 12),
                           enabledBorder: UnderlineInputBorder(
@@ -231,213 +243,6 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 }
-
-// class SignUp2 extends StatefulWidget {
-//   final String returnedEmail;
-//   const SignUp2(
-//       this.returnedEmail,
-//       {Key key}) : super(key: key);
-//
-//   @override
-//   State<SignUp2> createState() => _SignUp2State();
-// }
-
-// class _SignUp2State extends State<SignUp2> {
-//   TextEditingController username = TextEditingController();
-//   TextEditingController name = TextEditingController();
-//   UserCredential userCredential;
-//   final _formkey = GlobalKey<FormState>();
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     final authService = Provider.of<AuthService>(context);
-//     signUserUp() async {
-//
-//       final instance = FirebaseAuth.instance;
-//       String uid = userCredential.user.uid;
-//       await FirebaseFirestore.instance.collection('users').doc(uid).set({
-//         'email': Returnedemail.text,
-//         'uid': uid,
-//         'dateOfCreation': DateTime.now(),
-//         'nickname': username.text,
-//       });
-//     }
-//
-//     return Material(
-//       type: MaterialType.transparency,
-//       child: Column(
-//         children: [
-//           Stack(
-//             children: [
-//               Image.asset('assets/images/signup_bg.png'),
-//               Padding(
-//                 padding: const EdgeInsets.fromLTRB(50, 150, 50, 0),
-//                 child: Text(
-//                   'Register with us!',
-//                   style: GoogleFonts.rubik(
-//                     color: Colors.white,
-//                     fontSize: 22,
-//                     fontStyle: FontStyle.italic,
-//                   ),
-//                 ),
-//               ),
-//               Padding(
-//                 padding: const EdgeInsets.fromLTRB(50, 280, 40, 0),
-//                 child: Text(
-//                   'Please enter your details below',
-//                   style: GoogleFonts.rubik(
-//                     color: Colors.white,
-//                     fontSize: 15,
-//                     fontStyle: FontStyle.italic,
-//                   ),
-//                 ),
-//               ),
-//               Padding(
-//                 padding: const EdgeInsets.fromLTRB(70, 330, 70, 100),
-//                 child: Form(
-//                   key: _formkey,
-//                   child: Column(
-//                     children: [
-//                       TextFormField(
-//                         validator: (val) =>
-//                         val.isEmpty ? 'enter an email please' : null,
-//                         controller: email,  ///TODO: fix keyboard glitching, putting the cursor at the start
-//                         style: GoogleFonts.rubik(
-//                             color: Colors.white, fontSize: 15),
-//                         decoration: InputDecoration(
-//                           hintText: 'we will keep your email safe',
-//                           hintStyle: GoogleFonts.rubik(
-//                               color: Colors.white60, fontSize: 12),
-//                           enabledBorder: UnderlineInputBorder(
-//                             borderSide: BorderSide(color: Colors.white),
-//                           ),
-//                           focusedBorder: UnderlineInputBorder(
-//                             borderSide: BorderSide(color: Colors.white),
-//                           ),
-//                         ),
-//                         onChanged: (val) {
-//                           setState(() => {
-//                             email.text = val,
-//                           });
-//                         },
-//                       ),
-//                       // TextFormField(
-//                       //   validator: (val) => val.isEmpty
-//                       //       ? 'we need to know what to call you'
-//                       //       : null,
-//                       //   controller: username,
-//                       //   style: GoogleFonts.rubik(
-//                       //       color: Colors.white, fontSize: 15),
-//                       //   decoration: InputDecoration(
-//                       //     hintText: 'enter a password here',
-//                       //     hintStyle: GoogleFonts.rubik(
-//                       //         color: Colors.white60, fontSize: 12),
-//                       //     enabledBorder: UnderlineInputBorder(
-//                       //       borderSide: BorderSide(color: Colors.white),
-//                       //     ),
-//                       //     focusedBorder: UnderlineInputBorder(
-//                       //       borderSide: BorderSide(color: Colors.white),
-//                       //     ),
-//                       //   ),
-//                       //   onChanged: (val) {
-//                       //     setState(() => {
-//                       //           username.text = val,
-//                       //         });
-//                       //   },
-//                       // ),
-//                       TextFormField(
-//                         validator: (val) => val.length < 9
-//                             ? 'you will need a secure password you know (min 9 chars.)'
-//                             : null,
-//                         controller: name,
-//                         style: GoogleFonts.rubik(
-//                             color: Colors.white, fontSize: 15),
-//                         decoration: InputDecoration(
-//                           hintText: "and again please (we know... it's annoying)",
-//                           hintStyle: GoogleFonts.rubik(
-//                               color: Colors.white60, fontSize: 12),
-//                           enabledBorder: UnderlineInputBorder(
-//                             borderSide: BorderSide(color: Colors.white),
-//                           ),
-//                           focusedBorder: UnderlineInputBorder(
-//                             borderSide: BorderSide(color: Colors.white),
-//                           ),
-//                         ),
-//                         onChanged: (val) {
-//                           setState(() => {
-//                             name.text = val,
-//                           });
-//                         },
-//                       ),
-//                       SizedBox(
-//                         height: 30,
-//                       ),
-//                       ElevatedButton(
-//                         onPressed: () async {
-//                           if (_formkey.currentState.validate()) {
-//                             signUserUp();
-//                             Navigator.pop(
-//                               context,
-//                               MaterialPageRoute(
-//                                   builder: (context) => HomePage()),
-//                             );
-//                           }
-//                         },
-//                         child: Text(
-//                           '   Confirm   ',
-//                           style: GoogleFonts.rubik(
-//                             color: Colors.white,
-//                             fontSize: 15,
-//                           ),
-//                         ),
-//                         style: ButtonStyle(
-//                           shape:
-//                           MaterialStateProperty.all<RoundedRectangleBorder>(
-//                             RoundedRectangleBorder(
-//                               borderRadius: BorderRadius.circular(7.0),
-//                               side: BorderSide(color: Colors.white),
-//                             ),
-//                           ),
-//                         ),
-//                       ),
-//                     ],
-//                   ),
-//                 ),
-//               ),
-//               Padding(
-//                 padding: const EdgeInsets.fromLTRB(128, 650, 0, 0),
-//                 child: Column(
-//                   children: [
-//                     Text(
-//                       'Already have an account?',
-//                       style: GoogleFonts.rubik(
-//                         color: Colors.white,
-//                         fontSize: 12,
-//                         fontStyle: FontStyle.italic,
-//                       ),
-//                     ),
-//                     TextButton(
-//                       onPressed: () => Navigator.pushReplacement(
-//                         context,
-//                         MaterialPageRoute(builder: (context) => LoginPage()),
-//                       ),
-//                       child: Text(
-//                         'Sign in here',
-//                         style: GoogleFonts.rubik(
-//                           color: Colors.orangeAccent,
-//                           fontSize: 12,
-//                           fontStyle: FontStyle.italic,
-//                         ),
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//             ],
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
+///TODO: error:
+///Failed assertion: line 5128 pos 12: '_history.isNotEmpty': is not true.
 

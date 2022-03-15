@@ -25,6 +25,8 @@ final credential = await _firebaseAuth.signInWithEmailAndPassword(
     email: email,
     password: password,
    );
+
+
 return _userFromFirebase(credential.user);
    }
 
