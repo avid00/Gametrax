@@ -29,7 +29,6 @@ class _TrendingGamesState extends State<TrendingGames> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: gotoAppBar(),
-
       ///TODO: add reused widgets to a separate file
       body: SingleChildScrollView(
         child: Column(
@@ -160,41 +159,41 @@ class _TrendingGamesState extends State<TrendingGames> {
 //Icons column-------------------------------------------------------------------------------------------------------------------------
                                 Expanded(
                                   child: Column(
-                                  children: const [
-                                    SizedBox(
-                                      height: 9,
-                                    ),
-                                    Align(
-                                      alignment: Alignment.centerRight,
-                                      child: IconButton(
-                                        padding: EdgeInsets.zero,
-                                        constraints: BoxConstraints(),
-                                        onPressed: null,
-                                        icon: Icon(
-                                          Icons.favorite_border,
-                                          size: 30,
-                                          color: Colors.white,
+                                    children: const [
+                                      SizedBox(
+                                        height: 9,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: IconButton(
+                                          padding: EdgeInsets.zero,
+                                          constraints: BoxConstraints(),
+                                          onPressed: null,
+                                          icon: Icon(
+                                            Icons.favorite_border,
+                                            size: 30,
+                                            color: Colors.white,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Align(
-                                      alignment: Alignment.centerRight,
-                                      child: IconButton(
-                                        padding: EdgeInsets.zero,
-                                        constraints: BoxConstraints(),
-                                        onPressed: null,
-                                        icon: Icon(
-                                          Icons.bookmark_border_sharp,
-                                          size: 30,
-                                          color: Colors.white,
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: IconButton(
+                                          padding: EdgeInsets.zero,
+                                          constraints: BoxConstraints(),
+                                          onPressed: null,
+                                          icon: Icon(
+                                            Icons.bookmark_border_sharp,
+                                            size: 30,
+                                            color: Colors.white,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
@@ -204,7 +203,7 @@ class _TrendingGamesState extends State<TrendingGames> {
                     ),
                   ),
                 ),
-///Game 2--------------------------------------------------------------------------------
+                ///Game 2--------------------------------------------------------------------------------
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
                   child: Container(
@@ -357,10 +356,10 @@ class _TrendingGamesState extends State<TrendingGames> {
                 ),
               ],
             ),
-///Game rank 3 and 4-------------------------------------------------------------------------------------------------------------------------
+            ///Game rank 3 and 4-------------------------------------------------------------------------------------------------------------------------
             Row(
               children: [
-///Game 3--------------------------------------------------------------------------------
+                ///Game 3--------------------------------------------------------------------------------
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
                   child: Container(
@@ -511,7 +510,7 @@ class _TrendingGamesState extends State<TrendingGames> {
                     ),
                   ),
                 ),
-///Game 4--------------------------------------------------------------------------------
+                ///Game 4--------------------------------------------------------------------------------
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
                   child: Container(
@@ -664,10 +663,10 @@ class _TrendingGamesState extends State<TrendingGames> {
                 ),
               ],
             ),
-///Game rank 5 and 6-------------------------------------------------------------------------------------------------------------------------
+            ///Game rank 5 and 6-------------------------------------------------------------------------------------------------------------------------
             Row(
               children: [
-///Game 5--------------------------------------------------------------------------------
+                ///Game 5--------------------------------------------------------------------------------
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
                   child: Container(
@@ -818,7 +817,7 @@ class _TrendingGamesState extends State<TrendingGames> {
                     ),
                   ),
                 ),
-///Game 6--------------------------------------------------------------------------------
+                ///Game 6--------------------------------------------------------------------------------
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
                   child: Container(
@@ -971,10 +970,10 @@ class _TrendingGamesState extends State<TrendingGames> {
                 ),
               ],
             ),
-///Game rank 7 and 8-------------------------------------------------------------------------------------------------------------------------
+            ///Game rank 7 and 8-------------------------------------------------------------------------------------------------------------------------
             Row(
               children: [
-///Game 7--------------------------------------------------------------------------------
+                ///Game 7--------------------------------------------------------------------------------
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
                   child: Container(
@@ -1125,7 +1124,7 @@ class _TrendingGamesState extends State<TrendingGames> {
                     ),
                   ),
                 ),
-///Game 8--------------------------------------------------------------------------------
+                ///Game 8--------------------------------------------------------------------------------
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
                   child: Container(
@@ -1278,10 +1277,10 @@ class _TrendingGamesState extends State<TrendingGames> {
                 ),
               ],
             ),
-///Game rank 9 and 10-------------------------------------------------------------------------------------------------------------------------
+            ///Game rank 9 and 10-------------------------------------------------------------------------------------------------------------------------
             Row(
               children: [
-///Game 9--------------------------------------------------------------------------------
+                ///Game 9--------------------------------------------------------------------------------
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
                   child: Container(
@@ -1432,7 +1431,7 @@ class _TrendingGamesState extends State<TrendingGames> {
                     ),
                   ),
                 ),
-///Game 10--------------------------------------------------------------------------------
+                ///Game 10--------------------------------------------------------------------------------
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
                   child: Container(
@@ -1592,12 +1591,10 @@ class _TrendingGamesState extends State<TrendingGames> {
   }
 
   fetchTrendingGames() async {
-    ///fetching popular games for default page body---------------------------------------------------------------------------------------------
+///fetching popular games for default page body---------------------------------------------------------------------------------------------
     var popularGamesURL = 'https://rawg.io/api/games/lists/main';
     Map<String, dynamic> queryParams = {
-      'key': 'e8bfd125c87243ad941d54f7933bf318',
-
-      ///TODO: USE MY OWN KEY LOL
+      'key': '78917d353ee74c57b726259620cdded8',
       'page': '1',
       'page_size': '10',
       'ordering': '-relevance',
