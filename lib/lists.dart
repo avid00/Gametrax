@@ -12,6 +12,13 @@ class ListsPage extends StatefulWidget {
 }
 
 class _ListsPageState extends State<ListsPage> {
+  List listTitle= [
+    Text("List 1"),
+    Text("List 2"),
+    Text("List 3"),
+    Text("List 4"),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,9 +108,10 @@ class _ListsPageState extends State<ListsPage> {
                     color: Color(0xFF484848),
                     borderRadius: BorderRadius.all(Radius.circular(9)),
                   ),
-                  child: ImageIcon(
-                    AssetImage(assetName) 
-                  )
+                  child: Icon(
+                    Icons.bookmark,
+                    color: Color(0xFFE5E5E5FF),
+                  ),
                 ),
                 SizedBox(
                   width: 28,
@@ -111,18 +119,52 @@ class _ListsPageState extends State<ListsPage> {
               ],
             ),
             //container (scrollable)-----
-            //Listbuilder-----
-
-            ElevatedButton(
-              onPressed: () => Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => HomePage()),
+            Container(
+              height: 580,
+              decoration: BoxDecoration(
+                color: Color(0xFF484848),
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                topRight: Radius.circular(30),
+                ),
               ),
-              child: Text("go to homepage"),
+              child: SingleChildScrollView(
+                physics: ScrollPhysics(),
+                child: Column(
+                  children:[
+                    Text('Hey'),
+                    ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount:5,
+                        itemBuilder: (context,index){
+                          return  Text('Some text',
+                          style: TextStyle(
+                            color: Colors.white70,
+                          ),
+                          );
+                        })
+                  ],
+                ),
+              ),
             ),
+
+            // ElevatedButton(
+            //   onPressed: () => Navigator.pushReplacement(
+            //     context,
+            //     MaterialPageRoute(builder: (context) => HomePage()),
+            //   ),
+            //   child: Text("go to homepage"),
+            // ),
           ],
         ),
       ),
+    );
+  }
+
+  Widget buildBar(BuildContext context){
+    return AppBar(
+      backgroundColor: Colors.white,
     );
   }
 }

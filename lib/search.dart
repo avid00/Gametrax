@@ -1722,7 +1722,7 @@ class _SearchPageState extends State<SearchPage> {
           return Container();
         }
         return ListView.builder(
-          itemCount: nameList == null ? 0 : 10,
+          itemCount: nameList == null ? null : 10,
           itemBuilder: (BuildContext context, int index) {
             return GestureDetector(
               onTap: () async => {
