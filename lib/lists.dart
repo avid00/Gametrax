@@ -27,7 +27,7 @@ class _ListsPageState extends State<ListsPage> {
         child: Column(
           children: [
             SizedBox(
-              height: 100,
+              height: 60,
             ),
             Align(
               alignment: Alignment.centerLeft,
@@ -35,7 +35,7 @@ class _ListsPageState extends State<ListsPage> {
                 "        | Some Default Lists for you",
                 style: GoogleFonts.rubik(
                   color: Colors.white,
-                  fontSize: 18,
+                  fontSize: 20,
                 ),
               ),
             ),
@@ -118,44 +118,76 @@ class _ListsPageState extends State<ListsPage> {
                 ),
               ],
             ),
+            SizedBox(
+              height: 20,
+            ),
             //container (scrollable)-----
             Container(
-              height: 580,
+              height: 597,
               decoration: BoxDecoration(
-                color: Color(0xFF484848),
+                color: Color(0xFF262626),
                 borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                topRight: Radius.circular(30),
+                    topLeft: Radius.circular(40),
+                topRight: Radius.circular(40),
                 ),
               ),
               child: SingleChildScrollView(
                 physics: ScrollPhysics(),
                 child: Column(
                   children:[
-                    Text('Hey'),
+                    SizedBox(
+                      height: 50,
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text("       Lists Created by you",
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
+                      ),
+                      ),
+                    ),
                     ListView.builder(
                         physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
-                        itemCount:5,
+                        itemCount:10,
                         itemBuilder: (context,index){
-                          return  Text('Some text',
-                          style: TextStyle(
-                            color: Colors.white70,
-                          ),
+                          return  Padding(
+                            padding: const EdgeInsets.fromLTRB(20, 0, 20, 5),
+                            child: Card(
+                              color: Colors.black,
+                              clipBehavior: Clip.antiAlias,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5.5),
+                              ),
+                              child: SizedBox(
+                                height: 90,
+                              child: Row(
+                                  children: const [
+                                    Text('Some text',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              )
+                            ),
                           );
-                        })
+                        }),
+                    ElevatedButton(
+                      onPressed: () => Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomePage()),
+                      ),
+                      child: Text("go to homepage"),
+                    ),
                   ],
                 ),
               ),
             ),
 
-            // ElevatedButton(
-            //   onPressed: () => Navigator.pushReplacement(
-            //     context,
-            //     MaterialPageRoute(builder: (context) => HomePage()),
-            //   ),
-            //   child: Text("go to homepage"),
-            // ),
           ],
         ),
       ),
