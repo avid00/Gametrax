@@ -1587,6 +1587,7 @@ class _TrendingGamesState extends State<TrendingGames> {
           ],
         ),
       ),
+      //TODO: add 'powered by RAWG'
     );
   }
 
@@ -1791,7 +1792,6 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   _searchPressed() {
-    //dont async
     setState(() {
       _appbartitle = TextField(
           style: TextStyle(
@@ -1821,11 +1821,8 @@ class _SearchPageState extends State<SearchPage> {
       }
       var endpointUrl = 'https://api.rawg.io/api/games';
       Map<String, dynamic> queryParams = {
-        'key': 'e8bfd125c87243ad941d54f7933bf318',
-
-        ///TODO: USE MY OWN KEY LOL
+        'key': '78917d353ee74c57b726259620cdded8',
         'search': gamename,
-        // 'ordering': '-rating',
         'page_size': '20',
       };
       final response =

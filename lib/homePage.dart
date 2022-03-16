@@ -14,6 +14,7 @@ import 'services/variables.dart';
 
 ///TODO: add changing background image
 ///TODO: cache the news articles and refresh only every 24 hours
+///https://pub.dev/packages/cached_map
 //variables
 // TextEditingController _name = TextEditingController();
 int index = 0;
@@ -48,9 +49,10 @@ class _HomePageState extends State<HomePage> {
           children: [
             Stack(
               children: [
-                Image.network(
-                  "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Z2FtaW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-                  scale: 0.4,
+                Image.asset(
+                  "assets/images/wallpapers/7.png",
+                  fit: BoxFit.fill,
+                    colorBlendMode: BlendMode.darken
                 ),
                 Center(
                   heightFactor: 5,
@@ -71,6 +73,7 @@ class _HomePageState extends State<HomePage> {
                       fontSize: 25,
                       color: Colors.white,
                     ),
+                    ///TODO: add time and day
                   ),
                 ),
                 Row(

@@ -158,7 +158,7 @@ class _ListsPageState extends State<ListsPage> {
                               color: Colors.black,
                               clipBehavior: Clip.antiAlias,
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5.5),
+                                borderRadius: BorderRadius.circular(13),
                               ),
                               child: SizedBox(
                                 height: 90,
