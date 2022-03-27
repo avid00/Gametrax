@@ -1,5 +1,6 @@
 //ignore_for_file: prefer_const_constructors
 //import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled2/lists.dart';
 import 'package:untitled2/onboarding_screens.dart';
@@ -41,6 +42,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // var width = MediaQuery.of(context).size.width;
+    // var height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: gotoAppBar(),
@@ -110,6 +113,26 @@ class _HomePageState extends State<HomePage> {
                       },
                       label: Text("onboarding"),
                     ),
+        ElevatedButton.icon(
+          icon: Icon(
+            Icons.insert_chart,
+            color: Colors.white,
+          ),
+          onPressed: () async {
+            try{
+              await FirebaseFirestore.instance.collection('users').doc('test').set({
+                'dateOfCreation': DateTime.now(),
+                'nickname': 'amy trial',
+              });
+            } catch(e){
+              print("Error: $e");
+            }
+          },
+          label: Text("fstr"),
+        ),
+
+
+
                   ],
                 ),
 ///news tile 1 -----------------------------------------------------------------------------------------------------------------------------
