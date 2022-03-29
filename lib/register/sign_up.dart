@@ -30,18 +30,12 @@ class _SignUpPageState extends State<SignUpPage> {
       final instance = FirebaseAuth.instance;
       userCredential = await instance.createUserWithEmailAndPassword(
           email: email.text, password: password.text);
-      var user = FirebaseAuth.instance.currentUser;
 
+
+      try{
       await authService.createUserWithEmailAndPassword(
           email.text, password.text);
 
-      try{
-        await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
-          'email': email.text,
-          'uid': user.uid,
-          'dateOfCreation': DateTime.now(),
-          'nickname': username.text,
-        });
       } catch(e){
         print("Error: $e");
       }
@@ -177,8 +171,15 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       ElevatedButton(
                         onPressed: () async {
+                          var user = FirebaseAuth.instance.currentUser;
                           if (_formkey.currentState.validate()) {
                             signUserUp();
+                            await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+                              'email': email.text,
+                              'uid': user.uid,
+                              'dateOfCreation': DateTime.now(),
+                              'nickname': username.text,
+                            });
                             Navigator.pop(
                               context,
                               MaterialPageRoute(

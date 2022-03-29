@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'homePage.dart';
 import 'package:flutter/material.dart';
 
+///TODO: add to json and upload json to firestore instead
+
 class ListsPage extends StatefulWidget {
   const ListsPage({Key key}) : super(key: key);
 

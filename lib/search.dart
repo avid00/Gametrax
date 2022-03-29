@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'game_info.dart';
 import 'services/variables.dart';
-
+///TODO: willpopscope() to go to homepage
 Widget _appbartitle = Text('Game Name');
 final dio = Dio(); // for http requests
 TextEditingController _gamenamecontroller = TextEditingController();

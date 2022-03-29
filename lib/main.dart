@@ -9,6 +9,8 @@ import 'package:untitled2/services/wrapper.dart';
 import 'package:provider/provider.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
+
+//TODO: have made comment out of history.isNotEmpty in navigator.dart
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
