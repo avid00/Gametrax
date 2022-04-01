@@ -1,16 +1,18 @@
 // ignore_for_file: prefer_const_constructors
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 ///TODO: add powered by RAWG at the bottom
 class GameInfo extends StatefulWidget {
-  final String selectedGame;
+  final String selectedGameName;
   final String selectedGameImage;
   final String gameDate;
   final String gameGenre;
   const GameInfo(
-      this.selectedGameImage, this.selectedGame, this.gameDate, this.gameGenre,
+      this.selectedGameImage, this.selectedGameName, this.gameDate, this.gameGenre,
       {Key key})
       : super(key: key);
 
@@ -54,7 +56,7 @@ class _GameInfoState extends State<GameInfo> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(5, 0, 70, 0),
                       child: Text(
-                        widget.selectedGame,
+                        widget.selectedGameName,
                         style: GoogleFonts.rubik(
                           color: Colors.white70,
                           fontSize: 30,
@@ -95,7 +97,9 @@ class _GameInfoState extends State<GameInfo> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 225, 0),
                       child: ElevatedButton.icon(
-                        onPressed: null,
+                        onPressed: () async => {
+                          addToFirestore()
+                        },
                         icon: Icon(
                           Icons.add_circle_outline,
                         ),
@@ -115,7 +119,7 @@ class _GameInfoState extends State<GameInfo> {
                       child: ElevatedButton.icon(
                         onPressed: () async {
                           final url =
-                              "https://www.google.com/search?q=${widget.selectedGame}";
+                              "https://www.google.com/search?q=${widget.selectedGameName}";
                           if (await canLaunch(url)) {
                             await launch(
                               url,
@@ -143,11 +147,26 @@ class _GameInfoState extends State<GameInfo> {
     );
   }
 
+  addToFirestore() async{
+    List gameName =[];
+    setState(() async {
+      gameName.add(widget.selectedGameName);
+      var user = FirebaseAuth.instance.currentUser;
+      await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+        'Favourite Games' : gameName,
+      });
+    });
+    //await FirebaseFirestore.instance.collection('post')
+    // .doc(postId).update({"like": FieldValue.increment(1)});
+///TODO: adding is deleting other fields i . Alos, creating a new document like wtf?
+///TODO: list is not expanding on firestore (deletes one list item to add another)
+  }
+
   Widget appBar() {
     return AppBar(
       backgroundColor: Colors.black26,
       title: Text(
-        "About ${widget.selectedGame}",
+        "About ${widget.selectedGameName}",
         style: TextStyle(
           fontSize: 15,
         ),

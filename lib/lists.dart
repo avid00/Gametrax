@@ -1,4 +1,6 @@
 // ignore_for_file: prefer_const_constructors
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'homePage.dart';
@@ -57,7 +59,9 @@ class _ListsPageState extends State<ListsPage> {
                     borderRadius: BorderRadius.all(Radius.circular(9)),
                   ),
                   child: IconButton(
-                    onPressed: null,
+                    onPressed: () async =>{
+                      getListItems(),
+                    },
                     icon: Icon(
                       Icons.favorite,
                       color: Color(0xFFE5E5E5FF),
@@ -189,12 +193,24 @@ class _ListsPageState extends State<ListsPage> {
                 ),
               ),
             ),
-
           ],
         ),
       ),
     );
   }
+
+getListItems() async {
+var collection = FirebaseFirestore.instance.collection('users');
+var user = FirebaseAuth.instance.currentUser;
+var docSnapshot = await collection.doc(user.uid).get();
+if (docSnapshot.exists) {
+Map<String, dynamic> data = docSnapshot.data();
+// You can then retrieve the value from the Map like this:
+var gameName = data['Favourite Games'];
+print (gameName);
+}
+
+}
 
   Widget buildBar(BuildContext context){
     return AppBar(

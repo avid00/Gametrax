@@ -15,6 +15,7 @@ import 'services/variables.dart';
 
 ///TODO: add changing background image
 ///TODO: cache the news articles and refresh only every 24 hours
+///TODO: load page after sign up idk why tf it's not working.
 ///https://pub.dev/packages/cached_map
 //variables
 // TextEditingController _name = TextEditingController();

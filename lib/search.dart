@@ -1643,7 +1643,7 @@ class _TrendingGamesState extends State<TrendingGames> {
         ),
         leading: IconButton(
           icon: Icon(Icons.search_sharp, color: Colors.white70),
-          onPressed: () => Navigator.pushReplacement(
+          onPressed: () async => Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => SearchPage()),
           ),
