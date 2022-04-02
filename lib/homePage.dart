@@ -43,7 +43,8 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    getNews();
+    WidgetsBinding.instance.addPostFrameCallback((_) => getNews());
+    //getNews();
   }
 
   // @override
@@ -575,7 +576,7 @@ class _HomePageState extends State<HomePage> {
       leading: IconButton(
         onPressed: () async => Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => SearchPage()),
+          MaterialPageRoute(builder: (context) => TrendingGames()),
         ),
         icon: Icon(Icons.search_sharp),
       ),

@@ -22,7 +22,8 @@ class _TrendingGamesState extends State<TrendingGames> {
   @override
   void initState() {
     super.initState();
-    fetchTrendingGames();
+    WidgetsBinding.instance.addPostFrameCallback((_) => fetchTrendingGames());
+  //  fetchTrendingGames();
   }
 
   @override
@@ -1668,7 +1669,8 @@ class _SearchPageState extends State<SearchPage> {
   @override
   void initState() {
     super.initState();
-    _buildList();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _buildList());
+   // _buildList();
     _searchPressed();
   }
 

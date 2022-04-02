@@ -228,6 +228,7 @@ setState(() {
           "  Some Default Lists for you",
           style: GoogleFonts.rubik(
             fontSize: 20,
+            fontWeight: FontWeight.w200,
           ),
         ),
         leading: IconButton(
