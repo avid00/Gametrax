@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:untitled2/services/variables.dart';
 
 import 'homePage.dart';
 import 'package:flutter/material.dart';
@@ -26,26 +27,27 @@ class _ListsPageState extends State<ListsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: appBar(),
       backgroundColor: Colors.black,
       body: Center(
         child: Column(
           children: [
             SizedBox(
-              height: 60,
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "        | Some Default Lists for you",
-                style: GoogleFonts.rubik(
-                  color: Colors.white,
-                  fontSize: 20,
-                ),
-              ),
-            ),
-            SizedBox(
               height: 20,
             ),
+            // Align(
+            //   alignment: Alignment.centerLeft,
+            //   child: Text(
+            //     "        | Some Default Lists for you",
+            //     style: GoogleFonts.rubik(
+            //       color: Colors.white,
+            //       fontSize: 20,
+            //     ),
+            //   ),
+            // ),
+            // SizedBox(
+            //   height: 20,
+            // ),
             Row(
               children: [
                 SizedBox(
@@ -129,7 +131,7 @@ class _ListsPageState extends State<ListsPage> {
             ),
             //container (scrollable)-----
             Container(
-              height: 597,
+              height: 528,  //length of container for lists
               decoration: BoxDecoration(
                 color: Color(0xFF262626),
                 borderRadius: BorderRadius.only(
@@ -142,7 +144,7 @@ class _ListsPageState extends State<ListsPage> {
                 child: Column(
                   children:[
                     SizedBox(
-                      height: 50,
+                      height: 20,
                     ),
                     Align(
                       alignment: Alignment.centerLeft,
@@ -152,6 +154,9 @@ class _ListsPageState extends State<ListsPage> {
                         color: Colors.white,
                       ),
                       ),
+                    ),
+                    SizedBox(
+                      height: 20,
                     ),
                     ListView.builder(
                         physics: NeverScrollableScrollPhysics(),
@@ -169,8 +174,8 @@ class _ListsPageState extends State<ListsPage> {
                               child: SizedBox(
                                 height: 90,
                               child: Row(
-                                  children: const [
-                                    Text('Some text',
+                                  children: [
+                                    Text(gameNameFromFirestore,
                                       style: TextStyle(
                                         fontSize: 20,
                                         color: Colors.white,
@@ -206,11 +211,33 @@ var docSnapshot = await collection.doc(user.uid).get();
 if (docSnapshot.exists) {
 Map<String, dynamic> data = docSnapshot.data();
 // You can then retrieve the value from the Map like this:
-var gameName = data['Favourite Games'];
-print (gameName);
+setState(() {
+  gameNameFromFirestore = data['Favourite Games'].toString();
+});
+///TODO: maybe add a return function instead of global variable and setState
+}
 }
 
-}
+  appBar() {
+    return AppBar(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        backgroundColor: Color(0xFF212121),
+        title: Text(
+          "  Some Default Lists for you",
+          style: GoogleFonts.rubik(
+            fontSize: 20,
+          ),
+        ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_sharp, color: Colors.white70),
+          onPressed: () => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage()),
+          ),
+        ));
+  }
 
   Widget buildBar(BuildContext context){
     return AppBar(
@@ -218,3 +245,7 @@ print (gameName);
     );
   }
 }
+
+//notes:
+//once the list items are added,
+// just the list can be retrieved from firestore rather than adding it one by one

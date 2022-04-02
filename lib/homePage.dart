@@ -4,22 +4,31 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled2/lists.dart';
 import 'package:untitled2/onboarding_screens.dart';
-import 'package:untitled2/profile_page.dart';
 import 'package:untitled2/register/sign_in.dart';
 import 'package:untitled2/services/auth.dart';
 import 'search.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'services/variables.dart';
 
 ///TODO: add changing background image
-///TODO: cache the news articles and refresh only every 24 hours
+///TODO: cache the news articles and refresh only every 24 hours (maybe use datetime now)
 ///TODO: load page after sign up idk why tf it's not working.
 ///https://pub.dev/packages/cached_map
 //variables
 // TextEditingController _name = TextEditingController();
-int index = 0;
+// int index = 0;
+// String currentPage;
+// List<String> pageKeys =[
+//   "home",
+//   "search",
+//   "lists",
+// ];
+// Map<String,GlobalKey<NavigatorState>> _navigatorKeys ={
+//   "home": GlobalKey<NavigatorState>(),
+//   "search": GlobalKey<NavigatorState>(),
+//   "lists": GlobalKey<NavigatorState>(),
+// };
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);
@@ -29,7 +38,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currentIndex = 0;
+  // int _currentIndex = 0;
+  // var _currentTab;
   @override
   void initState() {
     super.initState();
@@ -40,24 +50,20 @@ class _HomePageState extends State<HomePage> {
   // void dispose() {
   //   super.dispose();
   // }
-
   @override
   Widget build(BuildContext context) {
     // var width = MediaQuery.of(context).size.width;
     // var height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: gotoAppBar(),
+      appBar: appBarHome(),
       body: SingleChildScrollView(
         child: Column(
           children: [
             Stack(
               children: [
-                Image.asset(
-                  "assets/images/wallpapers/7.png",
-                  fit: BoxFit.fill,
-                    colorBlendMode: BlendMode.darken
-                ),
+                Image.network("https://wallpaper.dog/large/10828301.jpg",
+                    fit: BoxFit.fill, colorBlendMode: BlendMode.darken),
                 Center(
                   heightFactor: 5,
                   child: Text(
@@ -77,81 +83,26 @@ class _HomePageState extends State<HomePage> {
                       fontSize: 25,
                       color: Colors.white,
                     ),
+
                     ///TODO: add time and day
                   ),
                 ),
-                Row(
-                  children: [
-                    ElevatedButton.icon(
-                      icon: Icon(
-                        Icons.insert_chart,
-                        color: Colors.white,
-                      ),
-                      onPressed: () => Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => LoginPage()),
-                      ),
-                      label: Text("login"),
-                    ),
-                    ElevatedButton.icon(
-                      icon: Icon(
-                        Icons.insert_chart,
-                        color: Colors.white,
-                      ),
-                      onPressed: () => Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => Onboarding_1()),
-                      ),
-                      label: Text("logout"),
-                    ),
-                    ElevatedButton.icon(
-                      icon: Icon(
-                        Icons.insert_chart,
-                        color: Colors.white,
-                      ),
-                      onPressed: () async {
-                        await AuthService().signOut();
-                      },
-                      label: Text("onboarding"),
-                    ),
-        ElevatedButton.icon(
-          icon: Icon(
-            Icons.insert_chart,
-            color: Colors.white,
-          ),
-          onPressed: () async {
-            try{
-              await FirebaseFirestore.instance.collection('users').doc('test').set({
-                'dateOfCreation': DateTime.now(),
-                'nickname': 'amy trial',
-              });
-            } catch(e){
-              print("Error: $e");
-            }
-          },
-          label: Text("fstr"),
-        ),
 
-
-
-                  ],
-                ),
-///news tile 1 -----------------------------------------------------------------------------------------------------------------------------
+                ///news tile 1 -----------------------------------------------------------------------------------------------------------------------------
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 300, 10, 0),
+                  padding: const EdgeInsets.fromLTRB(10, 270, 10, 0),
                   child: Container(
                       height: 80,
                       width: 300,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(11)),
-                          color: Colors.black,
-                          image: DecorationImage(
+                        borderRadius: BorderRadius.all(Radius.circular(11)),
+                        color: Colors.black,
+                        image: DecorationImage(
                             image: NetworkImage(newsimagelist[1]),
                             fit: BoxFit.cover,
                             colorFilter: ColorFilter.mode(
                                 Colors.black.withOpacity(0.7),
-                                BlendMode.dstATop)
-                          ),
+                                BlendMode.dstATop)),
                       ),
                       child: Stack(
                         children: [
@@ -207,9 +158,10 @@ class _HomePageState extends State<HomePage> {
                         ],
                       )),
                 ),
-///news tile 2 ------------------------------------------------------------------------------------------------------------------------
+
+                ///news tile 2 ------------------------------------------------------------------------------------------------------------------------
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(80, 400, 10, 0),
+                  padding: const EdgeInsets.fromLTRB(80, 370, 10, 0),
                   child: Container(
                       height: 80,
                       width: 300,
@@ -221,8 +173,7 @@ class _HomePageState extends State<HomePage> {
                               fit: BoxFit.cover,
                               colorFilter: ColorFilter.mode(
                                   Colors.black.withOpacity(0.7),
-                                  BlendMode.dstATop)
-                          )),
+                                  BlendMode.dstATop))),
                       child: Stack(
                         children: [
                           Padding(
@@ -277,9 +228,10 @@ class _HomePageState extends State<HomePage> {
                         ],
                       )),
                 ),
-///news tile 3-----------------------------------------------------------------------------------------------------------------------------
+
+                ///news tile 3-----------------------------------------------------------------------------------------------------------------------------
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 500, 90, 0),
+                  padding: const EdgeInsets.fromLTRB(10, 470, 90, 0),
                   child: Container(
                       height: 80,
                       width: 300,
@@ -291,8 +243,7 @@ class _HomePageState extends State<HomePage> {
                               fit: BoxFit.cover,
                               colorFilter: ColorFilter.mode(
                                   Colors.black.withOpacity(0.7),
-                                  BlendMode.dstATop)
-                          )),
+                                  BlendMode.dstATop))),
                       child: Stack(
                         children: [
                           Padding(
@@ -347,9 +298,10 @@ class _HomePageState extends State<HomePage> {
                         ],
                       )),
                 ),
-///news tile 4 -----------------------------------------------------------------------------------------------------------------------------
+
+                ///news tile 4 -----------------------------------------------------------------------------------------------------------------------------
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(80, 600, 10, 0),
+                  padding: const EdgeInsets.fromLTRB(80, 570, 10, 0),
                   child: Container(
                       height: 80,
                       width: 300,
@@ -361,8 +313,7 @@ class _HomePageState extends State<HomePage> {
                               fit: BoxFit.cover,
                               colorFilter: ColorFilter.mode(
                                   Colors.black.withOpacity(0.7),
-                                  BlendMode.dstATop)
-                          )),
+                                  BlendMode.dstATop))),
                       child: Stack(
                         children: [
                           Padding(
@@ -417,9 +368,10 @@ class _HomePageState extends State<HomePage> {
                         ],
                       )),
                 ),
-///news tile 5 ----------------------------------------------------------------------------------------------------------------------------
+
+                ///news tile 5 ----------------------------------------------------------------------------------------------------------------------------
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 700, 10, 0),
+                  padding: const EdgeInsets.fromLTRB(10, 670, 10, 0),
                   child: Container(
                       height: 80,
                       width: 400,
@@ -431,8 +383,7 @@ class _HomePageState extends State<HomePage> {
                               fit: BoxFit.cover,
                               colorFilter: ColorFilter.mode(
                                   Colors.black.withOpacity(0.7),
-                                  BlendMode.dstATop)
-                          )),
+                                  BlendMode.dstATop))),
                       child: Stack(
                         children: [
                           Padding(
@@ -489,98 +440,179 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
+            Row(
+              children: [
+                ElevatedButton.icon(
+                  icon: Icon(
+                    Icons.insert_chart,
+                    color: Colors.white,
+                  ),
+                  onPressed: () => Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginPage()),
+                  ),
+                  label: Text("login"),
+                ),
+                ElevatedButton.icon(
+                  icon: Icon(
+                    Icons.insert_chart,
+                    color: Colors.white,
+                  ),
+                  onPressed: () => Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => Onboarding_1()),
+                  ),
+                  label: Text("logout"),
+                ),
+                ElevatedButton.icon(
+                  icon: Icon(
+                    Icons.insert_chart,
+                    color: Colors.white,
+                  ),
+                  onPressed: () async {
+                    await AuthService().signOut();
+                  },
+                  label: Text("onboarding"),
+                ),
+                ElevatedButton.icon(
+                  icon: Icon(
+                    Icons.insert_chart,
+                    color: Colors.white,
+                  ),
+                  onPressed: () async {
+                    try {
+                      await FirebaseFirestore.instance
+                          .collection('users')
+                          .doc('test')
+                          .set({
+                        'dateOfCreation': DateTime.now(),
+                        'nickname': 'amy trial',
+                      });
+                    } catch (e) {
+                      print("Error: $e");
+                    }
+                  },
+                  label: Text("fstr"),
+                ),
+              ],
+            ),
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavyBar(
-        //TODO: make nav bar persistent
-        backgroundColor: Colors.black45,
-        selectedIndex: _currentIndex,
-        showElevation: true,
-        itemCornerRadius: 24,
-        curve: Curves.easeIn,
-        onItemSelected: (index) => setState(() => _currentIndex = index),
-        items: <BottomNavyBarItem>[
-          BottomNavyBarItem(
-            icon: GestureDetector(
-              child: Icon(Icons.home),
-              onTap: () async => Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => HomePage()),
-              ),
-            ),
-            title: Text('Home'),
-            activeColor: Colors.white70,
-            textAlign: TextAlign.center,
-          ),
-          BottomNavyBarItem(
-            icon: GestureDetector(
-              child: Icon(Icons.search_sharp),
-              onTap: () async => Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => TrendingGames()),
-              ),
-            ),
-            title: Text('Games'),
-            activeColor: Colors.white70,
-            textAlign: TextAlign.center,
-          ),
-          BottomNavyBarItem(
-            icon: GestureDetector(
-              child: Icon(Icons.view_list_sharp),
-              onTap: () async => Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => ListsPage()),
-              ),
-            ),
-            title: Text(
-              'Lists',
-            ),
-            activeColor: Colors.white70,
-            textAlign: TextAlign.center,
-          ),
-          BottomNavyBarItem(
-            icon: GestureDetector(
-              child: Icon(Icons.person_sharp),
-              onTap: () async => Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => ProfilePage()),
-              ),
-            ),
-            title: Text('Me'), //TODO: add user's name/nicname
-            activeColor: Colors.white70,
-            textAlign: TextAlign.center,
-          ),
-        ],
-      ),
+      // bottomNavigationBar: BottomNavyBar(
+      //   backgroundColor: Colors.black45,
+      //   showElevation: true,
+      //   itemCornerRadius: 24,
+      //   curve: Curves.easeIn,
+      //   onItemSelected: (index) => setState(() => _currentIndex = index),
+      //   selectedIndex: _currentIndex,
+      //   items: <BottomNavyBarItem>[
+      //     BottomNavyBarItem(
+      //       icon: GestureDetector(
+      //         child: Icon(Icons.home),
+      //         onTap: () async => Navigator.pushReplacement(
+      //           context,
+      //           MaterialPageRoute(builder: (context) => HomePage()),
+      //         ),
+      //       ),
+      //       title: Text('Home'),
+      //       activeColor: Colors.white70,
+      //       textAlign: TextAlign.center,
+      //     ),
+      //     BottomNavyBarItem(
+      //       icon: GestureDetector(
+      //         child: Icon(Icons.search_sharp),
+      //         onTap: () async => Navigator.pushReplacement(
+      //           context,
+      //           MaterialPageRoute(builder: (context) => TrendingGames()),
+      //         ),
+      //       ),
+      //       title: Text('Games'),
+      //       activeColor: Colors.white70,
+      //       textAlign: TextAlign.center,
+      //     ),
+      //     BottomNavyBarItem(
+      //       icon: GestureDetector(
+      //         child: Icon(Icons.view_list_sharp),
+      //         onTap: () async => Navigator.pushReplacement(
+      //           context,
+      //           MaterialPageRoute(builder: (context) => ListsPage()),
+      //         ),
+      //       ),
+      //       title: Text(
+      //         'Lists',
+      //       ),
+      //       activeColor: Colors.white70,
+      //       textAlign: TextAlign.center,
+      //     ),
+      //   ],
+      // ),
     );
   }
 
-  gotoAppBar() {
+//   Widget _buildOffstageNavigator(String tabItem){
+// return Offstage(
+//   offstage: _currentIndex != tabItem,
+//   child: TabNavigator(
+//     navigatorKey: _navigatorKeys[tabItem],
+//     tabItem: tabItem,
+//   ),
+// );
+//   }
+
+  // void _selectTab(String tabItem, int index){
+  //  setState(() {
+  //    _currentTab=pageKeys[index];
+  //    _currentIndex = index;
+  //  });
+  // }
+
+  appBarHome() {
     return AppBar(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+      backgroundColor: Color(0xFF212121),
+      centerTitle: true,
+      title: Text("Gametrax"),
+      leading: IconButton(
+        onPressed: () async => Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => SearchPage()),
         ),
-        backgroundColor: Color(0xFF212121),
-        title: TextField(
-          onTap: () async => Navigator.pushReplacement(
+        icon: Icon(Icons.search_sharp),
+      ),
+      actions: [
+        IconButton(
+          onPressed: () async => Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => SearchPage()),
+            MaterialPageRoute(builder: (context) => ListsPage()),
           ),
-          decoration: InputDecoration(
-            hintText: "Search for a Game",
-            hintStyle: TextStyle(
-              color: Colors.white24,
-            ),
-          ),
+          icon: Icon(Icons.list_sharp),
         ),
-        leading: IconButton(
-          icon: Icon(Icons.search_sharp, color: Colors.white70),
-          onPressed: () => Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => SearchPage()),
-          ),
-        ));
+      ],
+    );
+    // return AppBar(
+    //     shape: RoundedRectangleBorder(
+    //       borderRadius: BorderRadius.circular(20),
+    //     ),
+    //     backgroundColor: Color(0xFF212121),
+    //     title: TextField(
+    //       onTap: () async => Navigator.pushReplacement(
+    //         context,
+    //         MaterialPageRoute(builder: (context) => SearchPage()),
+    //       ),
+    //       decoration: InputDecoration(
+    //         hintText: "Search for a Game",
+    //         hintStyle: TextStyle(
+    //           color: Colors.white24,
+    //         ),
+    //       ),
+    //     ),
+    //     leading: IconButton(
+    //       icon: Icon(Icons.search_sharp, color: Colors.white70),
+    //       onPressed: () => Navigator.pushReplacement(
+    //         context,
+    //         MaterialPageRoute(builder: (context) => SearchPage()),
+    //       ),
+    //     ));
   }
 
   // getBackgroundImage(){

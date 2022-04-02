@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:untitled2/homePage.dart';
 import 'game_info.dart';
 import 'services/variables.dart';
 ///TODO: willpopscope() to go to homepage
@@ -28,7 +29,7 @@ class _TrendingGamesState extends State<TrendingGames> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: gotoAppBar(),
+      appBar: appBarTrending(),
       ///TODO: add reused widgets to a separate file
       body: SingleChildScrollView(
         child: Column(
@@ -1623,7 +1624,7 @@ class _TrendingGamesState extends State<TrendingGames> {
     }
   }
 
-  gotoAppBar() {
+  appBarTrending() {
     return AppBar(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
@@ -1642,10 +1643,10 @@ class _TrendingGamesState extends State<TrendingGames> {
           ),
         ),
         leading: IconButton(
-          icon: Icon(Icons.search_sharp, color: Colors.white70),
+          icon: Icon(Icons.arrow_back_ios_sharp, color: Colors.white70),
           onPressed: () async => Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => SearchPage()),
+            MaterialPageRoute(builder: (context) => HomePage()),
           ),
         ));
   }
@@ -1673,8 +1674,8 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   void dispose() {
-    _gamenamecontroller.dispose();
-    _buildList().dispose();
+    // _gamenamecontroller.dispose();
+    // _buildList().dispose();
     super.dispose();
   }
 
@@ -1694,14 +1695,14 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: buildBar(context),
+      appBar: appBarSearch(context),
       body: Container(
         child: _buildList(),
       ),
     );
   }
 
-  Widget buildBar(BuildContext context) {
+  Widget appBarSearch(BuildContext context) {
     return AppBar(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
@@ -1709,9 +1710,13 @@ class _SearchPageState extends State<SearchPage> {
       backgroundColor: Color(0xFF212121),
       title: _appbartitle,
       leading: IconButton(
-        icon: Icon(Icons.search_sharp, color: Colors.white70),
-        onPressed: _searchPressed(),
+        icon: Icon(Icons.arrow_back_ios_sharp, color: Colors.white70),
+        onPressed: () async => Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => TrendingGames()),
+        ),
       ),
+
     );
   }
 
