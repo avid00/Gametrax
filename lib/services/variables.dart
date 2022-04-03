@@ -25,8 +25,12 @@ List newsurllist = [];
 List newsimagelist = [];
 List newsdatelist = [];
 
+//for time
+var date = DateTime.now();
+String time;
 //Lists------------------------------------------------------------------------------------------------------------------------------------
 String gameNameFromFirestore;
+String gameImageFromFirestore;
 
 //popular game show page----------------------------------------------------------------------------------------------------------------------
 List popularimagelist = [];

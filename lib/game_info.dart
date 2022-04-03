@@ -149,11 +149,15 @@ class _GameInfoState extends State<GameInfo> {
 
   addToFirestore() async{
     List gameName =[];
+    List gameImage= [];
+    // String
     setState(() async {
       gameName.add(widget.selectedGameName);
+      gameImage.add(widget.selectedGameImage);
       var user = FirebaseAuth.instance.currentUser;
       await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
         'Favourite Games' : gameName,
+        'Favourite Game Image': gameImage,
       });
     });
     //await FirebaseFirestore.instance.collection('post')

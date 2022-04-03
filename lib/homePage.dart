@@ -12,7 +12,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'services/variables.dart';
 
 ///TODO: add changing background image
-///TODO: cache the news articles and refresh only every 24 hours (maybe use datetime now)
 ///TODO: load page after sign up idk why tf it's not working.
 ///https://pub.dev/packages/cached_map
 //variables
@@ -44,17 +43,23 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) => getNews());
-    //getNews();
+    getTime();
+   // StreamBuilder(
+   //     stream: Stream.periodic(const Duration(minutes: 1)),
+   //     builder: (context, snapshot){
+   //       return getTime();
+   //     }
+   // );
   }
 
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  // }
+
   @override
   Widget build(BuildContext context) {
     // var width = MediaQuery.of(context).size.width;
     // var height = MediaQuery.of(context).size.height;
+    // String day =
+    //     "${date.year.toString()}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
+
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: appBarHome(),
@@ -63,29 +68,51 @@ class _HomePageState extends State<HomePage> {
           children: [
             Stack(
               children: [
-                Image.network("https://wallpaper.dog/large/10828301.jpg",
-                    fit: BoxFit.fill, colorBlendMode: BlendMode.darken),
-                Center(
-                  heightFactor: 5,
-                  child: Text(
-                    "Greetings",
-                    style: GoogleFonts.rubikMonoOne(
-                      color: Colors.white,
-                      fontSize: 25,
-                    ),
-                  ),
-                ),
-                Center(
-                  heightFactor: 7,
-                  child: Text(
-                    "david",
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.rubikMonoOne(
-                      fontSize: 25,
-                      color: Colors.white,
-                    ),
+                Image.network(
+                    "https://images.unsplash.com/photo-1567027757540-7b572280fa22?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
+                    fit: BoxFit.fill,
+                    colorBlendMode: BlendMode.darken),
 
-                    ///TODO: add time and day
+                Center(
+                  heightFactor: 2,
+                  child: Column(
+                    children: [
+                      Text(
+                        "Greetings",
+                        style: GoogleFonts.rubikMonoOne(
+                          color: Colors.white,
+                          fontSize: 25,
+                        ),
+                      ),
+                      Text(
+                        "david",
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.rubikMonoOne(
+                          fontSize: 25,
+                          color: Colors.white,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+
+                              Text(
+                                time,
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.rubikMonoOne(
+                                  fontSize: 35,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              Text(
+                                "${date.year.toString()}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}",
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.rubik(
+                                  fontSize: 15,
+                                  color: Colors.white,
+                                ),
+                              ),
+                    ],
                   ),
                 ),
 
@@ -568,11 +595,26 @@ class _HomePageState extends State<HomePage> {
   //  });
   // }
 
+  getTime() {
+    setState(() {
+      time = "${date.hour}:${date.minute}";
+    });
+  }
+
   appBarHome() {
     return AppBar(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
       backgroundColor: Color(0xFF212121),
       centerTitle: true,
-      title: Text("Gametrax"),
+      title: Text(
+        "Gametrax",
+        style: GoogleFonts.rubik(
+          fontSize: 19,
+          fontWeight: FontWeight.w200,
+        ),
+      ),
       leading: IconButton(
         onPressed: () async => Navigator.pushReplacement(
           context,

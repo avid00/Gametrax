@@ -35,19 +35,6 @@ class _ListsPageState extends State<ListsPage> {
             SizedBox(
               height: 20,
             ),
-            // Align(
-            //   alignment: Alignment.centerLeft,
-            //   child: Text(
-            //     "        | Some Default Lists for you",
-            //     style: GoogleFonts.rubik(
-            //       color: Colors.white,
-            //       fontSize: 20,
-            //     ),
-            //   ),
-            // ),
-            // SizedBox(
-            //   height: 20,
-            // ),
             Row(
               children: [
                 SizedBox(
@@ -175,9 +162,14 @@ class _ListsPageState extends State<ListsPage> {
                                 height: 90,
                               child: Row(
                                   children: [
-                                    Text(gameNameFromFirestore,
+                                    Container(
+                                      child: Image.network(gameImageFromFirestore.replaceAll('[','').replaceAll(']', ''),
+                                      scale: 5,
+                                      ),
+                                    ),
+                                    Text(gameNameFromFirestore.replaceAll('[','').replaceAll(']', ''),
                                       style: TextStyle(
-                                        fontSize: 20,
+                                        fontSize: 15,
                                         color: Colors.white,
                                       ),
                                     ),
@@ -213,6 +205,7 @@ Map<String, dynamic> data = docSnapshot.data();
 // You can then retrieve the value from the Map like this:
 setState(() {
   gameNameFromFirestore = data['Favourite Games'].toString();
+  gameImageFromFirestore = data['Favourite Game Image'].toString();
 });
 ///TODO: maybe add a return function instead of global variable and setState
 }
@@ -227,7 +220,7 @@ setState(() {
         title: Text(
           "  Some Default Lists for you",
           style: GoogleFonts.rubik(
-            fontSize: 20,
+            fontSize: 19,
             fontWeight: FontWeight.w200,
           ),
         ),
