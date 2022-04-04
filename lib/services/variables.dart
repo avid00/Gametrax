@@ -1,3 +1,5 @@
+import 'dart:async';
+
 Map data = {};
 
 //for game search
@@ -28,6 +30,7 @@ List newsdatelist = [];
 //for time
 var date = DateTime.now();
 String time;
+Timer timer;
 //Lists------------------------------------------------------------------------------------------------------------------------------------
 String gameNameFromFirestore;
 String gameImageFromFirestore;
@@ -35,5 +38,9 @@ String gameImageFromFirestore;
 //popular game show page----------------------------------------------------------------------------------------------------------------------
 List popularimagelist = [];
 List popularnamelist = [];
+List populardatelist =[];
+List populargenrelist=[];
 String popularGameName;
+String popularGameDate;
+String popularGameGenre;
 String popularGameImage;

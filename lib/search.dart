@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:untitled2/homePage.dart';
 import 'game_info.dart';
 import 'services/variables.dart';
+///TODO: page no tloading the first time...
 ///TODO: willpopscope() to go to homepage
 Widget _appbartitle = Text('Game Name');
 final dio = Dio(); // for http requests
@@ -80,6 +81,21 @@ class _TrendingGamesState extends State<TrendingGames> {
                         children: [
 //Image----------------------------------------------------------------------------------------------------------------------------------
                           Container(
+                            child: InkWell(
+                              onTap: () async => {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => GameInfo(
+                                      popularimagelist[0],
+                                      popularnamelist[0],
+                                      populardatelist[0],
+                                      populargenrelist[0],
+                                    ),
+                                  ),
+                                )
+                              },
+                            ),
                             height: 120,
                             decoration: BoxDecoration(
                               boxShadow: const [
@@ -145,7 +161,7 @@ class _TrendingGamesState extends State<TrendingGames> {
                                       Align(
                                         alignment: Alignment.centerLeft,
                                         child: Text(
-                                          "Metacritic: 92%",
+                                          "Metacritic: 88%",
                                           ///TODO: add metacritic variable
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
@@ -296,7 +312,7 @@ class _TrendingGamesState extends State<TrendingGames> {
                                       Align(
                                         alignment: Alignment.centerLeft,
                                         child: Text(
-                                          "Metacritic: 92%",
+                                          "Metacritic: 79%",
                                           ///TODO: add metacritic variable
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
@@ -452,7 +468,7 @@ class _TrendingGamesState extends State<TrendingGames> {
                                       Align(
                                         alignment: Alignment.centerLeft,
                                         child: Text(
-                                          "Metacritic: 92%",
+                                          "Metacritic:96%",
                                           ///TODO: add metacritic variable
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
@@ -603,7 +619,7 @@ class _TrendingGamesState extends State<TrendingGames> {
                                       Align(
                                         alignment: Alignment.centerLeft,
                                         child: Text(
-                                          "Metacritic: 92%",
+                                          "Metacritic: 71%",
                                           ///TODO: add metacritic variable
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
@@ -759,7 +775,7 @@ class _TrendingGamesState extends State<TrendingGames> {
                                       Align(
                                         alignment: Alignment.centerLeft,
                                         child: Text(
-                                          "Metacritic: 92%",
+                                          "Metacritic: 74%",
                                           ///TODO: add metacritic variable
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
@@ -910,7 +926,7 @@ class _TrendingGamesState extends State<TrendingGames> {
                                       Align(
                                         alignment: Alignment.centerLeft,
                                         child: Text(
-                                          "Metacritic: 92%",
+                                          "Metacritic: 83%",
                                           ///TODO: add metacritic variable
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
@@ -1066,7 +1082,7 @@ class _TrendingGamesState extends State<TrendingGames> {
                                       Align(
                                         alignment: Alignment.centerLeft,
                                         child: Text(
-                                          "Metacritic: 92%",
+                                          "Metacritic: 35%",
                                           ///TODO: add metacritic variable
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
@@ -1217,7 +1233,7 @@ class _TrendingGamesState extends State<TrendingGames> {
                                       Align(
                                         alignment: Alignment.centerLeft,
                                         child: Text(
-                                          "Metacritic: 92%",
+                                          "Metacritic: 76%",
                                           ///TODO: add metacritic variable
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
@@ -1373,7 +1389,7 @@ class _TrendingGamesState extends State<TrendingGames> {
                                       Align(
                                         alignment: Alignment.centerLeft,
                                         child: Text(
-                                          "Metacritic: 92%",
+                                          "Metacritic: 45%",
                                           ///TODO: add metacritic variable
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
@@ -1524,7 +1540,7 @@ class _TrendingGamesState extends State<TrendingGames> {
                                       Align(
                                         alignment: Alignment.centerLeft,
                                         child: Text(
-                                          "Metacritic: 92%",
+                                          "Metacritic: 84%",
                                           ///TODO: add metacritic variable
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
@@ -1595,6 +1611,11 @@ class _TrendingGamesState extends State<TrendingGames> {
 
   fetchTrendingGames() async {
 ///fetching popular games for default page body---------------------------------------------------------------------------------------------
+    if (popularnamelist.isNotEmpty) {
+      popularnamelist.clear();
+      popularimagelist.clear();
+    }
+
     var popularGamesURL = 'https://rawg.io/api/games/lists/main';
     Map<String, dynamic> queryParams = {
       'key': '78917d353ee74c57b726259620cdded8',
@@ -1604,9 +1625,6 @@ class _TrendingGamesState extends State<TrendingGames> {
       'discover': 'true',
     };
     try {
-      // if (newstitlelist.isNotEmpty) {
-      //   newstitlelist.clear();
-      // }
       final response =
           await dio.get(popularGamesURL + '?', queryParameters: queryParams);
       setState(() {
@@ -1615,9 +1633,13 @@ class _TrendingGamesState extends State<TrendingGames> {
           //parsing data
           popularGameName = data["results"][i]["name"].toString();
           popularGameImage = data["results"][i]["background_image"].toString();
+          popularGameDate = data["results"][i]["released"].toString();
+         popularGameGenre = data["results"][i]["genres"][0]["name"].toString();
           //add to list
           popularnamelist.add(popularGameName);
           popularimagelist.add(popularGameImage);
+          populardatelist.add(popularGameDate);
+          populargenrelist.add(popularGameGenre);
         }
       });
     } catch (e) {
@@ -1660,17 +1682,14 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  //int _currentIndex;
   String _gamenamedata;
   String _gamedatedata;
   String _gameimagedata;
   String _gamegenredata;
-  // String _gameplatformdata;
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) => _buildList());
-   // _buildList();
     _searchPressed();
   }
 
@@ -1779,11 +1798,23 @@ class _SearchPageState extends State<SearchPage> {
                         ],
                       )),
                       Expanded(
-                        child: Text(
-                          nameList[index],
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                            color: Colors.white,
+                        child: Padding(
+                          padding: const EdgeInsets.all(13.0),
+                          child: Text(
+                            nameList[index],
+                            textAlign: TextAlign.right,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 17,
+                              fontWeight: FontWeight.w400,
+                              shadows: <Shadow>[
+                                Shadow(
+                                  offset: Offset(0.0,0.0),
+                                  blurRadius: 30.0,
+                                  color: Colors.black,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -1839,7 +1870,7 @@ class _SearchPageState extends State<SearchPage> {
         searching = true;
         final data = response.data as Map;
         //print("DATAAAAAAAAAAAAAAAA: $data");
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 10; i++) {
           //data variables parsing from json
           _gamenamedata = data["results"][i]["name"].toString();
           _gamedatedata = data["results"][i]["released"].toString();

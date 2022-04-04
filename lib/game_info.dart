@@ -28,6 +28,7 @@ class _GameInfoState extends State<GameInfo> {
 
   @override
   Widget build(BuildContext context) {
+    bool toggle = true;
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: appBar(),
@@ -43,101 +44,192 @@ class _GameInfoState extends State<GameInfo> {
                   color: Color(0xff212121),
                 ),
                 height: MediaQuery.of(context).size.height / 1.22,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Image.network(
-                      widget.selectedGameImage,
-                      fit: BoxFit.cover,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(5, 0, 70, 0),
-                      child: Text(
-                        widget.selectedGameName,
-                        style: GoogleFonts.rubik(
-                          color: Colors.white70,
-                          fontSize: 30,
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: 330,
+                        child: Image.network(
+                          widget.selectedGameImage,
+                          fit: BoxFit.fitHeight,
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 130, 0),
-                      child: Text(
-                        "Date Released: ${widget.gameDate}",
+                    Row(
+                      //has two column children for:
+                      //1. name, genre, buttons etc
+                      //2. heart and bookmark icons + platform icons
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 10, 0, 10),
+                          child: Column( //1. name, genre, buttons etc
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: 220,
+                                child: Text(
+                                  widget.selectedGameName,
+                                  style: GoogleFonts.rubik(
+                                    color: Colors.white70,
+                                    fontSize: 28,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
 
-                        ///TODO: parse date
-                        style: GoogleFonts.rubik(
-                          color: Colors.white70,
-                          fontSize: 15,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 205, 0),
-                      child: Text(
-                        "Genre: ${widget.gameGenre}",
-                        style: GoogleFonts.rubik(
-                          color: Colors.white70,
-                          fontSize: 15,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 225, 0),
-                      child: ElevatedButton.icon(
-                        onPressed: () async => {
-                          addToFirestore()
-                        },
-                        icon: Icon(
-                          Icons.add_circle_outline,
-                        ),
-                        label: Text(
-                          "add to library",
-                          style: TextStyle(
-                            color: Colors.white,
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                child: Text(
+                                  "Date Released: ${widget.gameDate}",
+                                  ///TODO: parse date
+                                  style: GoogleFonts.rubik(
+                                    color: Colors.white70,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Text(
+                                "Genre: ${widget.gameGenre}",
+                                style: GoogleFonts.rubik(
+                                  color: Colors.white70,
+                                  fontSize: 15,
+                                ),
+                              ),
+
+                              SizedBox(
+                                height: 20,
+                              ),
+                              ElevatedButton.icon(
+                                onPressed: () async => {
+                                  addToFirestore()
+                                },
+                                icon: Icon(
+                                  Icons.add_circle_outline,
+                                ),
+                                label: Text(
+                                  "add to library",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              ElevatedButton.icon(
+                                onPressed: () async {
+                                  final url =
+                                      "https://www.google.com/search?q=${widget.selectedGameName}";
+                                  if (await canLaunch(url)) {
+                                    await launch(
+                                      url,
+                                    );
+                                  }
+                                },
+                                icon: Icon(
+                                  Icons.screen_search_desktop,
+                                ),
+                                label: Text(
+                                  "Search on Google",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 200, 0),
-                      child: ElevatedButton.icon(
-                        onPressed: () async {
-                          final url =
-                              "https://www.google.com/search?q=${widget.selectedGameName}";
-                          if (await canLaunch(url)) {
-                            await launch(
-                              url,
-                            );
-                          }
-                        },
-                        icon: Icon(
-                          Icons.screen_search_desktop,
-                        ),
-                        label: Text(
-                          "Search on Google",
-                          style: TextStyle(
-                            color: Colors.white,
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0,10,10,10),
+                          child: Column(  //2. heart and bookmark icons + platform icons
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                child: Row( //row for 2 icons
+                                  children: [
+                                    IconButton(
+                                        padding: EdgeInsets.zero,
+                                        constraints: BoxConstraints(),
+                                        icon: toggle
+                                            ? Icon(Icons.favorite_border,
+                                        color: Colors.white,
+                                        size: 30
+                                        )
+                                            : Icon(
+                                          Icons.favorite,
+                                        ),
+                                        onPressed: () {
+                                          setState(() {
+                                            // Here we changing the icon.
+                                            toggle = !toggle;
+                                          });
+                                        }),
+                                    SizedBox(
+                                      width: 15,
+                                    ),
+                                    IconButton(
+                                        padding: EdgeInsets.zero,
+                                        constraints: BoxConstraints(),
+                                        icon: toggle
+                                            ? Icon(Icons.bookmark_border_sharp,
+                                            color: Colors.white,
+                                            size: 30
+                                        )
+                                            : Icon(
+                                          Icons.bookmark,
+                                        ),
+                                        onPressed: () {
+                                          setState(() {
+                                            // Here we changing the icon.
+                                            toggle = !toggle;
+                                          });
+                                        }),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                width: 100,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Image.asset('assets/images/windows.png',
+                                      scale: 2,
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Image.asset('assets/images/ps.png',
+                                      scale: 3,
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Image.asset('assets/images/xbox.png',
+                                      scale: 2,
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
                           ),
-                        ),
-                      ),
+                        )
+                      ],
                     ),
-                  ],
+
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -156,10 +248,15 @@ class _GameInfoState extends State<GameInfo> {
       gameImage.add(widget.selectedGameImage);
       var user = FirebaseAuth.instance.currentUser;
       await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
-        'Favourite Games' : gameName,
+        'Favourite Games' : FieldValue.arrayUnion(gameName),
         'Favourite Game Image': gameImage,
-      });
+      } ,
+      );
+
     });
+
+    ///add loop for running more?
+    ///
     //await FirebaseFirestore.instance.collection('post')
     // .doc(postId).update({"like": FieldValue.increment(1)});
 ///TODO: adding is deleting other fields i . Alos, creating a new document like wtf?

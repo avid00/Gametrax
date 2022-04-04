@@ -1,5 +1,6 @@
 //ignore_for_file: prefer_const_constructors
 //import 'package:firebase_core/firebase_core.dart';
+import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled2/lists.dart';
@@ -44,23 +45,17 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) => getNews());
     getTime();
-   // StreamBuilder(
-   //     stream: Stream.periodic(const Duration(minutes: 1)),
-   //     builder: (context, snapshot){
-   //       return getTime();
-   //     }
-   // );
+    // time = "${date.hour}:${date.minute}";
+    // timer = Timer.periodic(Duration(seconds: 1), (_) => getTime());
   }
-
+// @override
+//   void dispose() {
+//     super.dispose();
+//   }
 
   @override
   Widget build(BuildContext context) {
-    // var width = MediaQuery.of(context).size.width;
-    // var height = MediaQuery.of(context).size.height;
-    // String day =
-    //     "${date.year.toString()}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
-
-    return Scaffold(
+        return Scaffold(
       backgroundColor: Colors.black,
       appBar: appBarHome(),
       body: SingleChildScrollView(
@@ -72,11 +67,12 @@ class _HomePageState extends State<HomePage> {
                     "https://images.unsplash.com/photo-1567027757540-7b572280fa22?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
                     fit: BoxFit.fill,
                     colorBlendMode: BlendMode.darken),
-
                 Center(
-                  heightFactor: 2,
                   child: Column(
                     children: [
+                      SizedBox(
+                        height:40,
+                      ),
                       Text(
                         "Greetings",
                         style: GoogleFonts.rubikMonoOne(
@@ -95,7 +91,6 @@ class _HomePageState extends State<HomePage> {
                       SizedBox(
                         height: 30,
                       ),
-
                               Text(
                                 time,
                                 textAlign: TextAlign.center,
@@ -116,6 +111,17 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
 
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 230, 0, 0),
+                  child: Text(
+                    "   | Here's what's happening in the gaming world",
+                    style: GoogleFonts.rubik(
+                      fontSize: 15,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
                 ///news tile 1 -----------------------------------------------------------------------------------------------------------------------------
                 Padding(
                   padding: const EdgeInsets.fromLTRB(10, 270, 10, 0),
@@ -502,98 +508,13 @@ class _HomePageState extends State<HomePage> {
                   },
                   label: Text("onboarding"),
                 ),
-                ElevatedButton.icon(
-                  icon: Icon(
-                    Icons.insert_chart,
-                    color: Colors.white,
-                  ),
-                  onPressed: () async {
-                    try {
-                      await FirebaseFirestore.instance
-                          .collection('users')
-                          .doc('test')
-                          .set({
-                        'dateOfCreation': DateTime.now(),
-                        'nickname': 'amy trial',
-                      });
-                    } catch (e) {
-                      print("Error: $e");
-                    }
-                  },
-                  label: Text("fstr"),
-                ),
               ],
             ),
           ],
         ),
       ),
-      // bottomNavigationBar: BottomNavyBar(
-      //   backgroundColor: Colors.black45,
-      //   showElevation: true,
-      //   itemCornerRadius: 24,
-      //   curve: Curves.easeIn,
-      //   onItemSelected: (index) => setState(() => _currentIndex = index),
-      //   selectedIndex: _currentIndex,
-      //   items: <BottomNavyBarItem>[
-      //     BottomNavyBarItem(
-      //       icon: GestureDetector(
-      //         child: Icon(Icons.home),
-      //         onTap: () async => Navigator.pushReplacement(
-      //           context,
-      //           MaterialPageRoute(builder: (context) => HomePage()),
-      //         ),
-      //       ),
-      //       title: Text('Home'),
-      //       activeColor: Colors.white70,
-      //       textAlign: TextAlign.center,
-      //     ),
-      //     BottomNavyBarItem(
-      //       icon: GestureDetector(
-      //         child: Icon(Icons.search_sharp),
-      //         onTap: () async => Navigator.pushReplacement(
-      //           context,
-      //           MaterialPageRoute(builder: (context) => TrendingGames()),
-      //         ),
-      //       ),
-      //       title: Text('Games'),
-      //       activeColor: Colors.white70,
-      //       textAlign: TextAlign.center,
-      //     ),
-      //     BottomNavyBarItem(
-      //       icon: GestureDetector(
-      //         child: Icon(Icons.view_list_sharp),
-      //         onTap: () async => Navigator.pushReplacement(
-      //           context,
-      //           MaterialPageRoute(builder: (context) => ListsPage()),
-      //         ),
-      //       ),
-      //       title: Text(
-      //         'Lists',
-      //       ),
-      //       activeColor: Colors.white70,
-      //       textAlign: TextAlign.center,
-      //     ),
-      //   ],
-      // ),
     );
   }
-
-//   Widget _buildOffstageNavigator(String tabItem){
-// return Offstage(
-//   offstage: _currentIndex != tabItem,
-//   child: TabNavigator(
-//     navigatorKey: _navigatorKeys[tabItem],
-//     tabItem: tabItem,
-//   ),
-// );
-//   }
-
-  // void _selectTab(String tabItem, int index){
-  //  setState(() {
-  //    _currentTab=pageKeys[index];
-  //    _currentIndex = index;
-  //  });
-  // }
 
   getTime() {
     setState(() {
