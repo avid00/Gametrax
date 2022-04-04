@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:untitled2/lists.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 ///TODO: add powered by RAWG at the bottom
@@ -110,15 +111,18 @@ class _GameInfoState extends State<GameInfo> {
                                   addToFirestore()
                                 },
                                 icon: Icon(
-                                  Icons.add_circle_outline,
+                                  Icons.add,
                                 ),
                                 label: Text(
-                                  "add to library",
+                                  "Add to Library",
                                   style: TextStyle(
                                     color: Colors.white,
                                   ),
                                 ),
-                              ),
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all<Color>(Color(0xff373737)),
+                                shadowColor: MaterialStateProperty.all<Color>(Colors.black)),
+                                ),
                               SizedBox(
                                 height: 10,
                               ),
@@ -133,7 +137,7 @@ class _GameInfoState extends State<GameInfo> {
                                   }
                                 },
                                 icon: Icon(
-                                  Icons.screen_search_desktop,
+                                  Icons.search_sharp,
                                 ),
                                 label: Text(
                                   "Search on Google",
@@ -141,7 +145,11 @@ class _GameInfoState extends State<GameInfo> {
                                     color: Colors.white,
                                   ),
                                 ),
+                                style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all<Color>(Color(0xff373737)),
+                                    shadowColor: MaterialStateProperty.all<Color>(Colors.black)),
                               ),
+
                             ],
                           ),
                         ),
@@ -199,43 +207,36 @@ class _GameInfoState extends State<GameInfo> {
                                 height:40,
                               ),
                               Image.asset('assets/images/consoles.png',
-                                scale: 2.5,)
-                              // Container(
-                              //   width: 100,
-                                // child: Column(
-                                //   mainAxisAlignment: MainAxisAlignment.end,
-                                //   crossAxisAlignment: CrossAxisAlignment.end,
-                                //   children: [
-                                //     SizedBox(
-                                //       height: 20,
-                                //     ),
-                                //     Image.asset('assets/images/windows.png',
-                                //       scale: 2,
-                                //     ),
-                                //
-                                //     SizedBox(
-                                //       height: 20,
-                                //     ),
-                                //     Image.asset('assets/images/xbox.png',
-                                //       scale: 2,
-                                //     ),
-                                //     SizedBox(
-                                //       height: 20,
-                                //     ),
-                                //     Container(
-                                //       width: 250,
-                                //       child: Image.asset('assets/images/ps.png',
-                                //       ),
-                                //     ),
-                                //   ],
-                                // ),
-                             // )
+                                scale: 2.5,
+                              ),
                             ],
                           ),
                         )
                       ],
                     ),
+                      ElevatedButton.icon(
+                        onPressed: () async {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => ListsPage()),
+                          );
+                        },
+                        icon: Icon(
+                          Icons.arrow_forward_ios_sharp,
+                        ),
+                        label: Text(
+                          "Go to your Lists",
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(Color(0xff373737)),
+                            shadowColor: MaterialStateProperty.all<Color>(Colors.black),
+                        minimumSize: MaterialStateProperty.all(Size(400, 50))
+                        ),
 
+                      ),
                     ],
                   ),
                 ),
