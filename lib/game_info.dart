@@ -146,7 +146,7 @@ class _GameInfoState extends State<GameInfo> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(0,10,10,10),
+                          padding: const EdgeInsets.fromLTRB(27,10,10,10),
                           child: Column(  //2. heart and bookmark icons + platform icons
                             mainAxisAlignment: MainAxisAlignment.end,
                             crossAxisAlignment: CrossAxisAlignment.end,
@@ -195,33 +195,41 @@ class _GameInfoState extends State<GameInfo> {
                                   ],
                                 ),
                               ),
-                              Container(
-                                width: 100,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Image.asset('assets/images/windows.png',
-                                      scale: 2,
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Image.asset('assets/images/ps.png',
-                                      scale: 3,
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Image.asset('assets/images/xbox.png',
-                                      scale: 2,
-                                    )
-                                  ],
-                                ),
-                              )
+                              SizedBox(
+                                height:40,
+                              ),
+                              Image.asset('assets/images/consoles.png',
+                                scale: 2.5,)
+                              // Container(
+                              //   width: 100,
+                                // child: Column(
+                                //   mainAxisAlignment: MainAxisAlignment.end,
+                                //   crossAxisAlignment: CrossAxisAlignment.end,
+                                //   children: [
+                                //     SizedBox(
+                                //       height: 20,
+                                //     ),
+                                //     Image.asset('assets/images/windows.png',
+                                //       scale: 2,
+                                //     ),
+                                //
+                                //     SizedBox(
+                                //       height: 20,
+                                //     ),
+                                //     Image.asset('assets/images/xbox.png',
+                                //       scale: 2,
+                                //     ),
+                                //     SizedBox(
+                                //       height: 20,
+                                //     ),
+                                //     Container(
+                                //       width: 250,
+                                //       child: Image.asset('assets/images/ps.png',
+                                //       ),
+                                //     ),
+                                //   ],
+                                // ),
+                             // )
                             ],
                           ),
                         )
