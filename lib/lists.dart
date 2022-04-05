@@ -151,26 +151,38 @@ class _ListsPageState extends State<ListsPage> {
                         itemCount:10,
                         itemBuilder: (context,index){
                           return  Padding(
-                            padding: const EdgeInsets.fromLTRB(20, 0, 20, 5),
+                            padding: const EdgeInsets.fromLTRB(20, 0, 10, 5),
                             child: Card(
                               color: Colors.black,
                               clipBehavior: Clip.antiAlias,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(13),
                               ),
-                              child: SizedBox(
+                              child: SizedBox( //not this
                                 height: 90,
                               child: Row(
                                   children: [
-                                    Container(
-                                      child: Image.network(gameImageFromFirestore.replaceAll('[','').replaceAll(']', ''),
-                                      scale: 5,
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(10.0),
+                                          child: Image.network(gameImageFromFirestore.replaceAll('[','').replaceAll(']', ''),
+                                            height: 70,
+                                            width: 110.0,
+                                            fit: BoxFit.fitHeight,
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                    Text(gameNameFromFirestore.replaceAll('[','').replaceAll(']', ''),
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        color: Colors.white,
+                                    Flexible(
+                                      child: Padding(
+                                        padding: const EdgeInsets.fromLTRB(40, 10, 10, 30),
+                                        child: Text(gameNameFromFirestore.replaceAll('[','').replaceAll(']', ''),
+                                          textAlign: TextAlign.right,
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                            color: Colors.white,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ],
