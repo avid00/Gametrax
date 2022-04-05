@@ -496,7 +496,7 @@ class _HomePageState extends State<HomePage> {
                     context,
                     MaterialPageRoute(builder: (context) => Onboarding_1()),
                   ),
-                  label: Text("logout"),
+                  label: Text("onboarding"),
                 ),
                 ElevatedButton.icon(
                   icon: Icon(
@@ -506,7 +506,17 @@ class _HomePageState extends State<HomePage> {
                   onPressed: () async {
                     await AuthService().signOut();
                   },
-                  label: Text("onboarding"),
+                  label: Text("logout"),
+                ),
+                ElevatedButton.icon(
+                  icon: Icon(
+                    Icons.insert_chart,
+                    color: Colors.white,
+                  ),
+                  onPressed: () async {
+                    await getPrices();
+                  },
+                  label: Text("prices"),
                 ),
               ],
             ),
@@ -515,6 +525,37 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  getPrices() async {
+      // var headers = {
+      //   'Content-Type': 'application/x-www-form-urlencoded',
+      // };
+
+      var parameters = {
+        'token': 'ZXMKHAWFOFLZWNKBRLADUDKSBMEWAYDMEEUWTUZPJVXOOVINOEIKWHDUVKOZHQNW',
+        'country': 'in',
+        'source': 'amazon',
+        'topic': 'search_results',
+        'key': 'term',
+        'max_age': '43200',
+        'max_pages': '1',
+        // 'category_id': '',
+        'sort_by': 'relevance_descending',
+        // 'brand': '',
+        // 'seller_id': '',
+        // 'min_price': '',
+        // 'max_price': '',
+        // 'location': '',
+        'values': 'NieR: Automata',
+      };
+
+      var url = 'https://api.priceapi.com/v2/jobs';
+      final response = await dio.post(url, queryParameters: parameters);
+     // if (response.statusCode != 200) throw Exception('http.post error: statusCode= ${res.statusCode}');
+     final responsedata= response.data as Map;
+     print("RESPONSE: $responsedata");
+    }
+
 
   getTime() {
     setState(() {

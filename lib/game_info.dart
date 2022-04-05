@@ -149,7 +149,58 @@ class _GameInfoState extends State<GameInfo> {
                                     backgroundColor: MaterialStateProperty.all<Color>(Color(0xff373737)),
                                     shadowColor: MaterialStateProperty.all<Color>(Colors.black)),
                               ),
-
+                              SizedBox(
+                              height: 10,
+                              ),
+                              ElevatedButton.icon(
+                                onPressed: () async {
+                                  return showDialog(
+                                    context: context,
+                                    builder: (ctx) => AlertDialog(
+                                      backgroundColor: Color(0xff212121),
+                                      title: Text("Current Prices for ${widget.selectedGameName}",
+                                      style: GoogleFonts.rubik(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.white70,
+                                      ),
+                                      ),
+                                      content: Text("Amazon:           ₹1532\neBay:                 ₹1798",
+                                        style: GoogleFonts.rubik(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      actions: [
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.of(ctx).pop();
+                                          },
+                                          child: Text("Okay",
+                                          style: GoogleFonts.rubik(
+                                            color: Colors.black,
+                                          ),
+                                          ),
+                                          style: ButtonStyle(
+                                            backgroundColor:MaterialStateProperty.all<Color>(Colors.white70),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                                icon: Icon(
+                                  Icons.money,
+                                ),
+                                label: Text(
+                                  "Check Prices",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all<Color>(Color(0xff373737)),
+                                    shadowColor: MaterialStateProperty.all<Color>(Colors.black)),
+                              ),
                             ],
                           ),
                         ),
@@ -223,11 +274,12 @@ class _GameInfoState extends State<GameInfo> {
                         },
                         icon: Icon(
                           Icons.arrow_forward_ios_sharp,
+                          color: Colors.white70,
                         ),
                         label: Text(
                           "Go to your Lists",
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Colors.white70,
                           ),
                         ),
                         style: ButtonStyle(
