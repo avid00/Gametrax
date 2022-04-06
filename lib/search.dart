@@ -1874,36 +1874,15 @@ class _SearchPageState extends State<SearchPage> {
           //data variables parsing from json
           _gamenamedata = data["results"][i]["name"].toString();
           _gamedatedata = data["results"][i]["released"].toString();
-          _gameimagedata = data["results"][i]["background_image"]
-              .toString(); //use image.network
+          _gameimagedata = data["results"][i]["background_image"].toString();
           _gamegenredata = data["results"][i]["genres"][0]["name"].toString();
-          // _gameplatformdata = data["results"][i]["parent_platforms"][0]["platform"]["name"].toString();
-          ///TODO: add platforms as well
-          //"parent_platforms": [
-          //         //                 {
-          //         //                     "platform": {
-          //         //                         "id": 1,
-          //         //                         "name": "PC",
-          //         //                         "slug": "pc"
-          //         //                     }
-          //         //                 },
-          //         //                 {
-          //         //                     "platform": {
-          //         //                         "id": 2,
-          //         //                         "name": "PlayStation",
-          //         //                         "slug": "playstation"
-          //         //                     }
-          //         //                 }
-          //         //             ],
-
           //adding data to lists
           dateList.add(_gamedatedata);
           nameList.add(_gamenamedata);
           imageList.add(_gameimagedata);
           genreList.add(_gamegenredata);
         }
-        // print(_gameplatformdata);
-        namelength = nameList.length;
+       // namelength = nameList.length;
       });
     } catch (e) {
       print('error $e');

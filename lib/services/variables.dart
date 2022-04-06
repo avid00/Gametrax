@@ -34,7 +34,9 @@ Timer timer;
 //Lists------------------------------------------------------------------------------------------------------------------------------------
 String gameNameFromFirestore;
 String gameImageFromFirestore;
-
+List gameNameListFromFirestore=[];
+List gameImageListFromFirestore=[];
+int datalength;
 //popular game show page----------------------------------------------------------------------------------------------------------------------
 List popularimagelist = [];
 List popularnamelist = [];

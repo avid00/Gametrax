@@ -539,13 +539,7 @@ class _HomePageState extends State<HomePage> {
         'key': 'term',
         'max_age': '43200',
         'max_pages': '1',
-        // 'category_id': '',
         'sort_by': 'relevance_descending',
-        // 'brand': '',
-        // 'seller_id': '',
-        // 'min_price': '',
-        // 'max_price': '',
-        // 'location': '',
         'values': 'NieR: Automata',
       };
 
@@ -555,7 +549,6 @@ class _HomePageState extends State<HomePage> {
      final responsedata= response.data as Map;
      print("RESPONSE: $responsedata");
     }
-
 
   getTime() {
     setState(() {

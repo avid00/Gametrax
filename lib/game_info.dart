@@ -308,10 +308,10 @@ class _GameInfoState extends State<GameInfo> {
       gameName.add(widget.selectedGameName);
       gameImage.add(widget.selectedGameImage);
       var user = FirebaseAuth.instance.currentUser;
-      await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+      await FirebaseFirestore.instance.collection('users').doc(user.uid).update({
         'Favourite Games' : FieldValue.arrayUnion(gameName),
-        'Favourite Game Image': gameImage,
-      } ,
+        'Favourite Game Image': FieldValue.arrayUnion(gameImage),
+      },
       );
 
     });
