@@ -296,6 +296,12 @@ class _ListsPageState extends State<ListsPage> {
   }
 
   getListItems() async {
+    if(gameNameListFromFirestore.isNotEmpty){
+      setState(() {
+        gameNameListFromFirestore.clear();
+        gameImageListFromFirestore.clear();
+      });
+    }
     var collection = FirebaseFirestore.instance.collection('users');
     var user = FirebaseAuth.instance.currentUser;
     var docSnapshot = await collection.doc(user.uid).get();
