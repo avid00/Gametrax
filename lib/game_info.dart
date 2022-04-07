@@ -108,7 +108,40 @@ class _GameInfoState extends State<GameInfo> {
                               ),
                               ElevatedButton.icon(
                                 onPressed: () async => {
-                                  addToFirestore()
+                                  addToFirestore(),
+                                showDialog(
+                                context: context,
+                                builder: (ctx) => AlertDialog(
+                                  backgroundColor: Color(0xff212121),
+                                  title: Text("Game added to your library!",
+                                    style: GoogleFonts.rubik(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.white70,
+                                    ),
+                                  ),
+                                  // content: Text("Amazon:           ₹1532\neBay:                 ₹1798",
+                                  //   style: GoogleFonts.rubik(
+                                  //     color: Colors.white,
+                                  //   ),
+                                  // ),
+                                  actions: [
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.of(ctx).pop();
+                                      },
+                                      child: Text("Okay",
+                                        style: GoogleFonts.rubik(
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      style: ButtonStyle(
+                                        backgroundColor:MaterialStateProperty.all<Color>(Colors.white70),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                                 },
                                 icon: Icon(
                                   Icons.add,
