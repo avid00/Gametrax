@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:untitled2/homePage.dart';
 import 'game_info.dart';
 import 'services/variables.dart';
-///TODO: page no tloading the first time...
+///TODO: page not loading the first time...
 ///TODO: willpopscope() to go to homepage
 Widget _appbartitle = Text('Game Name');
 final dio = Dio(); // for http requests
@@ -32,8 +32,11 @@ class _TrendingGamesState extends State<TrendingGames> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: appBarTrending(),
-      ///TODO: add reused widgets to a separate file
-      body: SingleChildScrollView(
+      body: popularnamelist.isEmpty ?
+      Center(
+        child: CircularProgressIndicator(),
+      ) :
+      SingleChildScrollView(
         child: Column(
           children: [
             Padding(
@@ -1695,8 +1698,6 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   void dispose() {
-    // _gamenamecontroller.dispose();
-    // _buildList().dispose();
     super.dispose();
   }
 
@@ -1717,7 +1718,11 @@ class _SearchPageState extends State<SearchPage> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: appBarSearch(context),
-      body: Container(
+      body: nameList.isEmpty ?
+      Center(
+        child: CircularProgressIndicator(),
+      ) :
+      Container(
         child: _buildList(),
       ),
     );

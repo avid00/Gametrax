@@ -21,7 +21,11 @@ class ListsPage extends StatefulWidget {
 }
 
 class _ListsPageState extends State<ListsPage> {
-
+@override
+  void initState() {
+    super.initState();
+    getListItems();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -46,7 +46,11 @@ class _HomePageState extends State<HomePage> {
         return Scaffold(
       backgroundColor: Colors.black,
       appBar: appBarHome(),
-      body: SingleChildScrollView(
+      body: newstitlelist.isEmpty ?
+      Center(
+        child: CircularProgressIndicator(),
+      ) :
+      SingleChildScrollView(
         child: Column(
           children: [
             Stack(
