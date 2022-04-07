@@ -183,11 +183,13 @@ class _SignUpPageState extends State<SignUpPage> {
                             });
                             final prefs = await SharedPreferences.getInstance();
                             prefs.setString('username', username.text);
-                            Navigator.pop(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => HomePage()),
-                            );
+                            // Navigator.pop(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //       builder: (context) => HomePage()),
+                            // );
+                            Navigator.pop(context);
+                           // );
                           }
                         },
                         child: Text(

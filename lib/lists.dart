@@ -2,10 +2,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:untitled2/search.dart';
 import 'package:untitled2/services/variables.dart';
 
 import 'homePage.dart';
 import 'package:flutter/material.dart';
+
+import 'services/auth.dart';
 
 ///TODO: add logout button
 ///TODO: add redirect to the trending button page
@@ -63,7 +66,10 @@ class _ListsPageState extends State<ListsPage> {
                     borderRadius: BorderRadius.all(Radius.circular(9)),
                   ),
                   child: IconButton(
-                    onPressed: null,
+                    onPressed: () async => Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => TrendingGames()),
+                    ),
                     icon: Icon(
                       Icons.change_history_sharp,
                       color: Color(0xFFE5E5E5FF),
@@ -98,9 +104,14 @@ class _ListsPageState extends State<ListsPage> {
                     color: Color(0xFF484848),
                     borderRadius: BorderRadius.all(Radius.circular(9)),
                   ),
-                  child: Icon(
-                    Icons.bookmark,
-                    color: Color(0xFFE5E5E5FF),
+                  child: IconButton(
+                    onPressed: () async {
+                      await AuthService().signOut();
+                    },
+                    icon:Icon(
+                      Icons.logout,
+                      color: Color(0xFFE5E5E5FF),
+                    )
                   ),
                 ),
                 SizedBox(
@@ -328,7 +339,7 @@ class _ListsPageState extends State<ListsPage> {
         ),
         backgroundColor: Color(0xFF212121),
         title: Text(
-          "  Some Default Lists for you",
+          "         Your Saved Games",
           style: GoogleFonts.rubik(
             fontSize: 19,
             fontWeight: FontWeight.w200,
@@ -349,7 +360,3 @@ class _ListsPageState extends State<ListsPage> {
     );
   }
 }
-
-//notes:
-//once the list items are added,
-// just the list can be retrieved from firestore rather than adding it one by one

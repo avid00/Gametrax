@@ -1862,6 +1862,7 @@ class _SearchPageState extends State<SearchPage> {
         'key': '78917d353ee74c57b726259620cdded8',
         'search': gamename,
         'page_size': '20',
+        'ordering' : '-rating',
       };
       final response =
           await dio.get(endpointUrl + '?', queryParameters: queryParams);

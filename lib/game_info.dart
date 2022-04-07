@@ -114,7 +114,7 @@ class _GameInfoState extends State<GameInfo> {
                                   Icons.add,
                                 ),
                                 label: Text(
-                                  "Add to Library",
+                                  "Want to Buy",
                                   style: TextStyle(
                                     color: Colors.white,
                                   ),

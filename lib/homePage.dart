@@ -30,14 +30,14 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) => getNews());
-    _timeString = _formatDateTime(DateTime.now());
-    Timer.periodic(Duration(seconds: 1), (Timer t) => _getTime());
-    getUsername();
+    // _timeString = _formatDateTime(DateTime.now());
+    // Timer.periodic(Duration(seconds: 1), (Timer t) => _getTime());
+    getTime();
 
   }
 @override
   void dispose() {
-    timer.cancel();
+    //timer.cancel();
     super.dispose();
   }
 
@@ -80,7 +80,7 @@ class _HomePageState extends State<HomePage> {
                         height: 30,
                       ),
                               Text(
-                                _timeString,
+                                time,
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.rubikMonoOne(
                                   fontSize: 35,
@@ -523,7 +523,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   String _formatDateTime(DateTime dateTime) {
-    return DateFormat('hh:mm:ss').format(dateTime);
+    return DateFormat('hh:mm').format(dateTime);
   }
 
   // getPrices() async {
