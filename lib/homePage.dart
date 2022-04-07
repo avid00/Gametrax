@@ -1,8 +1,9 @@
 //ignore_for_file: prefer_const_constructors
 //import 'package:firebase_core/firebase_core.dart';
 import 'dart:async';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled2/lists.dart';
 import 'package:untitled2/onboarding_screens.dart';
 import 'package:untitled2/register/sign_in.dart';
@@ -12,23 +13,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'services/variables.dart';
 
-///TODO: add changing background image
 ///TODO: load page after sign up idk why tf it's not working.
 ///https://pub.dev/packages/cached_map
-//variables
-// TextEditingController _name = TextEditingController();
-// int index = 0;
-// String currentPage;
-// List<String> pageKeys =[
-//   "home",
-//   "search",
-//   "lists",
-// ];
-// Map<String,GlobalKey<NavigatorState>> _navigatorKeys ={
-//   "home": GlobalKey<NavigatorState>(),
-//   "search": GlobalKey<NavigatorState>(),
-//   "lists": GlobalKey<NavigatorState>(),
-// };
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);
@@ -38,20 +24,22 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // int _currentIndex = 0;
-  // var _currentTab;
+  String _timeString;
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) => getNews());
-    getTime();
-    // time = "${date.hour}:${date.minute}";
-    // timer = Timer.periodic(Duration(seconds: 1), (_) => getTime());
+    _timeString = _formatDateTime(DateTime.now());
+    Timer.periodic(Duration(seconds: 1), (Timer t) => _getTime());
+    getUsername();
+
   }
-// @override
-//   void dispose() {
-//     super.dispose();
-//   }
+@override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +69,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       Text(
-                        "david",
+                    "amisha",
                         textAlign: TextAlign.center,
                         style: GoogleFonts.rubikMonoOne(
                           fontSize: 25,
@@ -92,7 +80,7 @@ class _HomePageState extends State<HomePage> {
                         height: 30,
                       ),
                               Text(
-                                time,
+                                _timeString,
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.rubikMonoOne(
                                   fontSize: 35,
@@ -100,7 +88,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               Text(
-                                "${date.year.toString()}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}",
+                                 "${date.year.toString()}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}",
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.rubik(
                                   fontSize: 15,
@@ -514,7 +502,7 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.white,
                   ),
                   onPressed: () async {
-                    await getPrices();
+                    null;
                   },
                   label: Text("prices"),
                 ),
@@ -526,30 +514,45 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  getPrices() async {
-      // var headers = {
-      //   'Content-Type': 'application/x-www-form-urlencoded',
-      // };
+  void _getTime() {
+    final DateTime now = DateTime.now();
+    final String formattedDateTime = _formatDateTime(now);
+    setState(() {
+      _timeString = formattedDateTime;
+    });
+  }
 
-      var parameters = {
-        'token': 'ZXMKHAWFOFLZWNKBRLADUDKSBMEWAYDMEEUWTUZPJVXOOVINOEIKWHDUVKOZHQNW',
-        'country': 'in',
-        'source': 'amazon',
-        'topic': 'search_results',
-        'key': 'term',
-        'max_age': '43200',
-        'max_pages': '1',
-        'sort_by': 'relevance_descending',
-        'values': 'NieR: Automata',
-      };
+  String _formatDateTime(DateTime dateTime) {
+    return DateFormat('hh:mm:ss').format(dateTime);
+  }
 
-      var url = 'https://api.priceapi.com/v2/jobs';
-      final response = await dio.post(url, queryParameters: parameters);
-     // if (response.statusCode != 200) throw Exception('http.post error: statusCode= ${res.statusCode}');
-     final responsedata= response.data as Map;
-     print("RESPONSE: $responsedata");
-    }
-
+  // getPrices() async {
+  //     // var headers = {
+  //     //   'Content-Type': 'application/x-www-form-urlencoded',
+  //     // };
+  //
+  //     var parameters = {
+  //       'token': 'ZXMKHAWFOFLZWNKBRLADUDKSBMEWAYDMEEUWTUZPJVXOOVINOEIKWHDUVKOZHQNW',
+  //       'country': 'in',
+  //       'source': 'amazon',
+  //       'topic': 'search_results',
+  //       'key': 'term',
+  //       'max_age': '43200',
+  //       'max_pages': '1',
+  //       'sort_by': 'relevance_descending',
+  //       'values': 'NieR: Automata',
+  //     };
+  //
+  //     var url = 'https://api.priceapi.com/v2/jobs';
+  //     final response = await dio.post(url, queryParameters: parameters);
+  //    // if (response.statusCode != 200) throw Exception('http.post error: statusCode= ${res.statusCode}');
+  //    final responsedata= response.data as Map;
+  //    //print("RESPONSE: $responsedata");
+  //   }
+  getUsername() async{
+    final prefs = await SharedPreferences.getInstance();
+    usernameFirestore = prefs.getString('username');
+  }
   getTime() {
     setState(() {
       time = "${date.hour}:${date.minute}";
@@ -587,39 +590,9 @@ class _HomePageState extends State<HomePage> {
         ),
       ],
     );
-    // return AppBar(
-    //     shape: RoundedRectangleBorder(
-    //       borderRadius: BorderRadius.circular(20),
-    //     ),
-    //     backgroundColor: Color(0xFF212121),
-    //     title: TextField(
-    //       onTap: () async => Navigator.pushReplacement(
-    //         context,
-    //         MaterialPageRoute(builder: (context) => SearchPage()),
-    //       ),
-    //       decoration: InputDecoration(
-    //         hintText: "Search for a Game",
-    //         hintStyle: TextStyle(
-    //           color: Colors.white24,
-    //         ),
-    //       ),
-    //     ),
-    //     leading: IconButton(
-    //       icon: Icon(Icons.search_sharp, color: Colors.white70),
-    //       onPressed: () => Navigator.pushReplacement(
-    //         context,
-    //         MaterialPageRoute(builder: (context) => SearchPage()),
-    //       ),
-    //     ));
+
   }
 
-  // getBackgroundImage(){
-  //   // String _key = "B-1LeqNhvdDdmWEM94JIRz9I1t__OctghnK67rY2_6Q";
-  //   var urlUnsplash = "https://api.unsplash.com/photos/random/?topics=Video Games&query=Wallpaper&client_id=B-1LeqNhvdDdmWEM94JIRz9I1t__OctghnK67rY2_6Q&count=20";
-  //   final response_unsplash = dio.get(urlUnsplash);
-  // }
-
-  ///gets news headlines----------------------------------------------------------------------------------------------------------------------
   getNews() async {
     var urlNews =
         "https://newsapi.org/v2/everything?q=gaming&apiKey=0ef79622f62947498f5dcf9d653f9b7c";
@@ -650,9 +623,3 @@ class _HomePageState extends State<HomePage> {
     }
   }
 }
-
-///TODO: error:
-// I/flutter ( 2729): setState() called after dispose(): _HomePageState#36c16(lifecycle state: defunct, not mounted)
-// I/flutter ( 2729): This error happens if you call setState() on a State object for a widget that no longer appears in the widget tree (e.g., whose parent widget no longer includes the widget in its build). This error can occur when code calls setState() from a timer or an animation callback.
-// I/flutter ( 2729): The preferred solution is to cancel the timer or stop listening to the animation in the dispose() callback. Another solution is to check the "mounted" property of this object before calling setState() to ensure the object is still in the tree.
-// I/flutter ( 2729): This error might indicate a memory leak if setState() is being called because another object is retaining a reference to this State object after it has been removed from the tree. To avoid memory leaks, consider breaking the reference to this object during dispose().

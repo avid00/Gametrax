@@ -7,7 +7,8 @@ import 'package:untitled2/services/variables.dart';
 import 'homePage.dart';
 import 'package:flutter/material.dart';
 
-///TODO: add to json and upload json to firestore instead
+///TODO: add logout button
+///TODO: add redirect to the trending button page
 
 class ListsPage extends StatefulWidget {
   const ListsPage({Key key}) : super(key: key);
@@ -17,12 +18,6 @@ class ListsPage extends StatefulWidget {
 }
 
 class _ListsPageState extends State<ListsPage> {
-  List listTitle = [
-    Text("List 1"),
-    Text("List 2"),
-    Text("List 3"),
-    Text("List 4"),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -136,7 +131,7 @@ class _ListsPageState extends State<ListsPage> {
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        "       Lists Created by you",
+                        "       Your To-Buy List",
                         style: TextStyle(
                           fontSize: 18,
                           color: Colors.white,
@@ -247,7 +242,7 @@ class _ListsPageState extends State<ListsPage> {
                           Positioned.fill(
                             child: Image.network(
                               gameImageListFromFirestore[index],
-                              fit: BoxFit.cover,
+                              fit: BoxFit.fitHeight,
                             ),
                           ),
                           Container(

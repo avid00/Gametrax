@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled2/homePage.dart';
 import 'package:untitled2/register/sign_in.dart';
 import 'package:untitled2/services/auth.dart';
@@ -180,6 +181,8 @@ class _SignUpPageState extends State<SignUpPage> {
                               'dateOfCreation': DateTime.now(),
                               'nickname': username.text,
                             });
+                            final prefs = await SharedPreferences.getInstance();
+                            prefs.setString('username', username.text);
                             Navigator.pop(
                               context,
                               MaterialPageRoute(

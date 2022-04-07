@@ -7,10 +7,8 @@ import 'package:untitled2/register/sign_in.dart';
 import 'package:untitled2/services/auth.dart';
 import 'package:untitled2/services/wrapper.dart';
 import 'package:provider/provider.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 
-//TODO: have made comment out of history.isNotEmpty in navigator.dart
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -25,7 +23,6 @@ class Gametrax extends StatefulWidget {
 }
 
 class _GametraxState extends State<Gametrax> {
-  final PersistentTabController _controller = PersistentTabController(initialIndex: 0);
 
   @override
   Widget build(BuildContext context) {
@@ -46,28 +43,3 @@ class _GametraxState extends State<Gametrax> {
     );
   }
 }
-
-//
-// class Gametrax extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       title: 'GAMES',
-//
-//       // theme: ThemeData(
-//       //   // textTheme: TextTheme(
-//       //   //   bodyText1: GoogleFonts.rubik(),
-//       //   // ),
-//       //   // primarySwatch: Colors.black,
-//       // ),
-//       home: HomePage(),
-//     );
-//   }
-// }
-
-
-//----------------------------------
-//https://rapidapi.com/SapphireWare/api/video-game-price/
-// newsapi.ord key: 014429d2731c4bb6b1d2830bae54e1d0
-//gamespot: c9353d017f27e4448a12f53c22c94b3a09ee01f7

@@ -16,7 +16,6 @@ int namelength;
 var index = 0;
 String gameinfo1;
 
-
 //homepage (for news)------------------------------------------------------------------------------------------------------
 String newsData;
 String newsURL;
@@ -26,7 +25,7 @@ List newstitlelist = [];
 List newsurllist = [];
 List newsimagelist = [];
 List newsdatelist = [];
-
+String usernameFirestore = "Amisha";
 //for time
 var date = DateTime.now();
 String time;
@@ -37,6 +36,7 @@ String gameImageFromFirestore;
 List gameNameListFromFirestore=[];
 List gameImageListFromFirestore=[];
 int datalength;
+
 //popular game show page----------------------------------------------------------------------------------------------------------------------
 List popularimagelist = [];
 List popularnamelist = [];
