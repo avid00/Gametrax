@@ -2,16 +2,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:untitled2/search.dart';
+import 'package:untitled2/register/sign_in.dart';
+import 'package:untitled2/searchPage.dart';
 import 'package:untitled2/services/variables.dart';
-
 import 'homePage.dart';
 import 'package:flutter/material.dart';
-
 import 'services/auth.dart';
 
-///TODO: add logout button
-///TODO: add redirect to the trending button page
 
 class ListsPage extends StatefulWidget {
   const ListsPage({Key key}) : super(key: key);
@@ -111,6 +108,11 @@ class _ListsPageState extends State<ListsPage> {
                   child: IconButton(
                     onPressed: () async {
                       await AuthService().signOut();
+                      Navigator.of(context).pushAndRemoveUntil(
+                           MaterialPageRoute(
+                              builder: (context) =>
+                              LoginPage()),
+                              (route) => false);
                     },
                     icon:Icon(
                       Icons.logout,
@@ -156,10 +158,14 @@ class _ListsPageState extends State<ListsPage> {
                     SizedBox(
                       height: 20,
                     ),
+                    gameNameListFromFirestore.isEmpty ?
+                    Center(
+                      child: CircularProgressIndicator(),
+                    ) :
                     ListView.builder(
                         physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
-                        itemCount: 10,
+                        itemCount: gameNameListFromFirestore.length,
                         itemBuilder: (context, index) {
                           return Padding(
                             padding: const EdgeInsets.fromLTRB(20, 0, 10, 5),
@@ -212,13 +218,30 @@ class _ListsPageState extends State<ListsPage> {
                                     ))),
                           );
                         }),
-                    ElevatedButton(
-                      onPressed: () => Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => HomePage()),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(85, 10, 0, 20),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Game Information is powered by  ",
+                                style: GoogleFonts.rubik(
+                                    color: Colors.white,
+                                  fontSize: 12,
+                                ),
+                          ),
+                          Image.asset('assets/images/RAWG.jpg',
+                          scale: 4,
+                          ),
+                        ],
                       ),
-                      child: Text("go to homepage"),
-                    ),
+                    )
+                    // ElevatedButton(
+                    //   onPressed: () => Navigator.pushReplacement(
+                    //     context,
+                    //     MaterialPageRoute(builder: (context) => HomePage()),
+                    //   ),
+                    //   child: Text("go to homepage"),
+                    // ),
                   ],
                 ),
               ),

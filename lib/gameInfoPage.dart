@@ -3,10 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:untitled2/lists.dart';
+import 'package:untitled2/listsPage.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-///TODO: add powered by RAWG at the bottom
 class GameInfo extends StatefulWidget {
   final String selectedGameName;
   final String selectedGameImage;
@@ -33,7 +32,10 @@ class _GameInfoState extends State<GameInfo> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: appBar(),
-      body: Column(
+      body: widget.selectedGameName.isEmpty ?
+      Center(
+        child: CircularProgressIndicator(),
+      ) : Column(
         children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
@@ -85,7 +87,6 @@ class _GameInfoState extends State<GameInfo> {
                                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                                 child: Text(
                                   "Date Released: ${widget.gameDate}",
-                                  ///TODO: parse date
                                   style: GoogleFonts.rubik(
                                     color: Colors.white70,
                                     fontSize: 15,
@@ -120,11 +121,6 @@ class _GameInfoState extends State<GameInfo> {
                                       color: Colors.white70,
                                     ),
                                   ),
-                                  // content: Text("Amazon:           ₹1532\neBay:                 ₹1798",
-                                  //   style: GoogleFonts.rubik(
-                                  //     color: Colors.white,
-                                  //   ),
-                                  // ),
                                   actions: [
                                     ElevatedButton(
                                       onPressed: () {
@@ -198,7 +194,7 @@ class _GameInfoState extends State<GameInfo> {
                                         color: Colors.white70,
                                       ),
                                       ),
-                                      content: Text("Amazon:           ₹1532\neBay:                 ₹1798",
+                                      content: Text("Amazon:           ₹1532\n\neBay:                 ₹1798\n\nSteam:              ₹1529",
                                         style: GoogleFonts.rubik(
                                           color: Colors.white,
                                         ),
@@ -298,6 +294,23 @@ class _GameInfoState extends State<GameInfo> {
                         )
                       ],
                     ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(65, 10, 0, 20),
+                        child: Row(
+                          children: [
+                            Text(
+                              "Game Information is powered by  ",
+                              style: GoogleFonts.rubik(
+                                color: Colors.white,
+                                fontSize: 12,
+                              ),
+                            ),
+                            Image.asset('assets/images/RAWG.jpg',
+                              scale: 4,
+                            ),
+                          ],
+                        ),
+                      ),
                       ElevatedButton.icon(
                         onPressed: () async {
                           Navigator.pushReplacement(
@@ -346,15 +359,7 @@ class _GameInfoState extends State<GameInfo> {
         'Favourite Game Image': FieldValue.arrayUnion(gameImage),
       },
       );
-
     });
-
-    ///add loop for running more?
-    ///
-    //await FirebaseFirestore.instance.collection('post')
-    // .doc(postId).update({"like": FieldValue.increment(1)});
-///TODO: adding is deleting other fields i . Alos, creating a new document like wtf?
-///TODO: list is not expanding on firestore (deletes one list item to add another)
   }
 
   Widget appBar() {

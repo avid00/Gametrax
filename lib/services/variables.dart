@@ -25,7 +25,6 @@ List newstitlelist = [];
 List newsurllist = [];
 List newsimagelist = [];
 List newsdatelist = [];
-String usernameFirestore = "Amisha";
 //for time
 var date = DateTime.now();
 String time;

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 //import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled2/homePage.dart';
 import 'package:untitled2/onboarding_screens.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:untitled2/register/sign_in.dart';
@@ -32,7 +33,7 @@ class _GametraxState extends State<Gametrax> {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-         // home: HomePage(),
+          //home: HomePage(),
         initialRoute: '/',
         routes: {
           '/': (context) => Wrapper(),

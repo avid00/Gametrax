@@ -1,5 +1,5 @@
 // ignore_for_file: prefer_const_constructors
-import 'user_model.dart';
+import 'userModel.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 
 

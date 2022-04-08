@@ -111,38 +111,38 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
+              // Padding(
+              //   padding: const EdgeInsets.fromLTRB(135, 510, 125, 0),
+              //   child: ElevatedButton(
+              //     onPressed: null,
+              //     child: Row(
+              //       mainAxisAlignment: MainAxisAlignment.center,
+              //       children: [
+              //         Text(
+              //           'Sign in with ',
+              //           style: GoogleFonts.rubik(
+              //             color: Colors.white,
+              //             fontSize: 15,
+              //           ),
+              //         ),
+              //         Image.asset(
+              //           'assets/images/google.png',
+              //           scale: 4,
+              //         ),
+              //       ],
+              //     ),
+              //     style: ButtonStyle(
+              //       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              //         RoundedRectangleBorder(
+              //           borderRadius: BorderRadius.circular(7.0),
+              //           side: BorderSide(color: Colors.white),
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(135, 510, 125, 0),
-                child: ElevatedButton(
-                  onPressed: null,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Sign in with ',
-                        style: GoogleFonts.rubik(
-                          color: Colors.white,
-                          fontSize: 15,
-                        ),
-                      ),
-                      Image.asset(
-                        'assets/images/google.png',
-                        scale: 4,
-                      ),
-                    ],
-                  ),
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(7.0),
-                        side: BorderSide(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(100, 600, 50, 0),
+                padding: const EdgeInsets.fromLTRB(100, 550, 50, 0),
                 child: Text(
                   'Create an Account',
                   style: GoogleFonts.rubik(
@@ -153,16 +153,16 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(140, 650, 50, 0),
+                padding: const EdgeInsets.fromLTRB(175, 600, 50, 0),
                 child: Row(
                   children: [
-                    Image.asset(
-                      'assets/images/google.png',
-                      scale: 2,
-                    ),
-                    SizedBox(
-                      width: 40,
-                    ),
+                    // Image.asset(
+                    //   'assets/images/google.png',
+                    //   scale: 2,
+                    // ),
+                    // SizedBox(
+                    //   width: 40,
+                    // ),
                     IconButton(
                       onPressed: () => Navigator.pushReplacement(
                         context,

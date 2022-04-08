@@ -1,20 +1,13 @@
 //ignore_for_file: prefer_const_constructors
 //import 'package:firebase_core/firebase_core.dart';
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:untitled2/lists.dart';
-import 'package:untitled2/onboarding_screens.dart';
+import 'package:untitled2/listsPage.dart';
 import 'package:untitled2/register/sign_in.dart';
-import 'package:untitled2/services/auth.dart';
-import 'search.dart';
+import 'searchPage.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'services/variables.dart';
 
-///TODO: load page after sign up idk why tf it's not working.
-///https://pub.dev/packages/cached_map
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);
@@ -24,7 +17,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String _timeString;
+  // String _timeString;
 
   @override
   void initState() {
@@ -56,9 +49,25 @@ class _HomePageState extends State<HomePage> {
             Stack(
               children: [
                 Image.network(
-                    "https://images.unsplash.com/photo-1567027757540-7b572280fa22?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
+                    "https://wallshub.net/wp-content/uploads/2021/09/Gaming-Wallpaper.jpg",
                     fit: BoxFit.fill,
                     colorBlendMode: BlendMode.darken),
+                Container(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: const [
+                         Color(0x151515C0),
+                         Color(0xCC000000),
+                         Color(0xCC000000),
+                         Color(0xCC000000),
+                      ],
+                    ),
+                  ),
+                ),
                 Center(
                   child: Column(
                     children: [
@@ -152,7 +161,7 @@ class _HomePageState extends State<HomePage> {
                             left: 10,
                             bottom: 11,
                             child: Text(
-                              newsdatelist[1], //TODO: Parse date
+                              newsdatelist[1],
                               style: GoogleFonts.rubik(
                                 fontSize: 11,
                                 fontStyle: FontStyle.italic,
@@ -222,7 +231,7 @@ class _HomePageState extends State<HomePage> {
                             left: 10,
                             bottom: 11,
                             child: Text(
-                              newsdatelist[2], //TODO: Parse date
+                              newsdatelist[2],
                               style: GoogleFonts.rubik(
                                 fontSize: 11,
                                 fontStyle: FontStyle.italic,
@@ -292,7 +301,7 @@ class _HomePageState extends State<HomePage> {
                             left: 10,
                             bottom: 11,
                             child: Text(
-                              newsdatelist[3], //TODO: Parse date
+                              newsdatelist[3],
                               style: GoogleFonts.rubik(
                                 fontSize: 11,
                                 fontStyle: FontStyle.italic,
@@ -362,7 +371,7 @@ class _HomePageState extends State<HomePage> {
                             left: 10,
                             bottom: 11,
                             child: Text(
-                              newsdatelist[4], //TODO: Parse date
+                              newsdatelist[4],
                               style: GoogleFonts.rubik(
                                 fontSize: 11,
                                 fontStyle: FontStyle.italic,
@@ -466,7 +475,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            Row(
+             Row(
               children: [
                 ElevatedButton.icon(
                   icon: Icon(
@@ -479,56 +488,56 @@ class _HomePageState extends State<HomePage> {
                   ),
                   label: Text("login"),
                 ),
-                ElevatedButton.icon(
-                  icon: Icon(
-                    Icons.insert_chart,
-                    color: Colors.white,
-                  ),
-                  onPressed: () => Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => Onboarding_1()),
-                  ),
-                  label: Text("onboarding"),
-                ),
-                ElevatedButton.icon(
-                  icon: Icon(
-                    Icons.insert_chart,
-                    color: Colors.white,
-                  ),
-                  onPressed: () async {
-                    await AuthService().signOut();
-                  },
-                  label: Text("logout"),
-                ),
-                ElevatedButton.icon(
-                  icon: Icon(
-                    Icons.insert_chart,
-                    color: Colors.white,
-                  ),
-                  onPressed: () async {
-                    null;
-                  },
-                  label: Text("prices"),
-                ),
-              ],
-            ),
+            //     ElevatedButton.icon(
+            //       icon: Icon(
+            //         Icons.insert_chart,
+            //         color: Colors.white,
+            //       ),
+            //       onPressed: () => Navigator.pushReplacement(
+            //         context,
+            //         MaterialPageRoute(builder: (context) => Onboarding_1()),
+            //       ),
+            //       label: Text("onboarding"),
+            //     ),
+            //     ElevatedButton.icon(
+            //       icon: Icon(
+            //         Icons.insert_chart,
+            //         color: Colors.white,
+            //       ),
+            //       onPressed: () async {
+            //         await AuthService().signOut();
+            //       },
+            //       label: Text("logout"),
+            //     ),
+            //     ElevatedButton.icon(
+            //       icon: Icon(
+            //         Icons.insert_chart,
+            //         color: Colors.white,
+            //       ),
+            //       onPressed: () async {
+            //         null;
+            //       },
+            //       label: Text("prices"),
+            //     ),
+               ],
+             ),
           ],
         ),
       ),
     );
   }
 
-  void _getTime() {
-    final DateTime now = DateTime.now();
-    final String formattedDateTime = _formatDateTime(now);
-    setState(() {
-      _timeString = formattedDateTime;
-    });
-  }
+  // void _getTime() {
+  //   final DateTime now = DateTime.now();
+  //   final String formattedDateTime = _formatDateTime(now);
+  //   setState(() {
+  //     _timeString = formattedDateTime;
+  //   });
+  // }
 
-  String _formatDateTime(DateTime dateTime) {
-    return DateFormat('hh:mm').format(dateTime);
-  }
+  // String _formatDateTime(DateTime dateTime) {
+  //   return DateFormat('hh:mm').format(dateTime);
+  // }
 
   // getPrices() async {
   //     // var headers = {
@@ -553,10 +562,10 @@ class _HomePageState extends State<HomePage> {
   //    final responsedata= response.data as Map;
   //    //print("RESPONSE: $responsedata");
   //   }
-  getUsername() async{
-    final prefs = await SharedPreferences.getInstance();
-    usernameFirestore = prefs.getString('username');
-  }
+  // getUsername() async{
+  //   final prefs = await SharedPreferences.getInstance();
+  //   usernameFirestore = prefs.getString('username');
+  // }
   getTime() {
     setState(() {
       time = "${date.hour}:${date.minute}";
@@ -600,8 +609,6 @@ class _HomePageState extends State<HomePage> {
   getNews() async {
     var urlNews =
         "https://newsapi.org/v2/everything?q=gaming&apiKey=0ef79622f62947498f5dcf9d653f9b7c";
-
-    try {
       if (newstitlelist.isNotEmpty) {
         newstitlelist.clear();
       }
@@ -622,8 +629,6 @@ class _HomePageState extends State<HomePage> {
           newsdatelist.add(newsDate);
         }
       });
-    } catch (e) {
-      print(e);
-    }
+
   }
 }

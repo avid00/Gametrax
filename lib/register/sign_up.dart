@@ -200,6 +200,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                         ),
                         style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(

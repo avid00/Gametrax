@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:untitled2/homePage.dart';
-import 'package:untitled2/lists.dart';
-import 'package:untitled2/search.dart';
+import 'package:untitled2/listsPage.dart';
+import 'package:untitled2/searchPage.dart';
 
 class TabNavigator extends StatelessWidget {
   final GlobalKey<NavigatorState> navigatorKey;
