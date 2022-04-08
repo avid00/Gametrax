@@ -20,13 +20,19 @@ class TrendingGames extends StatefulWidget {
 }
 
 class _TrendingGamesState extends State<TrendingGames> {
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) => fetchTrendingGames());
   //  fetchTrendingGames();
   }
-
+  // @override
+  // loader() {
+  //   return AlertDialog(
+  //     title: Text('Wait.. Loading data..'),
+  //   );
+  // }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -259,6 +265,23 @@ class _TrendingGamesState extends State<TrendingGames> {
                             children: [
 //Image----------------------------------------------------------------------------------------------------------------------------------
                               Container(
+                                child: InkWell(
+                                  onTap: () async =>
+                                  {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            GameInfo(
+                                              popularimagelist[1],
+                                              popularnamelist[1],
+                                              populardatelist[1],
+                                              populargenrelist[1],
+                                            ),
+                                      ),
+                                    )
+                                  },
+                                ),
                                 height: 120,
                                 decoration: BoxDecoration(
                                   boxShadow: const [
@@ -415,6 +438,23 @@ class _TrendingGamesState extends State<TrendingGames> {
                             children: [
 //Image----------------------------------------------------------------------------------------------------------------------------------
                               Container(
+                                child: InkWell(
+                                  onTap: () async =>
+                                  {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            GameInfo(
+                                              popularimagelist[2],
+                                              popularnamelist[2],
+                                              populardatelist[2],
+                                              populargenrelist[2],
+                                            ),
+                                      ),
+                                    )
+                                  },
+                                ),
                                 height: 120,
                                 decoration: BoxDecoration(
                                   boxShadow: const [
@@ -565,6 +605,23 @@ class _TrendingGamesState extends State<TrendingGames> {
                             children: [
 //Image----------------------------------------------------------------------------------------------------------------------------------
                               Container(
+                                child: InkWell(
+                                  onTap: () async =>
+                                  {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            GameInfo(
+                                              popularimagelist[3],
+                                              popularnamelist[3],
+                                              populardatelist[3],
+                                              populargenrelist[3],
+                                            ),
+                                      ),
+                                    )
+                                  },
+                                ),
                                 height: 120,
                                 decoration: BoxDecoration(
                                   boxShadow: const [
@@ -721,6 +778,23 @@ class _TrendingGamesState extends State<TrendingGames> {
                             children: [
 //Image----------------------------------------------------------------------------------------------------------------------------------
                               Container(
+                                child: InkWell(
+                                  onTap: () async =>
+                                  {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            GameInfo(
+                                              popularimagelist[4],
+                                              popularnamelist[4],
+                                              populardatelist[4],
+                                              populargenrelist[4],
+                                            ),
+                                      ),
+                                    )
+                                  },
+                                ),
                                 height: 120,
                                 decoration: BoxDecoration(
                                   boxShadow: const [
@@ -871,6 +945,23 @@ class _TrendingGamesState extends State<TrendingGames> {
                             children: [
 //Image----------------------------------------------------------------------------------------------------------------------------------
                               Container(
+                                child: InkWell(
+                                  onTap: () async =>
+                                  {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            GameInfo(
+                                              popularimagelist[5],
+                                              popularnamelist[5],
+                                              populardatelist[5],
+                                              populargenrelist[5],
+                                            ),
+                                      ),
+                                    )
+                                  },
+                                ),
                                 height: 120,
                                 decoration: BoxDecoration(
                                   boxShadow: const [
@@ -1027,6 +1118,23 @@ class _TrendingGamesState extends State<TrendingGames> {
                             children: [
 //Image----------------------------------------------------------------------------------------------------------------------------------
                               Container(
+                                child: InkWell(
+                                  onTap: () async =>
+                                  {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            GameInfo(
+                                              popularimagelist[6],
+                                              popularnamelist[6],
+                                              populardatelist[6],
+                                              populargenrelist[6],
+                                            ),
+                                      ),
+                                    )
+                                  },
+                                ),
                                 height: 120,
                                 decoration: BoxDecoration(
                                   boxShadow: const [
@@ -1177,6 +1285,23 @@ class _TrendingGamesState extends State<TrendingGames> {
                             children: [
 //Image----------------------------------------------------------------------------------------------------------------------------------
                               Container(
+                                child: InkWell(
+                                  onTap: () async =>
+                                  {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            GameInfo(
+                                              popularimagelist[7],
+                                              popularnamelist[7],
+                                              populardatelist[7],
+                                              populargenrelist[7],
+                                            ),
+                                      ),
+                                    )
+                                  },
+                                ),
                                 height: 120,
                                 decoration: BoxDecoration(
                                   boxShadow: const [
@@ -1333,6 +1458,23 @@ class _TrendingGamesState extends State<TrendingGames> {
                             children: [
 //Image----------------------------------------------------------------------------------------------------------------------------------
                               Container(
+                                child: InkWell(
+                                  onTap: () async =>
+                                  {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            GameInfo(
+                                              popularimagelist[8],
+                                              popularnamelist[8],
+                                              populardatelist[8],
+                                              populargenrelist[8],
+                                            ),
+                                      ),
+                                    )
+                                  },
+                                ),
                                 height: 120,
                                 decoration: BoxDecoration(
                                   boxShadow: const [
@@ -1483,6 +1625,23 @@ class _TrendingGamesState extends State<TrendingGames> {
                             children: [
 //Image----------------------------------------------------------------------------------------------------------------------------------
                               Container(
+                                child: InkWell(
+                                  onTap: () async =>
+                                  {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            GameInfo(
+                                              popularimagelist[9],
+                                              popularnamelist[9],
+                                              populardatelist[9],
+                                              populargenrelist[9],
+                                            ),
+                                      ),
+                                    )
+                                  },
+                                ),
                                 height: 120,
                                 decoration: BoxDecoration(
                                   boxShadow: const [
@@ -1618,7 +1777,7 @@ class _TrendingGamesState extends State<TrendingGames> {
     );
   }
 
-  fetchTrendingGames() async {
+  Future<void>fetchTrendingGames() async {
 ///fetching popular games for default page body---------------------------------------------------------------------------------------------
     if (popularnamelist.isNotEmpty) {
       popularnamelist.clear();
@@ -1852,7 +2011,7 @@ class _SearchPageState extends State<SearchPage> {
           textInputAction: TextInputAction.search,
           onSubmitted: (value) async {
             gamesearch();
-            setState(() {});
+           // setState(() {});
           });
     });
   }
@@ -1869,7 +2028,7 @@ class _SearchPageState extends State<SearchPage> {
         'key': '78917d353ee74c57b726259620cdded8',
         'search': gamename,
         'page_size': '20',
-        'ordering' : '-rating',
+       // 'ordering' : '-rating',
       };
       final response =
           await dio.get(endpointUrl + '?', queryParameters: queryParams);

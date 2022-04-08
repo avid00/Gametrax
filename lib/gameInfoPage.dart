@@ -29,6 +29,7 @@ class _GameInfoState extends State<GameInfo> {
   @override
   Widget build(BuildContext context) {
     bool toggle = true;
+    bool iconPressed = false;
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: appBar(),
@@ -109,7 +110,7 @@ class _GameInfoState extends State<GameInfo> {
                               ),
                               ElevatedButton.icon(
                                 onPressed: () async => {
-                                  addToFirestore(),
+                                  addToFirestoreToBuy(),
                                 showDialog(
                                 context: context,
                                 builder: (ctx) => AlertDialog(
@@ -246,18 +247,18 @@ class _GameInfoState extends State<GameInfo> {
                                     IconButton(
                                         padding: EdgeInsets.zero,
                                         constraints: BoxConstraints(),
-                                        icon: toggle
+                                        icon: (iconPressed == false)
                                             ? Icon(Icons.favorite_border,
                                         color: Colors.white,
                                         size: 30
-                                        )
-                                            : Icon(
+                                        ): Icon(
                                           Icons.favorite,
                                         ),
                                         onPressed: () {
                                           setState(() {
                                             // Here we changing the icon.
-                                            toggle = !toggle;
+                                            iconPressed == true;
+                                            addToFirestoreHeart();
                                           });
                                         }),
                                     SizedBox(
@@ -276,7 +277,7 @@ class _GameInfoState extends State<GameInfo> {
                                         ),
                                         onPressed: () {
                                           setState(() {
-                                            // Here we changing the icon.
+                                            addToFirestoreBookmark();
                                             toggle = !toggle;
                                           });
                                         }),
@@ -346,7 +347,7 @@ class _GameInfoState extends State<GameInfo> {
     );
   }
 
-  addToFirestore() async{
+  addToFirestoreToBuy() async{
     List gameName =[];
     List gameImage= [];
     // String
@@ -357,6 +358,38 @@ class _GameInfoState extends State<GameInfo> {
       await FirebaseFirestore.instance.collection('users').doc(user.uid).update({
         'Favourite Games' : FieldValue.arrayUnion(gameName),
         'Favourite Game Image': FieldValue.arrayUnion(gameImage),
+      },
+      );
+    });
+  }
+
+  addToFirestoreBookmark() async{
+    List gameName =[];
+    List gameImage= [];
+    // String
+    setState(() async {
+      gameName.add(widget.selectedGameName);
+      gameImage.add(widget.selectedGameImage);
+      var user = FirebaseAuth.instance.currentUser;
+      await FirebaseFirestore.instance.collection('users').doc(user.uid).update({
+        'Bookmarked Game Name' : FieldValue.arrayUnion(gameName),
+        'Bookmark Game Image': FieldValue.arrayUnion(gameImage),
+      },
+      );
+    });
+  }
+
+  addToFirestoreHeart() async{
+    List gameName =[];
+    List gameImage= [];
+    // String
+    setState(() async {
+      gameName.add(widget.selectedGameName);
+      gameImage.add(widget.selectedGameImage);
+      var user = FirebaseAuth.instance.currentUser;
+      await FirebaseFirestore.instance.collection('users').doc(user.uid).update({
+        'Heart Games' : FieldValue.arrayUnion(gameName),
+        'Heart Game Image': FieldValue.arrayUnion(gameImage),
       },
       );
     });

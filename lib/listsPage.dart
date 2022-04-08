@@ -117,7 +117,7 @@ class _ListsPageState extends State<ListsPage> {
                     icon:Icon(
                       Icons.logout,
                       color: Color(0xFFE5E5E5FF),
-                    )
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -128,7 +128,6 @@ class _ListsPageState extends State<ListsPage> {
             SizedBox(
               height: 20,
             ),
-            //container (scrollable)-----
             Container(
               height: 528, //length of container for lists
               decoration: BoxDecoration(
@@ -162,62 +161,7 @@ class _ListsPageState extends State<ListsPage> {
                     Center(
                       child: CircularProgressIndicator(),
                     ) :
-                    ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: gameNameListFromFirestore.length,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.fromLTRB(20, 0, 10, 5),
-                            child: Card(
-                                color: Colors.black,
-                                clipBehavior: Clip.antiAlias,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(13),
-                                ),
-                                child: SizedBox(
-                                    height: 90,
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          child: Padding(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                10, 0, 0, 0),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(10.0),
-                                              child: Image.network(
-                                                gameImageListFromFirestore[
-                                                        index]
-                                                    .replaceAll('[', '')
-                                                    .replaceAll(']', ''),
-                                                height: 70,
-                                                width: 110.0,
-                                                fit: BoxFit.fitHeight,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Flexible(
-                                          child: Padding(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                40, 10, 10, 30),
-                                            child: Text(
-                                              gameNameListFromFirestore[index]
-                                                  .replaceAll('[', '')
-                                                  .replaceAll(']', ''),
-                                              textAlign: TextAlign.right,
-                                              style: TextStyle(
-                                                fontSize: 15,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ))),
-                          );
-                        }),
+                   getGamesFromFirestore(),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(85, 10, 0, 20),
                       child: Row(
@@ -252,6 +196,84 @@ class _ListsPageState extends State<ListsPage> {
     );
   }
 
+  Widget getGamesFromFirestore(){
+  return FutureBuilder(
+      builder: (context, projectSnap) {
+        if (projectSnap.connectionState == ConnectionState.none &&
+            projectSnap.hasData == null)        {
+          return Container();
+        }
+   return ListView.builder(
+        physics: ScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: gameNameListFromFirestore.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.fromLTRB(20, 0, 10, 5),
+            child: Card(
+              color: Colors.black,
+              clipBehavior: Clip.antiAlias,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(13),
+              ),
+              child: SizedBox(
+                height: 90,
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                      ("${index+1}"),
+                      style: GoogleFonts.rubik(
+                        color: Colors.white,
+                        fontSize: 15,
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(
+                            10, 0, 0, 0),
+                        child: ClipRRect(
+                          borderRadius:
+                          BorderRadius.circular(10.0),
+                          child: Image.network(
+                            gameImageListFromFirestore[
+                            index]
+                                .replaceAll('[', '')
+                                .replaceAll(']', ''),
+                            height: 70,
+                            width: 100.0,
+                            fit: BoxFit.fitHeight,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Flexible(
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(
+                            40, 10, 10, 30),
+                        child: Text(
+                          gameNameListFromFirestore[index]
+                              .replaceAll('[', '')
+                              .replaceAll(']', ''),
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        });
+        }
+  );
+  }
   Widget firestoreList() {
     return FutureBuilder(
       builder: (context, projectSnap) {
@@ -260,7 +282,7 @@ class _ListsPageState extends State<ListsPage> {
           return Container();
         }
         return ListView.builder(
-          itemCount: gameNameListFromFirestore == null ? null : datalength,
+          itemCount: gameNameListFromFirestore.isEmpty ? null : gameNameListFromFirestore.length,
           itemBuilder: (BuildContext context, int index) {
             return GestureDetector(
               onTap: null,
@@ -306,7 +328,7 @@ class _ListsPageState extends State<ListsPage> {
                               color: Colors.white,
                               fontSize: 17,
                               fontWeight: FontWeight.w400,
-                              shadows: <Shadow>[
+                              shadows: const <Shadow>[
                                 Shadow(
                                   offset: Offset(0.0, 0.0),
                                   blurRadius: 30.0,
@@ -343,18 +365,14 @@ class _ListsPageState extends State<ListsPage> {
       datalength = data.length;
 
       for (int i = 0; i < datalength; i++) {
-        try{
           setState(() {
             gameNameFromFirestore = data['Favourite Games'][i].toString();
             gameImageFromFirestore = data['Favourite Game Image'][i].toString();
             //adding to lists
             gameNameListFromFirestore.add(gameNameFromFirestore);
             gameImageListFromFirestore.add(gameImageFromFirestore);
-            print(gameNameFromFirestore);
           });
-        }catch(e){
-          print("ERROR: $e");
-        }
+
       }
     }
   }

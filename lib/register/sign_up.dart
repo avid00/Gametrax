@@ -3,8 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:untitled2/homePage.dart';
 import 'package:untitled2/register/sign_in.dart';
 import 'package:untitled2/services/auth.dart';
 import 'package:provider/provider.dart';
@@ -31,15 +29,8 @@ class _SignUpPageState extends State<SignUpPage> {
       final instance = FirebaseAuth.instance;
       userCredential = await instance.createUserWithEmailAndPassword(
           email: email.text, password: password.text);
-
-
-      try{
       await authService.createUserWithEmailAndPassword(
           email.text, password.text);
-
-      } catch(e){
-        print("Error: $e");
-      }
     }
 
     return Material(
@@ -181,8 +172,6 @@ class _SignUpPageState extends State<SignUpPage> {
                               'dateOfCreation': DateTime.now(),
                               'nickname': username.text,
                             });
-                            final prefs = await SharedPreferences.getInstance();
-                            prefs.setString('username', username.text);
                             // Navigator.pop(
                             //   context,
                             //   MaterialPageRoute(
