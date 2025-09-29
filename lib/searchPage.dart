@@ -1786,7 +1786,7 @@ class _TrendingGamesState extends State<TrendingGames> {
 
     var popularGamesURL = 'https://rawg.io/api/games/lists/main';
     Map<String, dynamic> queryParams = {
-      'key': '78917d353ee74c57b726259620cdded8',
+      'key': '', # add your own key
       'page': '1',
       'page_size': '10',
       'ordering': '-relevance',
@@ -2025,7 +2025,7 @@ class _SearchPageState extends State<SearchPage> {
       }
       var endpointUrl = 'https://api.rawg.io/api/games';
       Map<String, dynamic> queryParams = {
-        'key': '78917d353ee74c57b726259620cdded8',
+        'key': '', #add your own key
         'search': gamename,
         'page_size': '20',
        // 'ordering' : '-rating',
