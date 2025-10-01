@@ -9,6 +9,9 @@ Gametrax is an Android app (built with Flutter/Dart + Firebase) that helps gamer
 ## Demo 
 [Demo](https://youtu.be/uQ6j9-H9pJU) Video of the App
 
+<img width="1344" height="756" alt="1" src="https://github.com/user-attachments/assets/49737c79-24b9-409e-929d-4ef67b809b05" />
+<img width="1344" height="756" alt="2" src="https://github.com/user-attachments/assets/188d3b8c-ab41-48ab-82b8-03c8c99fba46" />
+<img width="1344" height="756" alt="3" src="https://github.com/user-attachments/assets/e011cd17-aeb5-4ca8-ab94-f8173e222ca0" />
 
 
 ---
