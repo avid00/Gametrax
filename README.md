@@ -1,6 +1,6 @@
 # Gametrax — Game Tracker & News App (Android, Flutter)
 
-**One-liner:** Gametrax is an Android app (built with Flutter/Dart + Firebase) that helps gamers search, track and organise games, view latest gaming news, and check basic store info — all in one place. :contentReference[oaicite:2]{index=2} :contentReference[oaicite:3]{index=3}
+Gametrax is an Android app (built with Flutter/Dart + Firebase) that helps gamers search, track and organise games, view latest gaming news, and check basic store info — all in one place. 
 
 [![Flutter](https://img.shields.io/badge/Flutter-2.10.1-blue)](#) [![Dart](https://img.shields.io/badge/Dart-2.3.0-blue)](#) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#)
 
