@@ -7,6 +7,7 @@
 ---
 
 ## Demo / Screenshots
+[Demo Video](https://www.youtube.com/watch?v=uQ6j9-H9pJU&feature=youtu.be)
 <img width="1344" height="756" alt="image" src="https://github.com/user-attachments/assets/195854f3-3d39-4213-a3a6-fb7cf86e8769" />
 <img width="1344" height="756" alt="image" src="https://github.com/user-attachments/assets/0979d0aa-3952-4c3a-b22d-d830653372cf" />
 <img width="1344" height="756" alt="image" src="https://github.com/user-attachments/assets/d755f890-e383-4068-81b8-11444b511296" />
